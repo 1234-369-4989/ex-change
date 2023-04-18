@@ -13,6 +13,11 @@ public enum EnemyState{
 public class EnemyBehavior : MonoBehaviour
 {
 
+public int MoveSpeed;
+public int MaxDist;
+public int MinDist;
+public Transform Player;
+
     [SerializeField] private EnemyState _currentState = EnemyState.Idle;
 
     private void Update()
@@ -45,7 +50,17 @@ public class EnemyBehavior : MonoBehaviour
 
     private void CalculateMovement()
     {
-        
+       transform.LookAt(Player);
+
+       if (Vector3.Distance(transform.position, Player.position) >= MinDist)
+       {
+           transform.position += transform.forward * MoveSpeed * Time.deltaTime;
+           
+           if (Vector3.Distance(transform.position, Player.position) <= MaxDist)
+           {
+               _currentState = EnemyState.Attack;
+           }
+       }
     }
     
     private void Attack()
