@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.Timeline;
 
 public enum EnemyState{
@@ -14,11 +15,16 @@ public class EnemyBehavior : MonoBehaviour
 {
 
 public int MoveSpeed;
-public int MaxDist;
+public int AttackDist;
 public int MinDist;
 public Transform Player;
 
-    [SerializeField] private EnemyState _currentState = EnemyState.Idle;
+public int CheckRadius;
+public LayerMask whatIsGround, whatIsPlayer;
+
+private bool _playerInSightRange, _playerInAttackRange;
+
+[SerializeField] private EnemyState _currentState = EnemyState.Idle;
 
     private void Update()
     {
@@ -45,7 +51,17 @@ public Transform Player;
 
     private void LookForTargets()
     {
-        
+        _playerInSightRange = Physics.CheckSphere(transform.position, CheckRadius, whatIsPlayer);
+        _playerInAttackRange = Physics.CheckSphere(transform.position, AttackDist, whatIsPlayer);
+        if (_playerInSightRange && !_playerInAttackRange)
+        {
+            _currentState = EnemyState.Chase;
+        }
+
+        if (_playerInSightRange && _playerInAttackRange)
+        {
+            _currentState = EnemyState.Attack;
+        }
     }
 
     private void CalculateMovement()
@@ -56,7 +72,7 @@ public Transform Player;
        {
            transform.position += transform.forward * MoveSpeed * Time.deltaTime;
            
-           if (Vector3.Distance(transform.position, Player.position) <= MaxDist)
+           if (Vector3.Distance(transform.position, Player.position) <= AttackDist)
            {
                _currentState = EnemyState.Attack;
            }
