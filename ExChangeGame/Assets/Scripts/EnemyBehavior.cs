@@ -34,16 +34,35 @@ private bool _reverse;
 private bool _playerInSightRange, _playerInAttackRange;
 
 private EnemyState _currentState = EnemyState.Idle;
+private float _enemyHeight;
 
 
 private void Start()
 {
     _agent = GetComponent<NavMeshAgent>();
+    _enemyHeight = transform.position.y;
 }
 
 private void Update()
     {
+
+        _playerInSightRange = Physics.CheckSphere(transform.position, CheckRadius, whatIsPlayer);
+        _playerInAttackRange = Physics.CheckSphere(transform.position, CheckRadius/2, whatIsPlayer);
+        if (!_playerInSightRange && !_playerInAttackRange)
+        {
+            _currentState = EnemyState.Idle;
+        }
+        else if (_playerInSightRange && !_playerInAttackRange)
+        {
+            _currentState = EnemyState.Chase;
+        }
+        else if (_playerInSightRange && _playerInAttackRange)
+        {
+            _currentState = EnemyState.Attack;
+        }
+        
         Debug.Log(_currentState);
+        
         switch (_currentState)
         {
             case EnemyState.Idle:
@@ -68,15 +87,13 @@ private void Update()
     private void LookForTargets()
     {
         Patrol();
-        _playerInSightRange = Physics.CheckSphere(transform.position, CheckRadius, whatIsPlayer);
-        if (_playerInSightRange) _currentState = EnemyState.Chase;
-        
     }
 
     private void Patrol()
     {
+        Debug.Log(_currentState);
         _agent.destination = Waypoints[currentTarget].position;
-        float distance = Vector3.Distance(transform.position, Waypoints[currentTarget].position);
+        float distance = Vector3.Distance(transform.position, Waypoints[currentTarget].position) - _enemyHeight;
         if (distance < 1f && _targetReached == false)
         {
             _targetReached = true;
@@ -130,7 +147,7 @@ private void Update()
            
            if (Vector3.Distance(transform.position, Player.position) <= AttackDist)
            {
-               //_currentState = EnemyState.Attack; TO-DO
+               _currentState = EnemyState.Attack;
            }
        }
     }
