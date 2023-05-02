@@ -99,3 +99,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Type>k__BackingField: 2
   <Position>k__BackingField: 4
+  canJump: 1
+  canFloat: 1
+  moveSpeed: 0
+  sprintSpeed: 0
+  jumpHeight: 2
