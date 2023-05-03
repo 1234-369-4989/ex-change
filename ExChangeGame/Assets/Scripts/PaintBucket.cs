@@ -2,16 +2,17 @@
 using UnityEngine;
 
 // when the player touches the paint bucket, the robot should change its color
-public class PaintBucket  : MonoBehaviour
+public class PaintBucket : MonoBehaviour
 {
     [SerializeField] private Color color;
     private Renderer _ren;
+    private Material _mat;
 
     private void Awake()
     {
         _ren = GetComponent<Renderer>();
     }
-    
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -24,6 +25,15 @@ public class PaintBucket  : MonoBehaviour
     {
         if (_ren == null)
             _ren = GetComponent<Renderer>();
-        _ren.sharedMaterials[1].color = color;
+        if (_mat == null)
+        {
+            _mat = Instantiate(_ren.sharedMaterials[1]);
+            _mat.color = color;
+            _ren.materials = new[] { _ren.sharedMaterials[0], _mat };
+        }
+        else
+        {
+            _mat.color = color;
+        }
     }
 }
