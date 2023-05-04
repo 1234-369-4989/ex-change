@@ -116,6 +116,30 @@ namespace ExChangeParts
 
             lr.enabled = false;
         }
+
+        private void JumpToPosition(Vector3 targetPosition, float trajectoryHeight)
+        {
+            
+        }
+
+
+        private Vector3 CalculateJumpVelocity(Vector3 startpoint, Vector3 endPoint, float trajectoryHeight)
+        {
+            float gravity = Physics.gravity.y;
+            float displacementY = endPoint.y - startpoint.y;
+            Vector3 displacementXZ = new Vector3(endPoint.x - startpoint.x, 0f, endPoint.z - endPoint.z);
+
+            Vector3 velocityY = Vector3.up * Mathf.Sqrt(-2 * gravity * trajectoryHeight);
+            Vector3 velocityXZ = displacementXZ / (Mathf.Sqrt(-2 * trajectoryHeight / gravity) + Mathf.Sqrt(2 * (displacementY - trajectoryHeight) / gravity));
+
+            return velocityXZ + velocityY;
+
+        }
+        
+        
+        
+        
     }
+
 
 }
