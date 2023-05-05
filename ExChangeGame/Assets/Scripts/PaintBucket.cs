@@ -1,4 +1,5 @@
 ﻿using ExChangeParts;
+using UnityEditor;
 using UnityEngine;
 
 // when the player touches the paint bucket, the robot should change its color
@@ -23,6 +24,7 @@ public class PaintBucket : MonoBehaviour
 
     private void OnValidate()
     {
+        if(PrefabUtility.IsPartOfPrefabAsset(gameObject)) return;
         if (_ren == null)
             _ren = GetComponent<Renderer>();
         if (_mat == null)
@@ -31,9 +33,6 @@ public class PaintBucket : MonoBehaviour
             _mat.color = color;
             _ren.materials = new[] { _ren.sharedMaterials[0], _mat };
         }
-        else
-        {
-            _mat.color = color;
-        }
+        _mat.color = color;
     }
 }
