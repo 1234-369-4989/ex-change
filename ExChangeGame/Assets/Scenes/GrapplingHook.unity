@@ -938,6 +938,7 @@ GameObject:
   - component: {fileID: 2765171654169275964}
   - component: {fileID: 2208854892059634922}
   - component: {fileID: 6471843504799849553}
+  - component: {fileID: 6471843504799849554}
   m_Layer: 6
   m_Name: PlayerCapsule
   m_TagString: Player
@@ -1427,10 +1428,28 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   lr: {fileID: 2068160674}
+  Controller: {fileID: 0}
   maxGrappleDistance: 100
   grappleDelayTime: 0.25
+  overshootYAxis: 77.63
   grapplingCd: 1
   grappleKey: 323
+--- !u!54 &6471843504799849554
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2765171654169275952}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &6549812540015872120
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1555,28 +1574,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4af961dac4564644aad8b58de23393f0, type: 3}
---- !u!1 &6549812540015872121 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8957776603978993978, guid: 4af961dac4564644aad8b58de23393f0,
-    type: 3}
-  m_PrefabInstance: {fileID: 6549812540015872120}
-  m_PrefabAsset: {fileID: 0}
---- !u!54 &6549812540015872122
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6549812540015872121}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!4 &7149013814521713221
 Transform:
   m_ObjectHideFlags: 0
@@ -1585,7 +1582,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1293043312771970928}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 20.35, z: 0}
+  m_LocalPosition: {x: 0, y: 21.75, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
