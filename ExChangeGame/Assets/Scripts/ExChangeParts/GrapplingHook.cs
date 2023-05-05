@@ -18,7 +18,8 @@ namespace ExChangeParts
         public Transform gunTip;
         public LayerMask whatIsGrappable;
         public LineRenderer lr;
-        public Rigidbody Controller;
+        private CharacterController _controller;
+        private StarterAssetsInputs _inputs;
 
         [Header("GrappleValues")]
         public float maxGrappleDistance;
@@ -36,10 +37,11 @@ namespace ExChangeParts
         public KeyCode grappleKey = KeyCode.Mouse0;
     
         private bool grappling;
+        private bool _isGrappable;
         private bool _freeze;
         private float _speedStorage;
-        
-        
+
+
         protected override void OnEquip()
         {
             //engage the Grappling Hook
@@ -54,20 +56,37 @@ namespace ExChangeParts
         {
             pm = GetComponent<ThirdPersonController>();
             _speedStorage = pm.MoveSpeed;
-            Controller = GetComponent<Rigidbody>();
+            _controller = GetComponent<CharacterController>();
+            _inputs = GetComponent<StarterAssetsInputs>();
         }
     
         private void Update()
         {
             if (_freeze)
             {
-                pm.MoveSpeed = 0f;
+                pm.MoveSpeed = 0f; //freeze the player for a short time
             }
             else
             {
                 pm.MoveSpeed = _speedStorage;
             }
+            
+            
             if(Input.GetKeyDown(grappleKey)) StartGrapple();
+            
+            if (grappling && _isGrappable)
+            {
+                _freeze = false;
+
+                Vector3 lowestPoint = new Vector3(transform.position.x, transform.position.y - 1f, transform.position.z);
+                float grapplePointRelativeYPosition = grapplePoint.y - lowestPoint.y;
+                float highestPointOnArc = grapplePointRelativeYPosition + overshootYAxis;
+
+                if (grapplePointRelativeYPosition < 0) highestPointOnArc = overshootYAxis;
+                JumpToPosition(grapplePoint, highestPointOnArc);
+            
+                Invoke(nameof(StopGrapple),1f);
+            }
     
             if (grapplingTimer > 0) grapplingTimer -= Time.deltaTime;
     
@@ -92,12 +111,12 @@ namespace ExChangeParts
             if (Physics.Raycast(camera.position, camera.forward, out hit, maxGrappleDistance, whatIsGrappable))
             {
                 grapplePoint = hit.point;
-                
-                Invoke(nameof(ExecuteGrapple), grappleDelayTime);
+                _isGrappable = true;
             }
             else
             {
                 grapplePoint = camera.position + camera.forward * maxGrappleDistance;
+                _isGrappable = false;
                 Invoke(nameof(StopGrapple), grappleDelayTime);
             }
 
@@ -105,25 +124,12 @@ namespace ExChangeParts
             lr.SetPosition(1, grapplePoint);
 
         }
-    
-        private void ExecuteGrapple()
-        {
-            _freeze = false;
 
-            Vector3 lowestPoint = new Vector3(transform.position.x, transform.position.y - 1f, transform.position.z);
-            float grapplePointRelativeYPosition = grapplePoint.y - lowestPoint.y;
-            float highestPointOnArc = grapplePointRelativeYPosition + overshootYAxis;
-
-            if (grapplePointRelativeYPosition < 0) highestPointOnArc = overshootYAxis;
-            JumpToPosition(grapplePoint, highestPointOnArc);
-            
-            Invoke(nameof(StopGrapple),1f);
-        }
-    
         private void StopGrapple()
         {
             _freeze = false;
             grappling = false;
+            _isGrappable = false;
     
             grapplingTimer = grapplingCd;
 
@@ -132,23 +138,23 @@ namespace ExChangeParts
 
         private void JumpToPosition(Vector3 targetPosition, float trajectoryHeight)
         {
-            velocityToSet = CalculateJumpVelocity(transform.position, targetPosition, trajectoryHeight);
-            Invoke(nameof(SetVelocity), 0.1f);
+            Vector3 velocityToSet = CalculateJumpVelocity(transform.position, targetPosition, trajectoryHeight);
+            Vector3 targetDirection = Quaternion.Euler(0.0f, CalcualteCurrentRotation(), 0.0f) * Vector3.forward;
+            _controller.Move(targetDirection.normalized * (targetDirection.z * Time.deltaTime) + (velocityToSet + targetPosition) * Time.deltaTime);
         }
 
-        private Vector3 velocityToSet;
-
-        private void SetVelocity()
+        private float CalcualteCurrentRotation()
         {
-            Controller.velocity = velocityToSet;
-            Controller.AddForce(velocityToSet);
+            Vector3 inputDirection = new Vector3(_inputs.move.x, 0.0f, _inputs.move.y).normalized;
+            float targetrotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg +
+                                   camera.transform.eulerAngles.y;
+            return targetrotation;
         }
 
-        
 
         private Vector3 CalculateJumpVelocity(Vector3 startpoint, Vector3 endPoint, float trajectoryHeight)
         {
-            float gravity = Physics.gravity.y;
+            float gravity = pm.Gravity;
             float displacementY = endPoint.y - startpoint.y;
             Vector3 displacementXZ = new Vector3(endPoint.x - startpoint.x, 0f, endPoint.z - endPoint.z);
 
