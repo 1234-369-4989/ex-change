@@ -12,6 +12,5 @@ public class ActivatePlayerFunction : MonoBehaviour
         {
             onActivate.Invoke();
         }
-        
     }
 }
