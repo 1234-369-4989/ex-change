@@ -1,9 +1,54 @@
 fileFormatVersion: 2
-guid: ebda71bcb74b82d49a983f21666bb1ee
+guid: ca4687b5cd0664d44b99bfb91a3908a2
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: baseColor
+    second: {fileID: 2100000, guid: a30557ba09c6a4c408bf9290c6516fda, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: baseColor2
+    second: {fileID: 2100000, guid: b613e68b2e207364ea45bcf883d5d2cb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: baseColor3
+    second: {fileID: 2100000, guid: 1dc1a546e876fc849aa7979b479b742b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: cable
+    second: {fileID: 2100000, guid: 8acc30efe53b9214d8d4208aa5ef6610, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: highlight
+    second: {fileID: 2100000, guid: fe17a71660704304e851934d35b3b714, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: highlight2
+    second: {fileID: 2100000, guid: 3fbc2dd19a2bc7a45915d88850779c9a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: interior
+    second: {fileID: 2100000, guid: be506df1a74808646890173aad425bf7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: interior2
+    second: {fileID: 2100000, guid: e97aa588a25831446883e06612288158, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: interior3
+    second: {fileID: 2100000, guid: 901885363615e264e8b1c6dbff27d883, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
