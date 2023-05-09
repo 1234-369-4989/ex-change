@@ -14,22 +14,22 @@ namespace Environment
         [SerializeField] private Color activeColor;
         [SerializeField] private Color inactiveColor;
     
-        private bool _isActivated;
+        [SerializeField] private bool isActivated;
 
         private void Start()
         {
-            SetActive(_isActivated);
+            SetActive(isActivated);
         }
 
         public override bool IsActivated
         {
-            get => _isActivated;
+            get => isActivated;
             set => SetActive(value);
         }
 
         private void SetActive(bool value)
         {
-            _isActivated = value;
+            isActivated = value;
             foreach (var l in lights)
             {
                 l.color = value ? activeColor : inactiveColor;
@@ -43,7 +43,7 @@ namespace Environment
 
         private void OnTriggerEnter(Collider other)
         {
-            if (!_isActivated) return;
+            if (!isActivated) return;
             if (other.CompareTag("Player"))
             {
                 _animator.SetBool(Open, true);
