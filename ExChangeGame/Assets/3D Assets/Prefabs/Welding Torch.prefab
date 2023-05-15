@@ -98,3 +98,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Type>k__BackingField: 1
   <Position>k__BackingField: 5
+  input: {fileID: 0}
+  repairDistance: 1.5
