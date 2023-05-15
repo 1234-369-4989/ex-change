@@ -85,6 +85,9 @@ public class Movement_Rigidbody : MonoBehaviour
 
     private bool _hasAnimator;
 
+    /// <summary>
+    /// Method for checking if the current Inputdevice is Mouse and Keyboard
+    /// </summary>
     private bool IsCurrentDeviceMouse
     {
         get
@@ -131,7 +134,7 @@ public class Movement_Rigidbody : MonoBehaviour
 
         _moveSpeed = defaultMoveSpeed;
         _sprintSpeed = defaultSprintSpeed;
-        _canJump = true;
+        _canJump = false;
         _jumpHeight = 2;
             
        _exchangeSystem.OnMovementChanged += OnMovementChanged;
@@ -144,6 +147,7 @@ public class Movement_Rigidbody : MonoBehaviour
         _hasAnimator = TryGetComponent(out _animator);
     }
 
+    //Is called after a set time, needed for Physics Movement
     private void FixedUpdate()
     {
         Jump();
@@ -151,10 +155,11 @@ public class Movement_Rigidbody : MonoBehaviour
         Move();
     }
 
+    //Method for Calculating Movement and Applying it
     private void Move()
     {
-        float targetSpeed = _input.sprint ? _sprintSpeed : _moveSpeed;
-        float inputMagnitude = _input.analogMovement ? _input.move.magnitude : 1f;
+        float targetSpeed = _input.sprint ? _sprintSpeed : _moveSpeed; //set current movementspeed
+        float inputMagnitude = _input.analogMovement ? _input.move.magnitude : 1f; // how strong is the input
 
         if (_input.move == Vector2.zero) targetSpeed = 0.0f;
 
@@ -162,7 +167,7 @@ public class Movement_Rigidbody : MonoBehaviour
 
         if (_input.move != Vector2.zero)
         {
-            
+            //Calculate Rotation of Player Model
             _targetRotation = Mathf.Atan2(targetInput.x, targetInput.z) * Mathf.Rad2Deg + _mainCamera.transform.eulerAngles.y;
 
             float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity,
@@ -186,6 +191,7 @@ public class Movement_Rigidbody : MonoBehaviour
 
     }
 
+    //Method for Jumping
     private void Jump()
     {
         if (_isGrounded)
@@ -196,9 +202,9 @@ public class Movement_Rigidbody : MonoBehaviour
                 _animator.SetBool(_animIDFreeFall, false);
             }
             //Jumping
-             if (_input.jump && _canJump)
+             if (_input.jump && _canJump && _jumpTimeoutDelta <= 0.0f)
              {
-                 _playerBody.AddForce(new Vector3(0,_jumpHeight,0), ForceMode.Impulse);
+                 _playerBody.AddForce(new Vector3(0,_jumpHeight,0), ForceMode.Impulse);//apply an upwards force to the rigidbody
                  if (_hasAnimator)
                  {
                     _animator.SetBool(_animIDJump, true);
@@ -209,7 +215,7 @@ public class Movement_Rigidbody : MonoBehaviour
              {
                  _jumpTimeoutDelta -= Time.deltaTime;
              }
-        }//if(_isGrounded)
+        }//end if(_isGrounded)
         else
         {
             _jumpTimeoutDelta = jumpTimeout;
@@ -230,16 +236,7 @@ public class Movement_Rigidbody : MonoBehaviour
         }
     }
     
-    
-    private void OnMovementChanged(MovementVariables movementvariables)
-    {
-        _moveSpeed = movementvariables.MoveSpeed ?? defaultMoveSpeed;
-        _sprintSpeed = movementvariables.SprintSpeed ?? defaultSprintSpeed;
-        _canJump = movementvariables.CanJump;
-        _canFloat = movementvariables.CanFloat;
-        _jumpHeight = movementvariables.JumpHeight ?? 0;
-    }
-
+    //AnimationID assingments
     private void AssignAnimationIDs()
     {
         _animIDSpeed = Animator.StringToHash("Speed");
@@ -249,6 +246,7 @@ public class Movement_Rigidbody : MonoBehaviour
         _animIDMotionSpeed = Animator.StringToHash("MotionSpeed");
     }
 
+    //check if the player is currently grounded
     private void GroundedCheck()
     {
         var pos = transform.position;
@@ -261,17 +259,18 @@ public class Movement_Rigidbody : MonoBehaviour
             _animator.SetBool(_animIDGrounded, _isGrounded);
         }
     }
-
-    private void OnLand(AnimationEvent animationEvent)
-    {
-        if (animationEvent.animatorClipInfo.weight > 0.5f)
-        {
-           // AudioSource.PlayClipAtPoint(landingAudioClip, transform.position, footte);
-        }
-    }
-
     private void OnDestroy()
     {
        _exchangeSystem.OnMovementChanged -= OnMovementChanged;
+    }
+    
+    //get Movement values according to parts exchanged
+    private void OnMovementChanged(MovementVariables movementvariables)
+    {
+        _moveSpeed = movementvariables.MoveSpeed ?? defaultMoveSpeed;
+        _sprintSpeed = movementvariables.SprintSpeed ?? defaultSprintSpeed;
+        _canJump = movementvariables.CanJump;
+        _canFloat = movementvariables.CanFloat;
+        _jumpHeight = movementvariables.JumpHeight ?? 0;
     }
 }
