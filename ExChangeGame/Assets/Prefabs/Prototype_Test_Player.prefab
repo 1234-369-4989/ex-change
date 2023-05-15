@@ -533,6 +533,8 @@ MonoBehaviour:
   - {fileID: 4009420344083031287}
   - {fileID: 8475872919676791352}
   deactivateOnStart: 1
+  defaultParts:
+  - {fileID: 4009420344083031287}
   colorRenderers:
   - {fileID: 6084691295416701672}
   - {fileID: 458045991463587605}
@@ -1037,6 +1039,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4856587528687414352}
     m_Modifications:
+    - target: {fileID: 6987722229981791666, guid: e33c09e1290ec3b4c92d4e82ba7ef7c7,
+        type: 3}
+      propertyPath: input
+      value: 
+      objectReference: {fileID: 4452500458851065201}
     - target: {fileID: 8205129774711307363, guid: e33c09e1290ec3b4c92d4e82ba7ef7c7,
         type: 3}
       propertyPath: m_Name

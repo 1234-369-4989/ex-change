@@ -9,6 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2642169410724699747}
+  - component: {fileID: 8964090245948359427}
+  - component: {fileID: 8238193214893042183}
+  - component: {fileID: 3377354516938065060}
   m_Layer: 0
   m_Name: droneRobot
   m_TagString: Untagged
@@ -32,6 +35,46 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &8964090245948359427
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6550650597034272694}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 1.49
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!135 &8238193214893042183
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6550650597034272694}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3377354516938065060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6550650597034272694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95d186df9f6a24d47b7b136afe0ddcb3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  part: {fileID: 8906397099050755351}
 --- !u!1001 &4697502377596719415
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -176,6 +219,32 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 5e4c8f116493653479b85009a390eaea, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b27feb6a4d99027459561daa32dd6c76, type: 3}
+--- !u!1 &92219271137717379 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4645253517423902132, guid: b27feb6a4d99027459561daa32dd6c76,
+    type: 3}
+  m_PrefabInstance: {fileID: 4697502377596719415}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8906397099050755351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 92219271137717379}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5312abe266914c188789dd19010f63bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Type>k__BackingField: 2
+  <Position>k__BackingField: 4
+  canJump: 0
+  canFloat: 0
+  moveSpeed: 0
+  sprintSpeed: 0
+  jumpHeight: 0
+  canTakeFallDamage: 0
 --- !u!4 &5096483764902164188 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: b27feb6a4d99027459561daa32dd6c76,

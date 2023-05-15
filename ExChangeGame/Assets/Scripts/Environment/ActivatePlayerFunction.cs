@@ -2,13 +2,13 @@ using UnityEngine;
 using UnityEngine.Events;
 
 // This script is responsible for activating a function when the player enters the trigger
-public class ActivatePlayerFunction : MonoBehaviour
+namespace Environment
 {
-    
-    [SerializeField] private UnityEvent onActivate;
-    private void OnTriggerEnter(Collider other)
+    public class ActivatePlayerFunction : ActivateOnPlayerTrigger
     {
-        if (other.CompareTag("Player"))
+        [SerializeField] private UnityEvent onActivate;
+
+        protected override void Activate()
         {
             onActivate.Invoke();
         }
