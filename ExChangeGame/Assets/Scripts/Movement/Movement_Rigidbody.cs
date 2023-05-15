@@ -173,8 +173,11 @@ public class Movement_Rigidbody : MonoBehaviour
         }
         
         Vector3 targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;//Calculate Movementdirection via Rotation
-        _playerBody.MovePosition(transform.position + targetDirection * Time.fixedDeltaTime * targetSpeed);//Move Towards next position
-
+        
+        _playerBody.MovePosition(transform.position + targetDirection * (Time.deltaTime * targetSpeed));//Move Towards next position
+   
+        
+        
         if (_hasAnimator)
         {
             _animator.SetFloat(_animIDSpeed, _animationBlend);
