@@ -36,7 +36,7 @@ namespace Movement
 
         [Space(10)]
         [Tooltip("The height the player can jump")]
-        private bool _canJump;
+        [SerializeField] private bool _canJump;
         //TODO handle canFloat
         private bool _canFloat;
         private float _jumpHeight;
