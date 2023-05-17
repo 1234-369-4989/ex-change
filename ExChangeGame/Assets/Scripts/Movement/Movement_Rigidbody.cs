@@ -174,7 +174,7 @@ public class Movement_Rigidbody : MonoBehaviour
                 rotationSmoothTime);
             
             
-            _playerBody.MoveRotation(Quaternion.Euler(0.0f, rotation, 0.0f));//Rotate the player depending on input
+            _playerBody.AddTorque(0.0f, rotation, 0.0f, ForceMode.Impulse);
         }
         
         Vector3 targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;//Calculate Movementdirection via Rotation
