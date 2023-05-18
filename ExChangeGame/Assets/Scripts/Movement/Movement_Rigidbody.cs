@@ -62,7 +62,7 @@ public class Movement_Rigidbody : MonoBehaviour
     private float _rotationVelocity;
     private float _verticalVelocity;
     private float _terminalVelocity = 53.0f;
-    
+
     // timeout deltatime
     private float _jumpTimeoutDelta;
     private float _fallTimeoutDelta;
@@ -74,7 +74,12 @@ public class Movement_Rigidbody : MonoBehaviour
     private int _animIDFreeFall;
     private int _animIDMotionSpeed;
     
-    #if ENABLE_INPUT_SYSTEM
+    //PlayerCameraRoot
+    public GameObject PlayerCameraRoot;
+    private List<Vector3> _playerroute;
+    private float _distancePlayerToCameraRoot;
+
+#if ENABLE_INPUT_SYSTEM
         private PlayerInput _playerInput;
     #endif
 
@@ -104,6 +109,8 @@ public class Movement_Rigidbody : MonoBehaviour
 
     private void Awake()
     {
+        _playerroute = new List<Vector3>();
+        _distancePlayerToCameraRoot = Vector3.Distance(transform.position, PlayerCameraRoot.transform.position);
         
         //get a reference for the main camera
         if (_mainCamera == null)
@@ -120,8 +127,8 @@ public class Movement_Rigidbody : MonoBehaviour
         _hasAnimator = TryGetComponent(out _animator);
         _playerBody = GetComponent<Rigidbody>();
         _input = GetComponent<StarterAssetsInputs>();
-        
-        #if ENABLE_INPUT_SYSTEM
+
+#if ENABLE_INPUT_SYSTEM
         _playerInput = GetComponent<PlayerInput>();
         #else
         Debug.LogError( "Starter Assets package is missing dependencies. Pleas
@@ -134,7 +141,7 @@ public class Movement_Rigidbody : MonoBehaviour
 
         _moveSpeed = defaultMoveSpeed;
         _sprintSpeed = defaultSprintSpeed;
-        _canJump = false;
+        _canJump = true;
         _jumpHeight = 2;
             
        _exchangeSystem.OnMovementChanged += OnMovementChanged;
@@ -153,7 +160,16 @@ public class Movement_Rigidbody : MonoBehaviour
         Jump();
         GroundedCheck();
         Move();
+        _playerroute.Add(transform.position + new Vector3(0.0f, _distancePlayerToCameraRoot, 0.0f));
+
+        if (_playerroute.Count > 1)
+        {
+            _playerroute.RemoveAt(0);
+            PlayerCameraRoot.transform.position = _playerroute[0];
+        }
     }
+    
+    
 
     //Method for Calculating Movement and Applying it
     private void Move()
@@ -174,15 +190,15 @@ public class Movement_Rigidbody : MonoBehaviour
                 rotationSmoothTime);
             
             
-            _playerBody.MoveRotation(Quaternion.Euler(0.0f, rotation, 0.0f));//Rotate the player depending on input
+            _playerBody.MoveRotation(Quaternion.Euler(0.0f, rotation, 0.0f));
         }
         
         Vector3 targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;//Calculate Movementdirection via Rotation
         
-        _playerBody.MovePosition(transform.position + targetDirection * (Time.deltaTime * targetSpeed));//Move Towards next position
-   
-        
-        
+        _playerBody.MovePosition(transform.position + targetDirection * (Time.fixedDeltaTime * targetSpeed));//Move Towards next position
+
+
+
         if (_hasAnimator)
         {
             _animator.SetFloat(_animIDSpeed, _animationBlend);
@@ -223,6 +239,7 @@ public class Movement_Rigidbody : MonoBehaviour
             if (_fallTimeoutDelta >= 0.0f)
             {
                 _fallTimeoutDelta -= Time.deltaTime;
+                _input.jump = false;
             }
             else
             {
