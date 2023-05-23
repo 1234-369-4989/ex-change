@@ -1,7 +1,7 @@
 ﻿namespace ExChangeParts
 {
     // antennas should trigger the UI minimap
-    public class Antennas: ExchangePart
+    public class MapSensor: ExchangePart
     {
 
         protected override void OnEquip()
