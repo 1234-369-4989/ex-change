@@ -9,12 +9,20 @@ namespace Environment
     {
         private Animator _animator;
         private static readonly int Open = Animator.StringToHash("Open");
-    
+
         [SerializeField] private Light[] lights;
         [SerializeField] private Color activeColor;
         [SerializeField] private Color inactiveColor;
-    
+
         [SerializeField] private bool isActivated;
+
+        [SerializeField] private Collider _closeCollider;
+        [SerializeField] private Collider _openCollider;
+
+        private void Awake()
+        {
+            _animator = GetComponent<Animator>();
+        }
 
         private void Start()
         {
@@ -34,12 +42,10 @@ namespace Environment
             {
                 l.color = value ? activeColor : inactiveColor;
             }
+            _openCollider.enabled = value;
+            _closeCollider.enabled = !value;
         }
 
-        private void Awake()
-        {
-            _animator = GetComponent<Animator>();
-        }
 
         private void OnTriggerEnter(Collider other)
         {
@@ -49,7 +55,7 @@ namespace Environment
                 _animator.SetBool(Open, true);
             }
         }
-    
+
         private void OnTriggerExit(Collider other)
         {
             if (other.CompareTag("Player"))
