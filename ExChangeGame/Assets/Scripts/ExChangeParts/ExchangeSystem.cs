@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 
 namespace ExChangeParts
@@ -8,6 +9,7 @@ namespace ExChangeParts
         [Header("Parts")]
         [SerializeField] private ExchangePart[] parts;
         [SerializeField] bool deactivateOnStart = true;
+        [SerializeField] private ExchangePart[] defaultParts;
         
         [Header("Visuals")]
         [SerializeField] private Renderer[] colorRenderers;
@@ -34,6 +36,10 @@ namespace ExChangeParts
                     part.gameObject.SetActive(false);
                 }
             }
+            foreach (var part in defaultParts)
+            {
+                ChangeParts(part);
+            }
         }
 
 
@@ -48,10 +54,8 @@ namespace ExChangeParts
                         part.Unequip();
                         part.gameObject.SetActive(false);
                     }
-
                     continue;
                 }
-
                 if (part.gameObject.activeSelf) continue;
                 part.gameObject.SetActive(true);
                 part.Equip();
@@ -75,6 +79,28 @@ namespace ExChangeParts
         public void SetMovement(MovementVariables movementVariables)
         {
             OnMovementChanged?.Invoke(movementVariables);
+        }
+
+        public bool HasPartEquipped(ExchangePart neededType)
+        {
+            return parts.Any(part => part.GetType() == neededType.GetType() && part.gameObject.activeSelf);
+        }
+
+        public void ChangeParts(ExchangePart neededType, ExchangePart givenType)
+        {
+            RemovePart(neededType);
+            ChangeParts(givenType);
+        }
+
+        private void RemovePart(ExchangePart neededType)
+        {
+            foreach (var part in parts)
+            {
+                if (part.GetType() != neededType.GetType()) continue;
+                if (!part.gameObject.activeSelf) continue;
+                part.Unequip();
+                part.gameObject.SetActive(false);
+            }
         }
     }
 }
