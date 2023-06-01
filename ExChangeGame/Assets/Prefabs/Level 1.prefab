@@ -2137,7 +2137,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 4642
+  m_VersionIndex: 4762
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -2481,7 +2481,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 5354
+  m_VersionIndex: 5474
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -2825,7 +2825,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 5040
+  m_VersionIndex: 5160
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -3169,7 +3169,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 5501
+  m_VersionIndex: 5621
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -3513,7 +3513,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 5862
+  m_VersionIndex: 5982
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -3683,7 +3683,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4279769517904136427}
   - {fileID: 2960214224643323412}
@@ -4295,7 +4295,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 4200
+  m_VersionIndex: 4320
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -4642,7 +4642,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 4497
+  m_VersionIndex: 4617
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -5330,7 +5330,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 5006
+  m_VersionIndex: 5126
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -5674,7 +5674,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 5758
+  m_VersionIndex: 5878
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -6237,7 +6237,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 5124
+  m_VersionIndex: 5244
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -7150,7 +7150,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 4823
+  m_VersionIndex: 4943
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -7494,7 +7494,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 5170
+  m_VersionIndex: 5290
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -7838,7 +7838,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 4784
+  m_VersionIndex: 4904
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -8182,7 +8182,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 4525
+  m_VersionIndex: 4645
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -8526,7 +8526,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 4695
+  m_VersionIndex: 4815
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -8870,7 +8870,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 4854
+  m_VersionIndex: 4974
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -9454,7 +9454,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 5254
+  m_VersionIndex: 5374
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -9576,7 +9576,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 7, y: -4, z: -9}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 358276201009364263}
   - {fileID: 7766317460984940157}
@@ -10177,7 +10177,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 4876
+  m_VersionIndex: 4996
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -10521,7 +10521,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 4594
+  m_VersionIndex: 4714
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -10865,7 +10865,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 4669
+  m_VersionIndex: 4789
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -11449,7 +11449,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 2706
+  m_VersionIndex: 2826
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -12033,7 +12033,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 4674
+  m_VersionIndex: 4794
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -12290,7 +12290,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 15156
+  m_VersionIndex: 15276
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -14174,7 +14174,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 3956
+  m_VersionIndex: 4076
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -14526,7 +14526,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 4343
+  m_VersionIndex: 4463
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -14870,7 +14870,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 5167
+  m_VersionIndex: 5287
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -15214,7 +15214,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 4985
+  m_VersionIndex: 5105
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -17447,7 +17447,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 4763
+  m_VersionIndex: 4883
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -17665,7 +17665,7 @@ PrefabInstance:
     - target: {fileID: 2333479711270537974, guid: 43c98d225be0dbe45a3b15711b5d9091,
         type: 3}
       propertyPath: m_VersionIndex
-      value: 3712
+      value: 3832
       objectReference: {fileID: 0}
     - target: {fileID: 2333479711570192868, guid: 43c98d225be0dbe45a3b15711b5d9091,
         type: 3}
@@ -17750,7 +17750,7 @@ PrefabInstance:
     - target: {fileID: 2333479711757341757, guid: 43c98d225be0dbe45a3b15711b5d9091,
         type: 3}
       propertyPath: m_VersionIndex
-      value: 4983
+      value: 5103
       objectReference: {fileID: 0}
     - target: {fileID: 2333479711757341757, guid: 43c98d225be0dbe45a3b15711b5d9091,
         type: 3}
@@ -18685,7 +18685,7 @@ PrefabInstance:
     - target: {fileID: 2333479712238812630, guid: 43c98d225be0dbe45a3b15711b5d9091,
         type: 3}
       propertyPath: m_VersionIndex
-      value: 3726
+      value: 3846
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 43c98d225be0dbe45a3b15711b5d9091, type: 3}
@@ -18794,14 +18794,72 @@ PrefabInstance:
       propertyPath: m_Name
       value: droneRobot
       objectReference: {fileID: 0}
+    - target: {fileID: 8964090245948359427, guid: 9d1c9ebeaf3c83e46a2935d39694dc95,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.97
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9d1c9ebeaf3c83e46a2935d39694dc95, type: 3}
+--- !u!114 &3535557348078195244 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3377354516938065060, guid: 9d1c9ebeaf3c83e46a2935d39694dc95,
+    type: 3}
+  m_PrefabInstance: {fileID: 2291791967897425544}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4982813686578229566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95d186df9f6a24d47b7b136afe0ddcb3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &4279769517904136427 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2642169410724699747, guid: 9d1c9ebeaf3c83e46a2935d39694dc95,
     type: 3}
   m_PrefabInstance: {fileID: 2291791967897425544}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &4982813686578229566 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6550650597034272694, guid: 9d1c9ebeaf3c83e46a2935d39694dc95,
+    type: 3}
+  m_PrefabInstance: {fileID: 2291791967897425544}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &234957516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4982813686578229566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af4d91c9744ac384495eb909341fed52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialog:
+    name: Mysterious Drone
+    sentences:
+    - Hello ... ooooo
+    - Nice to meet youuuuu.
+    - I am nooot feeling well.
+    - Take this
+    onComplete:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 3535557348078195244}
+          m_TargetAssemblyTypeName: PartDonor, Assembly-CSharp
+          m_MethodName: DonatePart
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  isDialogActive: 1
 --- !u!1001 &5405105855020492089
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18809,6 +18867,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7766317460984940157}
     m_Modifications:
+    - target: {fileID: 1956284607, guid: c367e78e733c45b4e9ddca4f50f6bfe3, type: 3}
+      propertyPath: m_Radius
+      value: 0.9
+      objectReference: {fileID: 0}
     - target: {fileID: 7067836684448895789, guid: c367e78e733c45b4e9ddca4f50f6bfe3,
         type: 3}
       propertyPath: m_RootOrder
@@ -18877,6 +18939,57 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 5405105855020492089}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &4000477800999693023 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8972936816332984294, guid: c367e78e733c45b4e9ddca4f50f6bfe3,
+    type: 3}
+  m_PrefabInstance: {fileID: 5405105855020492089}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1834053062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4000477800999693023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af4d91c9744ac384495eb909341fed52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialog:
+    name: Repairbot
+    sentences:
+    - Hello
+    - Lets exchange parts. Your lights for my welding torch.
+    onComplete:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5405105855215168903}
+          m_TargetAssemblyTypeName: ExChangeParts.PartExchanger, Assembly-CSharp
+          m_MethodName: ExchangeParts
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  isDialogActive: 1
+--- !u!114 &5405105855215168903 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1956284606, guid: c367e78e733c45b4e9ddca4f50f6bfe3,
+    type: 3}
+  m_PrefabInstance: {fileID: 5405105855020492089}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4000477800999693023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38a9abbf50ffb414ca235826bd297da8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &6114234563150633171
 PrefabInstance:
   m_ObjectHideFlags: 0
