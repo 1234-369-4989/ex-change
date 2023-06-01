@@ -13,13 +13,12 @@ namespace ExChangeParts
     {
     
         [Header("References")]
-        private ThirdPersonController pm;
+        private Movement_Rigidbody pm;
         public Transform camera;
         public Transform gunTip;
         public LayerMask whatIsGrappable;
         public LineRenderer lr;
-        private CharacterController _controller;
-        private StarterAssetsInputs _inputs;
+        public Rigidbody rb;
 
         [Header("GrappleValues")]
         public float maxGrappleDistance;
@@ -34,7 +33,7 @@ namespace ExChangeParts
         private float grapplingTimer;
     
         [Header("Input")]
-        public KeyCode grappleKey = KeyCode.Mouse0;
+        public KeyCode grappleKey = KeyCode.Mouse1;
     
         private bool grappling;
         private bool _isGrappable;
@@ -54,25 +53,29 @@ namespace ExChangeParts
     
         private void Start()
         {
-            pm = GetComponent<ThirdPersonController>();
-            _speedStorage = pm.MoveSpeed;
-            _controller = GetComponent<CharacterController>();
-            _inputs = GetComponent<StarterAssetsInputs>();
+            pm = GetComponentInParent<Movement_Rigidbody>();
+            _speedStorage = pm._moveSpeed;
+            rb = GetComponentInParent<Rigidbody>();
         }
     
         private void Update()
         {
             if (_freeze)
             {
-                pm.MoveSpeed = 0f; //freeze the player for a short time
+                pm._moveSpeed = 0f; //freeze the player for a short time
             }
             else
             {
-                pm.MoveSpeed = _speedStorage;
+                pm._moveSpeed = _speedStorage;
             }
             
             
             if(Input.GetKeyDown(grappleKey)) StartGrapple();
+
+            if (grapplingTimer > 0)
+            {
+                grapplingTimer -= Time.deltaTime;
+            }
             
             if (grappling && _isGrappable)
             {
@@ -112,6 +115,7 @@ namespace ExChangeParts
             {
                 grapplePoint = hit.point;
                 _isGrappable = true;
+                Invoke(nameof(ExecuteGrapple), grappleDelayTime);
             }
             else
             {
@@ -138,23 +142,29 @@ namespace ExChangeParts
 
         private void JumpToPosition(Vector3 targetPosition, float trajectoryHeight)
         {
-            Vector3 velocityToSet = CalculateJumpVelocity(transform.position, targetPosition, trajectoryHeight);
-            Vector3 targetDirection = Quaternion.Euler(0.0f, CalcualteCurrentRotation(), 0.0f) * Vector3.forward;
-            _controller.Move(targetDirection.normalized * (targetDirection.z * Time.deltaTime) + (velocityToSet + targetPosition) * Time.deltaTime);
+            rb.velocity = CalculateJumpVelocity(transform.position, targetPosition, trajectoryHeight);
         }
+        
 
-        private float CalcualteCurrentRotation()
+        private void ExecuteGrapple()
         {
-            Vector3 inputDirection = new Vector3(_inputs.move.x, 0.0f, _inputs.move.y).normalized;
-            float targetrotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg +
-                                   camera.transform.eulerAngles.y;
-            return targetrotation;
+            _freeze = false;
+
+            Vector3 lowestPoint = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+            float grapplePointRelativeYPos = grapplePoint.y - lowestPoint.y;
+            float highestPointOnArc = grapplePointRelativeYPos + overshootYAxis;
+
+            if (grapplePointRelativeYPos < 0) highestPointOnArc = overshootYAxis;
+            
+            JumpToPosition(grapplePoint, highestPointOnArc);
+
+            Invoke(nameof(StopGrapple), 1f);
         }
 
 
         private Vector3 CalculateJumpVelocity(Vector3 startpoint, Vector3 endPoint, float trajectoryHeight)
         {
-            float gravity = pm.Gravity;
+            float gravity = Physics.gravity.y;
             float displacementY = endPoint.y - startpoint.y;
             Vector3 displacementXZ = new Vector3(endPoint.x - startpoint.x, 0f, endPoint.z - endPoint.z);
 
@@ -162,6 +172,7 @@ namespace ExChangeParts
             Vector3 velocityXZ = displacementXZ / (Mathf.Sqrt(-2 * trajectoryHeight / gravity)
                                                    + Mathf.Sqrt(2 * (displacementY - trajectoryHeight) / gravity));
 
+            Debug.Log(velocityXZ + velocityY);
             return velocityXZ + velocityY;
 
         }
