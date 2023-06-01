@@ -15,6 +15,7 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(PlayerInput))]
 #endif    
 
+[SelectionBase]
 public class Movement_Rigidbody : MonoBehaviour
 {
     [Header("Player")]

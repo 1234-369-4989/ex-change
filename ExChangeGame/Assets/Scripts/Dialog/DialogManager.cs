@@ -21,7 +21,6 @@ namespace Dialog
         [SerializeField] private AudioSource audioSource;
         private static readonly int IsOpen = Animator.StringToHash("IsOpen");
         
-       private static string _dialogTable = "Dialog";
 
         public static DialogManager Instance { get; private set; }
 
