@@ -134,8 +134,9 @@ namespace ExChangeParts
             _freeze = false;
             grappling = false;
             _isGrappable = false;
-    
-            grapplingTimer = grapplingCd;
+            //rb.constraints = RigidbodyConstraints.None;
+
+                grapplingTimer = grapplingCd;
 
             lr.enabled = false;
         }
@@ -149,6 +150,7 @@ namespace ExChangeParts
         private void ExecuteGrapple()
         {
             _freeze = false;
+            rb.constraints = RigidbodyConstraints.FreezeRotation;//rotationfreeze is needed, because otherwise when the player hits the wall with its edge uncontrollable spinning ensues
 
             Vector3 lowestPoint = new Vector3(transform.position.x, transform.position.y, transform.position.z);
             float grapplePointRelativeYPos = grapplePoint.y - lowestPoint.y;
