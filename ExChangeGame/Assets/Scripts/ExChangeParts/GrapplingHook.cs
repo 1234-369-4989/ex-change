@@ -134,8 +134,7 @@ namespace ExChangeParts
             _freeze = false;
             grappling = false;
             _isGrappable = false;
-            //rb.constraints = RigidbodyConstraints.None;
-
+            
                 grapplingTimer = grapplingCd;
 
             lr.enabled = false;
