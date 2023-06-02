@@ -3161,7 +3161,7 @@ PrefabInstance:
     - target: {fileID: 2963565914199304408, guid: b279c151df5e6f9468e98f090e622ff8,
         type: 3}
       propertyPath: m_CullingMask.m_Bits
-      value: 503
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 2963565914199304415, guid: b279c151df5e6f9468e98f090e622ff8,
         type: 3}
@@ -5526,7 +5526,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1682351841
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6342,7 +6342,7 @@ PrefabInstance:
     - target: {fileID: 6738227638150614435, guid: 5c11199c6b037b5488a8287b832ec634,
         type: 3}
       propertyPath: m_CullingMask.m_Bits
-      value: 551
+      value: 513
       objectReference: {fileID: 0}
     - target: {fileID: 6738227638150614462, guid: 5c11199c6b037b5488a8287b832ec634,
         type: 3}

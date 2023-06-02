@@ -10,6 +10,7 @@ public class MinimapCamera : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        MainCamera.GetComponent<Camera>().cullingMask &= ~(1 << LayerMask.NameToLayer("Minimap"));
         Vector3 pos = Player.transform.position;
         //float defaultAngle = Player.transform.localEulerAngles.y;
         pos.y = 20f;
