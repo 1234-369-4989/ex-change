@@ -83,7 +83,7 @@ MonoBehaviour:
   canFloat: 0
   moveSpeed: 2
   sprintSpeed: 4
-  jumpHeight: 5
+  jumpHeight: 6
   canTakeFallDamage: 0
 --- !u!1001 &2631464021102213099
 PrefabInstance:
