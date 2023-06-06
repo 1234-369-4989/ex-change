@@ -33,12 +33,14 @@ namespace ExChangeParts
             {
                 foreach (var part in parts)
                 {
+                    part.Unequip();
                     part.gameObject.SetActive(false);
                 }
             }
             foreach (var part in defaultParts)
             {
-                ChangeParts(part);
+                part.gameObject.SetActive(true);
+                part.Equip();
             }
         }
 

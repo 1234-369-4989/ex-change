@@ -12,7 +12,6 @@ public class MinimapCamera : MonoBehaviour
     {
         MainCamera.GetComponent<Camera>().cullingMask &= ~(1 << LayerMask.NameToLayer("Minimap"));
         Vector3 pos = Player.transform.position;
-        //float defaultAngle = Player.transform.localEulerAngles.y;
         pos.y = 20f;
         gameObject.transform.position = pos;
         transform.parent = Player.transform;
@@ -21,7 +20,7 @@ public class MinimapCamera : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float angle = MainCamera.transform.localEulerAngles.y;
-        gameObject.transform.rotation = Quaternion.Euler(90f, angle, 90f);
+        float angle = MainCamera.transform.eulerAngles.y;
+        gameObject.transform.rotation = Quaternion.Euler(90f, angle, 0);
     }
 }

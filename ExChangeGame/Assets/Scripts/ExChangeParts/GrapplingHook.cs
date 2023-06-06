@@ -9,7 +9,7 @@ using UnityEngine.TextCore.Text;
 
 namespace ExChangeParts
 {
-    public class GrapplingHook : ExchangePart
+    public class GrapplingHook : MonoBehaviour
     {
     
         [Header("References")]
@@ -40,17 +40,6 @@ namespace ExChangeParts
         private bool _freeze;
         private float _speedStorage;
 
-
-        protected override void OnEquip()
-        {
-            //engage the Grappling Hook
-        }
-    
-        protected override void OnUnequip()
-        {
-           //disengange the Grappling Hook
-        }
-    
         private void Start()
         {
             pm = GetComponentInParent<Movement_Rigidbody>();
@@ -176,11 +165,5 @@ namespace ExChangeParts
             return velocityXZ + velocityY;
 
         }
-        
-        
-        
-        
     }
-
-
 }
