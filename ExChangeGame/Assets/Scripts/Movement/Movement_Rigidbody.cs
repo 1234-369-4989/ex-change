@@ -142,6 +142,7 @@ public class Movement_Rigidbody : MonoBehaviour
 
         _moveSpeed = defaultMoveSpeed;
         _sprintSpeed = defaultSprintSpeed;
+        _canJump = false;
         _jumpHeight = 2;
             
        _exchangeSystem.OnMovementChanged += OnMovementChanged;
