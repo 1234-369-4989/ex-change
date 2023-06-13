@@ -1,11 +1,5 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using ExChangeParts;
-using StarterAssets;
+using Movement;
 using UnityEngine;
-using UnityEngine.Serialization;
-using UnityEngine.TextCore.Text;
 
 namespace ExChangeParts
 {
@@ -13,7 +7,7 @@ namespace ExChangeParts
     {
     
         [Header("References")]
-        private Movement_Rigidbody pm;
+        private MovementRigidbody pm;
         public Transform camera;
         public Transform gunTip;
         public LayerMask whatIsGrappable;
@@ -42,8 +36,8 @@ namespace ExChangeParts
 
         private void Start()
         {
-            pm = GetComponentInParent<Movement_Rigidbody>();
-            _speedStorage = pm._moveSpeed;
+            pm = GetComponentInParent<MovementRigidbody>();
+            _speedStorage = pm.MoveSpeed;
             rb = GetComponentInParent<Rigidbody>();
         }
     
@@ -51,11 +45,11 @@ namespace ExChangeParts
         {
             if (_freeze)
             {
-                pm._moveSpeed = 0f; //freeze the player for a short time
+                pm.MoveSpeed = 0f; //freeze the player for a short time
             }
             else
             {
-                pm._moveSpeed = _speedStorage;
+                pm.MoveSpeed = _speedStorage;
             }
             
             
@@ -70,7 +64,8 @@ namespace ExChangeParts
             {
                 _freeze = false;
 
-                Vector3 lowestPoint = new Vector3(transform.position.x, transform.position.y - 1f, transform.position.z);
+                var position = transform.position;
+                Vector3 lowestPoint = new Vector3(position.x, position.y - 1f, position.z);
                 float grapplePointRelativeYPosition = grapplePoint.y - lowestPoint.y;
                 float highestPointOnArc = grapplePointRelativeYPosition + overshootYAxis;
 
@@ -140,7 +135,8 @@ namespace ExChangeParts
             _freeze = false;
             rb.constraints = RigidbodyConstraints.FreezeRotation;//rotationfreeze is needed, because otherwise when the player hits the wall with its edge uncontrollable spinning ensues
 
-            Vector3 lowestPoint = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+            
+            Vector3 lowestPoint = transform.position;
             float grapplePointRelativeYPos = grapplePoint.y - lowestPoint.y;
             float highestPointOnArc = grapplePointRelativeYPos + overshootYAxis;
 

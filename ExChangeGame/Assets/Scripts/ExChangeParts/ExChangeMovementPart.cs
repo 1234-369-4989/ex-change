@@ -33,7 +33,15 @@ namespace ExChangeParts
 
         protected override void OnUnequip()
         {
-            
+            var movementVariables = new MovementVariables
+            {
+                CanJump = false,
+                CanFloat = false,
+                MoveSpeed = null,
+                SprintSpeed = null,
+                JumpHeight = null
+            };
+            ExchangeSystem.Instance.SetMovement(movementVariables);
         }
     }
 }

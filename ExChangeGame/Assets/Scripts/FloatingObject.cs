@@ -1,7 +1,7 @@
 using UnityEngine;
 
 // Makes the object float up and down while rotating
-public class Float : MonoBehaviour
+public class FloatingObject : MonoBehaviour
 {
     [SerializeField] private float heightAmplitude = 0.5f;
     [SerializeField] private float heightFrequency = 1f;
