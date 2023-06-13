@@ -3,6 +3,7 @@
 namespace ExChangeParts
 {
     // Base class for all exchangeable parts
+    [SelectionBase]
     public abstract class ExchangePart: MonoBehaviour, IExchangable
     {
 

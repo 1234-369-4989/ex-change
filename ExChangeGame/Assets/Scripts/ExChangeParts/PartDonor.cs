@@ -1,12 +1,11 @@
-using Environment;
 using ExChangeParts;
 using UnityEngine;
 
-public class PartDonor : ActivateOnPlayerTrigger
+public class PartDonor : MonoBehaviour
 {
     [SerializeField] private ExchangePart part;
 
-    protected override void Activate()
+    public void DonatePart()
     {
         ExchangeSystem.Instance.ChangeParts(part);
         part.gameObject.SetActive(false);

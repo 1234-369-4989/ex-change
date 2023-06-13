@@ -15,6 +15,7 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(PlayerInput))]
 #endif    
 
+[SelectionBase]
 public class Movement_Rigidbody : MonoBehaviour
 {
     [Header("Player")]
@@ -141,7 +142,7 @@ public class Movement_Rigidbody : MonoBehaviour
 
         _moveSpeed = defaultMoveSpeed;
         _sprintSpeed = defaultSprintSpeed;
-        _canJump = true;
+        _canJump = false;
         _jumpHeight = 2;
             
        _exchangeSystem.OnMovementChanged += OnMovementChanged;
@@ -225,6 +226,10 @@ public class Movement_Rigidbody : MonoBehaviour
                  {
                     _animator.SetBool(_animIDJump, true);
                  }
+             }
+             else
+             {
+                 _input.jump = false;
              }
              
              if (_jumpTimeoutDelta >= 0.0f)
