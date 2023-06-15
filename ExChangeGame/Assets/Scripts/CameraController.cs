@@ -108,7 +108,7 @@ public class CameraController : MonoBehaviour
         if (lfAngle > 360f) lfAngle -= 360f;
         return Mathf.Clamp(lfAngle, lfMin, lfMax);
     }
-
+    /*
     private void OnGUI()
     {
         GUI.Label(new Rect(15, 0, 100, 80), "Test Button");
@@ -123,5 +123,5 @@ public class CameraController : MonoBehaviour
         GUI.Label(new Rect(15, 120, 100, 50), "Sensitivity");
         Sensitivity = GUI.HorizontalSlider(new Rect(0, 150, 100, 20), Sensitivity, 0.5f, 3.0f);
     }
-
+    */
 }
