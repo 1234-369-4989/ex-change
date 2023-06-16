@@ -10,8 +10,7 @@ public class SawArea : MonoBehaviour
        [SerializeField] private float pushForceUp = 1f;
        private void OnTriggerEnter(Collider other)
        {
-           if(!other.TryGetComponent<BasicHealth>(out var health)) return;
-           Debug.Log("Damage");
+           if(!other.TryGetComponent<BasicHealth>(out var health)) return; ;
            health.Damage(1);
            var direction = other.transform.position - transform.position;
            direction.y = 0;
