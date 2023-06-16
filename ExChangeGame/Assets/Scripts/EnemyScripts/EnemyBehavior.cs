@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Serialization;
 using UnityEngine.Timeline;
+using UnityEngine.UIElements;
 
 public enum EnemyState{
     Idle,
@@ -37,7 +38,7 @@ private bool _reverse;//is the enemy travelling backwards in the List?
 private bool _playerInSightRange, _playerInAttackRange;//is the Player in Attack/Sight Range
 
 
-private EnemyState _currentState;//current State in which the Enemy operates
+protected EnemyState _currentState;//current State in which the Enemy operates
 private float _enemyHeight;//how how above the ground is the enemy floating
 
 
@@ -112,7 +113,8 @@ private void Update()
 private void Patrol()
     {
         Debug.Log(_currentState);
-        _agent.destination = Waypoints[currentTarget].position;
+        Transform target = Waypoints[currentTarget];
+        _agent.destination = target.position;
         float distance = Vector3.Distance(transform.position, Waypoints[currentTarget].position) - _enemyHeight;
         if (distance < 1f && _targetReached == false)
         {
@@ -138,16 +140,18 @@ private void Patrol()
         }
         else if (distance < 1f && _targetReached)
         {
-            StartCoroutine(WaitBeforeMoving());
+            StartCoroutine(WaitBeforeMoving(target));
         }
     }
+
+
 
 /// <summary>
 /// waits a time of 2f before moving on to the next Waypoint
 /// </summary>
 /// <returns></returns>
 
-    IEnumerator WaitBeforeMoving()
+    IEnumerator WaitBeforeMoving(Transform target)
     {
         if (currentTarget == Waypoints.Count - 1 || currentTarget == 0)
         {
@@ -159,7 +163,7 @@ private void Patrol()
             _targetReached = false;
         }
     }
-    
+
 
 /// <summary>
 /// sets Player as primary Target and tries to reach him until in Attack Range
@@ -181,7 +185,7 @@ private void Patrol()
     /// <summary>
     /// attack the player
     /// </summary>
-    private void Attack()
+   public virtual void Attack()
     {
         //depends on how the enemy will attack
     }
