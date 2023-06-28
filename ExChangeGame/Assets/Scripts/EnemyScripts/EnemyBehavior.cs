@@ -30,7 +30,7 @@ public LayerMask whatIsPlayer;//Layermask for defining what is the player
 
 [Header("Patrol Values")]
 public List<Transform> Waypoints; //List of Patrolpoints
-private NavMeshAgent _agent;//Navmeshagent for Patrolling
+protected NavMeshAgent _agent;//Navmeshagent for Patrolling
 [SerializeField] private int currentTarget;//which Point shall be reached next
 private bool _reverse;//is the enemy travelling backwards in the List?
 [SerializeField] private bool _targetReached;//is the current Target reached?
@@ -47,6 +47,8 @@ private void Start()
     _currentState = EnemyState.Idle;
     _agent = GetComponent<NavMeshAgent>();
     _enemyHeight = transform.position.y;
+
+    _agent.updateRotation = false;
 }
 
 /// <summary>
@@ -57,6 +59,8 @@ private void Start()
 {
     _playerInSightRange = Physics.CheckSphere(transform.position, CheckRadius, whatIsPlayer);
     _playerInAttackRange = Physics.CheckSphere(transform.position, CheckRadius/2, whatIsPlayer);
+    
+    
     if (!_playerInSightRange && !_playerInAttackRange)
     {
         _currentState = EnemyState.Idle;
@@ -78,10 +82,11 @@ private void Start()
 /// Attack: Attack Player
 /// </summary>
 
-private void Update()
+private void FixedUpdate()
     {
         
         setCurrentState();
+        Debug.Log(_currentState);
 
         switch (_currentState)
         {
@@ -112,10 +117,8 @@ private void Update()
 
 private void Patrol()
     {
-        Debug.Log(_currentState);
-        Transform target = Waypoints[currentTarget];
-        _agent.destination = target.position;
         float distance = Vector3.Distance(transform.position, Waypoints[currentTarget].position) - _enemyHeight;
+        _agent.destination = Waypoints[currentTarget].position;
         if (distance < 1f && _targetReached == false)
         {
             _targetReached = true;
@@ -140,9 +143,20 @@ private void Patrol()
         }
         else if (distance < 1f && _targetReached)
         {
-            StartCoroutine(WaitBeforeMoving(target));
+            StartCoroutine(WaitBeforeMoving());
         }
     }
+
+IEnumerator RotateAgent(Quaternion currentRotation, Quaternion targetRotation)
+{
+    while (currentRotation != targetRotation)
+    {
+        transform.rotation =
+            Quaternion.RotateTowards(currentRotation, targetRotation, _agent.angularSpeed * Time.deltaTime);
+        yield return 1;
+    }
+
+}
 
 
 
@@ -151,7 +165,7 @@ private void Patrol()
 /// </summary>
 /// <returns></returns>
 
-    IEnumerator WaitBeforeMoving(Transform target)
+    IEnumerator WaitBeforeMoving()
     {
         if (currentTarget == Waypoints.Count - 1 || currentTarget == 0)
         {
@@ -174,7 +188,7 @@ private void Patrol()
 
        if (Vector3.Distance(transform.position, Player.position) >= MinDist)
        {
-           transform.position += transform.forward * (MoveSpeed * Time.deltaTime);
+           _agent.destination = Player.position;
            
            if (Vector3.Distance(transform.position, Player.position) <= AttackDist)
            {

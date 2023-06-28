@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,9 +11,15 @@ public class SawEnemyBehavior : EnemyBehavior
     {
         transform.LookAt(Player);
 
-        if (Vector3.Distance(transform.position, Player.position) >= MinDist)
+        if (Vector3.Distance(transform.position, Player.position) >= AttackDist)
         {
-            transform.position += transform.forward * (MoveSpeed * Time.deltaTime);
+            _agent.destination = Player.position;
         }
+    }
+    
+    private void OnDestroy()
+    {
+        //drop component here
+        throw new NotImplementedException();
     }
 }

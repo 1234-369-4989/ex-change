@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
@@ -8,18 +9,17 @@ public class SawArea : MonoBehaviour
       [SerializeField] private float damagePerSecond = 1f;
        [SerializeField] private float pushForceAway = 1f;
        [SerializeField] private float pushForceUp = 1f;
+
        private void OnTriggerEnter(Collider other)
        {
-           if(!other.TryGetComponent<BasicHealth>(out var health)) return; ;
+           Debug.Log("Player Hit");
+           if (!other.TryGetComponent<BasicHealth>(out var health)) return;
            health.Damage(1);
+           Debug.Log(health);
            var direction = other.transform.position - transform.position;
-           direction.y = 0;
            direction.Normalize();
-           other.GetComponent<Rigidbody>().AddForce(direction * pushForceAway + Vector3.up * pushForceUp, ForceMode.VelocityChange);
-   } 
-       private void OnTriggerStay(Collider other)
-       {
-           if(!other.TryGetComponent<BasicHealth>(out var health)) return;
-           health.Damage((int) (damagePerSecond * Time.deltaTime));
+           other.GetComponent<Rigidbody>().AddForce(direction * pushForceAway + Vector3.up * pushForceUp,
+               ForceMode.VelocityChange);
+           other.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
        }
 }
