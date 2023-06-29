@@ -56,6 +56,8 @@ private void Start()
 
     _agent.updateRotation = false;
     _agent.updatePosition = false;
+
+    StartCoroutine(FOVRoutine());
 }
 
 
@@ -81,7 +83,7 @@ private void FieldOfViewCheck()
         Transform target = rangeChecks[0].transform;
         Vector3 directionTarget = (target.position - transform.position).normalized;
 
-        if (Vector3.Angle(transform.position, directionTarget) < angle / 2)
+        if (Vector3.Angle(transform.forward, directionTarget) < angle / 2)
         {
             float distanceToTarget = Vector3.Distance(transform.position, target.position);
             
