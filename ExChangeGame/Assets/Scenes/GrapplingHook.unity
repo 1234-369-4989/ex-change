@@ -229,10 +229,10 @@ MonoBehaviour:
   MinDist: 5
   Player: {fileID: 0}
   angle: 0
+  CheckRadius: 5
   obstructionMask:
     serializedVersion: 2
     m_Bits: 0
-  CheckRadius: 5
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 64
@@ -243,6 +243,7 @@ MonoBehaviour:
   - {fileID: 192342357}
   currentTarget: 0
   _targetReached: 0
+  rotation: 0
 --- !u!1001 &146121464
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1065,7 +1066,7 @@ CapsuleCollider:
   m_Radius: 0.25
   m_Height: 0.5
   m_Direction: 1
-  m_Center: {x: 0, y: 0.24, z: 0}
+  m_Center: {x: 0, y: 0.25, z: 0}
 --- !u!1 &1225872968
 GameObject:
   m_ObjectHideFlags: 0
@@ -1272,7 +1273,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh36354
+  m_Name: pb_Mesh28076
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1909,11 +1910,11 @@ MonoBehaviour:
   AttackDist: 0
   MinDist: 5
   Player: {fileID: 1407629454}
-  angle: 0
+  angle: 65
+  CheckRadius: 10
   obstructionMask:
     serializedVersion: 2
     m_Bits: 0
-  CheckRadius: 5
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 64
@@ -1923,6 +1924,7 @@ MonoBehaviour:
   - {fileID: 2040593179}
   currentTarget: 0
   _targetReached: 0
+  rotation: 0
 --- !u!195 &1979339593
 NavMeshAgent:
   m_ObjectHideFlags: 0
