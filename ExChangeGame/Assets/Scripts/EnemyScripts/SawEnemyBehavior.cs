@@ -14,6 +14,7 @@ public class SawEnemyBehavior : EnemyBehavior
         if (Vector3.Distance(transform.position, Player.position) >= AttackDist)
         {
             _agent.destination = Player.position;
+            transform.position = Vector3.SmoothDamp(transform.position, new Vector3(_agent.nextPosition.x, 0, _agent.nextPosition.z), ref velocity, 0.3f );
         }
     }
     

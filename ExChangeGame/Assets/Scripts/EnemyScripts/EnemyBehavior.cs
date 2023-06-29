@@ -24,9 +24,14 @@ public int AttackDist; // How far away the enemy is to attack the player
 public int MinDist;// Minimal Distance for the player to be noticed
 public Transform Player; //Playerposition
 
-[Header("Raycast Values and Layermask")]
-public int CheckRadius;//How far is the Radius the Enemy can "see"
+[Header("Field of View Values")]
+[Range(0,360)]
+public float angle;//FOV angle
+public LayerMask obstructionMask; //Mask for things the enemy can not see through 
+public int CheckRadius;//How far is the Radius the Enemy can see
 public LayerMask whatIsPlayer;//Layermask for defining what is the player
+public bool canSeePlayer; //can the enemy see the player
+
 
 [Header("Patrol Values")]
 public List<Transform> Waypoints; //List of Patrolpoints
@@ -40,6 +45,7 @@ private bool _playerInSightRange, _playerInAttackRange;//is the Player in Attack
 
 protected EnemyState _currentState;//current State in which the Enemy operates
 private float _enemyHeight;//how how above the ground is the enemy floating
+protected Vector3 velocity = Vector3.forward;// Velocity value for smoothdamp
 
 
 private void Start()
@@ -49,6 +55,51 @@ private void Start()
     _enemyHeight = transform.position.y;
 
     _agent.updateRotation = false;
+    _agent.updatePosition = false;
+}
+
+
+private IEnumerator FOVRoutine()
+{
+    float delay = 0.2f;
+    WaitForSeconds wait = new WaitForSeconds(delay);
+
+    while (true)
+    {
+        yield return wait;
+        FieldOfViewCheck();
+    }
+}
+
+
+private void FieldOfViewCheck()
+{
+    Collider[] rangeChecks = Physics.OverlapSphere(transform.position, CheckRadius, whatIsPlayer);
+
+    if (rangeChecks.Length != 0)//we are only looking for one object, if this does not work look that only the player has the Player Layer
+    {
+        Transform target = rangeChecks[0].transform;
+        Vector3 directionTarget = (target.position - transform.position).normalized;
+
+        if (Vector3.Angle(transform.position, directionTarget) < angle / 2)
+        {
+            float distanceToTarget = Vector3.Distance(transform.position, target.position);
+            
+            //is nothing obscuring the player
+            if (!Physics.Raycast(transform.position, directionTarget, distanceToTarget, obstructionMask))
+            {
+                canSeePlayer = true;
+            }
+            else//something is obscuring the player
+            {
+                canSeePlayer = false;
+            }
+        }
+        else if(canSeePlayer)//when the player is not within the radius anymore unsee him
+        {
+            canSeePlayer = false;
+        }
+    }
 }
 
 /// <summary>
@@ -119,6 +170,7 @@ private void Patrol()
     {
         float distance = Vector3.Distance(transform.position, Waypoints[currentTarget].position) - _enemyHeight;
         _agent.destination = Waypoints[currentTarget].position;
+        transform.position = Vector3.SmoothDamp(transform.position, new Vector3(_agent.nextPosition.x, 0, _agent.nextPosition.z), ref velocity, 0.3f );
         if (distance < 1f && _targetReached == false)
         {
             _targetReached = true;
@@ -152,7 +204,7 @@ IEnumerator RotateAgent(Quaternion currentRotation, Quaternion targetRotation)
     while (currentRotation != targetRotation)
     {
         transform.rotation =
-            Quaternion.RotateTowards(currentRotation, targetRotation, _agent.angularSpeed * Time.deltaTime);
+            Quaternion.RotateTowards(currentRotation, targetRotation, _agent.angularSpeed * Time.fixedDeltaTime);
         yield return 1;
     }
 
@@ -165,7 +217,7 @@ IEnumerator RotateAgent(Quaternion currentRotation, Quaternion targetRotation)
 /// </summary>
 /// <returns></returns>
 
-    IEnumerator WaitBeforeMoving()
+    protected virtual IEnumerator WaitBeforeMoving()
     {
         if (currentTarget == Waypoints.Count - 1 || currentTarget == 0)
         {
@@ -185,6 +237,8 @@ IEnumerator RotateAgent(Quaternion currentRotation, Quaternion targetRotation)
     private void ChasePlayer()
     {
        transform.LookAt(Player);
+       transform.position = Vector3.SmoothDamp(transform.position, new Vector3(_agent.nextPosition.x, 0, _agent.nextPosition.z), ref velocity, 0.3f );
+
 
        if (Vector3.Distance(transform.position, Player.position) >= MinDist)
        {

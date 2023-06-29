@@ -228,10 +228,15 @@ MonoBehaviour:
   AttackDist: 2
   MinDist: 5
   Player: {fileID: 0}
+  angle: 0
+  obstructionMask:
+    serializedVersion: 2
+    m_Bits: 0
   CheckRadius: 5
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 64
+  canSeePlayer: 0
   Waypoints:
   - {fileID: 844349685}
   - {fileID: 2040593179}
@@ -353,6 +358,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: -8
+      objectReference: {fileID: 0}
+    - target: {fileID: 95693983307356977, guid: d2a3de1e2b47de6408c0f0f42a74630a,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 95693983307356977, guid: d2a3de1e2b47de6408c0f0f42a74630a,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.53
       objectReference: {fileID: 0}
     - target: {fileID: 95693983307356977, guid: d2a3de1e2b47de6408c0f0f42a74630a,
         type: 3}
@@ -1050,7 +1065,7 @@ CapsuleCollider:
   m_Radius: 0.25
   m_Height: 0.5
   m_Direction: 1
-  m_Center: {x: 0, y: 0.12, z: 0}
+  m_Center: {x: 0, y: 0.24, z: 0}
 --- !u!1 &1225872968
 GameObject:
   m_ObjectHideFlags: 0
@@ -1107,7 +1122,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1311018486}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.95, y: 1.77, z: 5}
+  m_LocalPosition: {x: -2, y: -0.003, z: 22.295}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1257,7 +1272,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh28068
+  m_Name: pb_Mesh36354
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1892,12 +1907,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MoveSpeed: 2
   AttackDist: 0
-  MinDist: 10
+  MinDist: 5
   Player: {fileID: 1407629454}
-  CheckRadius: 10
+  angle: 0
+  obstructionMask:
+    serializedVersion: 2
+    m_Bits: 0
+  CheckRadius: 5
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 64
+  canSeePlayer: 0
   Waypoints:
   - {fileID: 844349685}
   - {fileID: 2040593179}
@@ -1922,7 +1942,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 1
-  m_BaseOffset: -0.075
+  m_BaseOffset: 0.01
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!114 &1979339595
