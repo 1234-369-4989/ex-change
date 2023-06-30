@@ -1,5 +1,7 @@
+using System;
 using Movement;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace ExChangeParts
 {
@@ -33,6 +35,14 @@ namespace ExChangeParts
         private bool _isGrappable;
         private bool _freeze;
         private float _speedStorage;
+        
+        [SerializeField] private InputActionReference grappleAction;
+        
+        private void OnEnable()
+        {
+            grappleAction.action.Enable();
+            grappleAction.action.performed +=  StartGrapple;
+        }
 
         private void Start()
         {
@@ -53,7 +63,7 @@ namespace ExChangeParts
             }
             
             
-            if(Input.GetKeyDown(grappleKey)) StartGrapple();
+            // if(Input.GetKeyDown(grappleKey)) StartGrapple(null);
 
             if (grapplingTimer > 0)
             {
@@ -87,7 +97,7 @@ namespace ExChangeParts
             }
         }
 
-        private void StartGrapple()
+        private void StartGrapple(InputAction.CallbackContext obj)
         {
             if (grapplingTimer > 0) return;
     
@@ -160,6 +170,12 @@ namespace ExChangeParts
             
             return velocityXZ + velocityY;
 
+        }
+
+        private void OnDestroy()
+        {
+            grappleAction.action.Disable();
+            grappleAction.action.performed -= StartGrapple;
         }
     }
 }

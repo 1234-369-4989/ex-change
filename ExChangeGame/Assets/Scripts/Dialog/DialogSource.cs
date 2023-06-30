@@ -6,15 +6,13 @@ namespace Dialog
     {
         [SerializeField] public Dialog dialog;
         
-        private DialogManager dialogManager;
         
-        private void Start()
-        {
-            dialogManager = DialogManager.Instance;
-        }
         public void StartDialog()
         {
-            dialogManager.StartDialog(dialog);
+            Debug.Log("StartDialog", this);
+            print(DialogManager.Instance);
+            print(dialog);
+            DialogManager.Instance.StartDialog(dialog);
         }
     }
 }
