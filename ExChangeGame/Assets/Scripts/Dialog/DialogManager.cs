@@ -21,6 +21,7 @@ namespace Dialog
         [SerializeField] private AudioSource audioSource;
         private static readonly int IsOpen = Animator.StringToHash("IsOpen");
         
+        [SerializeField] private InputActionReference continueButtonAction;
 
         public static DialogManager Instance { get; private set; }
 
@@ -35,6 +36,7 @@ namespace Dialog
                 Destroy(gameObject);
             }
             _sentences = new Queue<string>();
+            continueButtonAction.action.performed += ButtonPressed;
         }
 
         private void Start()
@@ -97,6 +99,11 @@ namespace Dialog
             }
             canvasGroup.gameObject.SetActive(false);
             print("EndDialog");
+        }
+        
+        private void OnDestroy()
+        {
+            continueButtonAction.action.performed -= ButtonPressed;
         }
     }
 }

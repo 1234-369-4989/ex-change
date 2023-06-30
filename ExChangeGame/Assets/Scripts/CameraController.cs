@@ -67,6 +67,9 @@ public class CameraController : MonoBehaviour
 
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
+        
+        // Start at 180 degrees to avoid camera flipping
+        CinemachineCameraTarget.transform.rotation = Quaternion.Euler(0.0f, 180.0f, 0.0f);
     }
 
     // Update is called once per frame
@@ -109,19 +112,19 @@ public class CameraController : MonoBehaviour
         return Mathf.Clamp(lfAngle, lfMin, lfMax);
     }
 
-    private void OnGUI()
-    {
-        GUI.Label(new Rect(15, 0, 100, 80), "Test Button");
-        if (GUI.Button(new Rect(0, 40, 100, 30), "Default"))
-        {
-            LowHealthCamera.Priority = 5;
-        }
-        if (GUI.Button(new Rect(0, 80, 100, 30), "LowHP"))
-        {
-            LowHealthCamera.Priority = 15;
-        }
-        GUI.Label(new Rect(15, 120, 100, 50), "Sensitivity");
-        Sensitivity = GUI.HorizontalSlider(new Rect(0, 150, 100, 20), Sensitivity, 0.5f, 3.0f);
-    }
+    // private void OnGUI()
+    // {
+    //     GUI.Label(new Rect(15, 0, 100, 80), "Test Button");
+    //     if (GUI.Button(new Rect(0, 40, 100, 30), "Default"))
+    //     {
+    //         LowHealthCamera.Priority = 5;
+    //     }
+    //     if (GUI.Button(new Rect(0, 80, 100, 30), "LowHP"))
+    //     {
+    //         LowHealthCamera.Priority = 15;
+    //     }
+    //     GUI.Label(new Rect(15, 120, 100, 50), "Sensitivity");
+    //     Sensitivity = GUI.HorizontalSlider(new Rect(0, 150, 100, 20), Sensitivity, 0.5f, 3.0f);
+    // }
 
 }
