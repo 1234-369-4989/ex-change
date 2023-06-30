@@ -1,6 +1,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.Sockets;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -43,7 +44,7 @@ public class EnemyBehavior : MonoBehaviour
     private Coroutine LookCoroutine;
     
     [Header("Do you want your own Rotation?")]
-    public bool rotation;
+    public bool DefaultRotation;
 
 
     private void Start()
@@ -52,7 +53,7 @@ public class EnemyBehavior : MonoBehaviour
         _agent = GetComponent<NavMeshAgent>();
         _enemyHeight = transform.position.y;
         
-        if(!rotation) _agent.updateRotation = false;
+        if(!DefaultRotation) _agent.updateRotation = false;
 
         
         _agent.updatePosition = false;
@@ -180,9 +181,13 @@ public class EnemyBehavior : MonoBehaviour
         
         Debug.Log(Vector3.Angle(transform.forward, directionTarget));
 
-        if (Vector3.Angle(transform.forward, directionTarget) >= 10 && !rotation)
+        if (!DefaultRotation)
         {
-            RotateToTarget(target);
+            if (Vector3.Angle(transform.forward, directionTarget) > 10)
+            {
+                transform.RotateAround(transform.position, Vector3.up, 5);
+            }
+            
         }
         else
         {
@@ -232,18 +237,20 @@ public class EnemyBehavior : MonoBehaviour
     private IEnumerator LookAt(Vector3 directionTarget)
     {
         Quaternion lookRotation = Quaternion.LookRotation(directionTarget - transform.position);
+
         float time = 0;
 
-        while (time < 5)
+        while (time < 1)
         {
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, time);
-            //transform.localEulerAngles = new Vector3(0, transform.localEulerAngles.y, 0);           
+            //transform.rotation = Quaternion.Euler(0, lookRotation.y, 0);      
             
-            time += Time.fixedDeltaTime;
+            time += Time.fixedDeltaTime * _agent.speed;
 
             yield return null;
         }
 
+        yield return null;
     }
 
 
