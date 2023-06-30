@@ -18,7 +18,7 @@ public class EnergyBar : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //maxValue = playerEnergy.maxEnergy;
+        //maxValue = playerEnergy.Energy;
         value = maxValue;
         delayValue = maxValue;
         lastValue = maxValue;

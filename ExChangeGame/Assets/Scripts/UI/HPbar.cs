@@ -18,10 +18,8 @@ public class HPbar : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //You may have to make maxvalue a public variable to get it to work.
-        //if you add BasicHealth script, enable thisÅ´
-        //maxValue = playerHealth.maxHealth;
-        value = playerHealth.Health;
+        maxValue = playerHealth.Health;
+        value = maxValue;
         delayValue = maxValue;
         lastValue = maxValue;
     }

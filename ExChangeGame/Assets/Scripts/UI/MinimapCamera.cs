@@ -6,7 +6,10 @@ public class MinimapCamera : MonoBehaviour
 {
     public GameObject Player;
     public GameObject MainCamera;
-
+    [SerializeField]
+    private float height1to2 = 0;
+    [SerializeField]
+    private float height2to3 = -4;
     private int nowLevel;
     private Camera mapCamera;
 
@@ -31,30 +34,27 @@ public class MinimapCamera : MonoBehaviour
     {
         float angle = MainCamera.transform.eulerAngles.y;
         gameObject.transform.rotation = Quaternion.Euler(90f, angle, 0);
-        //mapFloorChange();
     }
 
     void mapFloorChange()
     {
-        if(Player.transform.position.y < -4 && nowLevel != 3)
+        if(Player.transform.position.y < height2to3 && nowLevel != 3)
         {
             mapCamera.cullingMask = 1 << LayerMask.NameToLayer("Level3");
             mapCamera.cullingMask |= 1 << LayerMask.NameToLayer("Minimap");
             nowLevel = 3;
         }
-        else if (-4 <Player.transform.position.y && Player.transform.position.y < 0 && nowLevel != 2)
+        else if (height2to3 <Player.transform.position.y && Player.transform.position.y < height1to2 && nowLevel != 2)
         {
             mapCamera.cullingMask = 1 << LayerMask.NameToLayer("Level2");
             mapCamera.cullingMask |= 1 << LayerMask.NameToLayer("Minimap");
             nowLevel = 2;
-            Debug.Log("level2");
         }
-        else if (Player.transform.position.y > 0  && nowLevel != 1)
+        else if (Player.transform.position.y > height1to2  && nowLevel != 1)
         {
             mapCamera.cullingMask = 1 << LayerMask.NameToLayer("Level1");
             mapCamera.cullingMask |= 1 << LayerMask.NameToLayer("Minimap");
             nowLevel = 1;
-            Debug.Log("level1");
         }
     }
 }
