@@ -1,7 +1,9 @@
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.Sockets;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -16,7 +18,7 @@ public enum EnemyState
 
 public class EnemyBehavior : MonoBehaviour
 {
-    [Header("Movement Values")] public int MoveSpeed; //How fast the enemy moves
+    [Header("Movement Values")]
     public int AttackDist; // How far away the enemy is to attack the player
     public int MinDist; // Minimal Distance for the player to be noticed
     public Transform Player; //Playerposition
@@ -163,6 +165,17 @@ public class EnemyBehavior : MonoBehaviour
             default: break;
         }
     }
+    
+    /// <summary>
+    /// Checks if a value is between two parameters. Can be used in both ways
+    /// </summary>
+    /// <param name="min"> Minimal or Maximal Border</param>
+    /// <param name="max"> Minimal or Maximal Border</param>
+    /// <param name="value">Checked Value</param>
+    /// <returns>whether the value is in between min and max</returns>
+    private static bool IsValueBetween(float min, float max, float value){
+        return ((min < value) && (value < max)) || ((max < value) && (value < min));
+    }
 
     /// <summary>
     ///Patrols the Transforms set in the List of Transforms given as Waypoints.
@@ -174,24 +187,30 @@ public class EnemyBehavior : MonoBehaviour
         float distance = Vector3.Distance(transform.position, Waypoints[currentTarget].position) - _enemyHeight;
         _agent.destination = Waypoints[currentTarget].position;
         transform.position = Vector3.SmoothDamp(transform.position,
-            new Vector3(_agent.nextPosition.x, 0, _agent.nextPosition.z), ref velocity, 0.3f);
-        
-        Vector3 target = _agent.nextPosition;
+                new Vector3(_agent.nextPosition.x, 0, _agent.nextPosition.z), ref velocity, 0.3f);
+
+        Vector3 target = _agent.pathEndPosition;
         Vector3 directionTarget = (target - transform.position).normalized;
         
         Debug.Log(Vector3.Angle(transform.forward, directionTarget));
 
         if (!DefaultRotation)
         {
-            if (Vector3.Angle(transform.forward, directionTarget) > 10)
+            
+            if (!IsValueBetween(0f, 5f, Vector3.Angle(transform.forward, directionTarget)))
             {
-                transform.RotateAround(transform.position, Vector3.up, 5);
+                _agent.isStopped = true;//Stop the Agent while Rotating
+
+                RotateToPoint(target);
+            }
+            else
+            {
+                _agent.isStopped = false;
             }
             
         }
-        else
-        {
-            if (distance < 1f && !_targetReached)
+        
+        if (IsValueBetween(0.0f, 0.15f, distance) && !_targetReached)
             {
             
             
@@ -219,39 +238,21 @@ public class EnemyBehavior : MonoBehaviour
             {
                 StartCoroutine(WaitBeforeMoving());
             }
-        }
-        
-
     }
 
-    public void RotateToTarget(Vector3 directionTarget)
+    /// <summary>
+    /// Rotate Transform until looking at Point
+    /// </summary>
+    /// <param name="target">target to look at</param>
+    private void RotateToPoint(Vector3 target)
     {
-        if (LookCoroutine != null)
-        {
-            StopCoroutine(LookCoroutine);
-        }
-
-        LookCoroutine = StartCoroutine(LookAt(directionTarget));
+        Vector3 targetDirection = target - transform.position;
+                
+        float SingleStep = _agent.angularSpeed * Time.fixedDeltaTime;
+        Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, SingleStep, 0.0f);
+        transform.rotation = Quaternion.LookRotation(newDirection); 
     }
-
-    private IEnumerator LookAt(Vector3 directionTarget)
-    {
-        Quaternion lookRotation = Quaternion.LookRotation(directionTarget - transform.position);
-
-        float time = 0;
-
-        while (time < 1)
-        {
-            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, time);
-            //transform.rotation = Quaternion.Euler(0, lookRotation.y, 0);      
-            
-            time += Time.fixedDeltaTime * _agent.speed;
-
-            yield return null;
-        }
-
-        yield return null;
-    }
+    
 
 
     /// <summary>
@@ -263,13 +264,13 @@ public class EnemyBehavior : MonoBehaviour
         if (currentTarget == Waypoints.Count - 1 || currentTarget == 0)
         {
             _targetReached = false;
+            yield return new WaitForSeconds(2f);
         }
         else
         {
             _targetReached = false;
+            yield return new WaitForSeconds(2f);
         }
-
-        yield return null;
     }
 
 

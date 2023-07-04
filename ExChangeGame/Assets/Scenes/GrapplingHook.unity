@@ -224,7 +224,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a714e3d0cf708d44bf9251e0f823294, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveSpeed: 2
   AttackDist: 2
   MinDist: 5
   Player: {fileID: 0}
@@ -243,7 +242,7 @@ MonoBehaviour:
   - {fileID: 192342357}
   currentTarget: 0
   _targetReached: 0
-  rotation: 0
+  DefaultRotation: 0
 --- !u!1001 &146121464
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1906,7 +1905,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16478be4df8cfd64db0654f4d24afc47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveSpeed: 2
   AttackDist: 0
   MinDist: 5
   Player: {fileID: 1407629454}
@@ -1924,7 +1922,7 @@ MonoBehaviour:
   - {fileID: 2040593179}
   currentTarget: 0
   _targetReached: 0
-  rotation: 0
+  DefaultRotation: 0
 --- !u!195 &1979339593
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1938,7 +1936,7 @@ NavMeshAgent:
   m_Speed: 2
   m_Acceleration: 8
   avoidancePriority: 50
-  m_AngularSpeed: 120
+  m_AngularSpeed: 2
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
