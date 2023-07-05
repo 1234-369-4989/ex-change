@@ -205,7 +205,7 @@ public class EnemyBehavior : MonoBehaviour
             }
             else
             {
-                _agent.isStopped = false;
+                _agent.isStopped = false;//Restart the agent when done rotating
             }
             
         }

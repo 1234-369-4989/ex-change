@@ -6,6 +6,6 @@ public class FlyEnemy_Behavior : EnemyBehavior
 {
     public override void Attack()
     {
-        
+        transform.LookAt(Player);
     }
 }
