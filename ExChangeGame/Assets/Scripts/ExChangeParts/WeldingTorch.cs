@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace ExChangeParts
@@ -12,10 +13,12 @@ namespace ExChangeParts
         private bool canRepair;
         private readonly RaycastHit[] raycastHits = new RaycastHit[3];
         private Transform _transform;
+
+        private Vector3 rayCastOrigin => transform.position + new Vector3(0, .3f, 0);
         
-        private void Awake()
+        private void Start()
         {
-            _transform = transform;
+            _transform = PlayerInstance.Instance.transform;
         }
 
 
@@ -23,13 +26,18 @@ namespace ExChangeParts
         {
             print("Repairing");
             if (!canRepair) return;
-            var ray = new Ray(_transform.position, _transform.forward);
+            var ray = new Ray(rayCastOrigin, _transform.forward);
             var size = Physics.RaycastNonAlloc(ray, raycastHits, repairDistance);
             foreach (var hit in raycastHits)
             {
+                print("Hit something");
                 if (hit.collider == null) continue;
+                print("Hit collider");
+                Debug.Log("Hit " + hit.collider.name, hit.collider.gameObject);
                 var repairable = hit.collider.GetComponent<RepairableObject>();
+                
                 if (repairable == null) continue;
+                print("Hit repairable object");
                 repairable.Repair();
                 break;
             }

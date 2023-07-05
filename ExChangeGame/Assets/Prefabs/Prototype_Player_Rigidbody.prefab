@@ -83,7 +83,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &95693982752581945
 Transform:
   m_ObjectHideFlags: 0
@@ -123,8 +123,8 @@ MonoBehaviour:
   m_Lens:
     FieldOfView: 40
     OrthographicSize: 10
-    NearClipPlane: 0.2
-    FarClipPlane: 500
+    NearClipPlane: 0.1
+    FarClipPlane: 50
     Dutch: 0
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
@@ -183,7 +183,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 95693983307356974}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.53, z: -3}
+  m_LocalPosition: {x: -0.000000014901161, y: 0.2249999, z: -0.16884495}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -213,8 +213,8 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.2
-  far clip plane: 200
+  near clip plane: 0.1
+  far clip plane: 50
   field of view: 40
   orthographic: 0
   orthographic size: 10
@@ -419,7 +419,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 95693983900728893}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.53, z: 0}
+  m_LocalPosition: {x: 0, y: 0.225, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -451,7 +451,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 95693984178291891}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.53, z: -3}
+  m_LocalPosition: {x: -0.000000014901161, y: 0.2249999, z: -0.16884495}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -482,8 +482,8 @@ MonoBehaviour:
   m_Lens:
     FieldOfView: 40
     OrthographicSize: 10
-    NearClipPlane: 0.2
-    FarClipPlane: 200
+    NearClipPlane: 0.1
+    FarClipPlane: 50
     Dutch: 0
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
@@ -572,7 +572,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd6043bde05a7fc4cba197d06915c1e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damping: {x: 1, y: 1, z: 1}
+  Damping: {x: 0.8, y: 0.8, z: 0.8}
   ShoulderOffset: {x: 0, y: 0, z: 0}
   VerticalArmLength: 0
   CameraSide: 0.5
@@ -581,9 +581,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   IgnoreTag: Player
-  CameraRadius: 0.15
-  DampingIntoCollision: 0.5
-  DampingFromCollision: 1.01
+  CameraRadius: 0.1
+  DampingIntoCollision: 0.2
+  DampingFromCollision: 1.54
 --- !u!1 &95693984386424338
 GameObject:
   m_ObjectHideFlags: 0
@@ -637,6 +637,7 @@ GameObject:
   - component: {fileID: 95693984416333221}
   - component: {fileID: 8909006192052784580}
   - component: {fileID: 2531973230262734642}
+  - component: {fileID: 3485844511516565281}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -796,7 +797,7 @@ MonoBehaviour:
   BottomClamp: -15
   CameraAngleOverride: 0
   LockCameraPosition: 0
-  Sensitivity: 1
+  Sensitivity: 0.15
   DefaultCamera: {fileID: 95693984178291890}
   LowHealthCamera: {fileID: 95693982752581942}
 --- !u!114 &95693984416333215
@@ -811,7 +812,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d327082aa9f5b2469208dafada3bcab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultMoveSpeed: 2
+  defaultMoveSpeed: 1.5
   defaultSprintSpeed: 5
   rotationSmoothTime: 0.12
   speedChangeRate: 10
@@ -843,7 +844,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 80
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
 --- !u!114 &95693984416333221
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -900,6 +901,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Health>k__BackingField: 10
   maxHealth: 10
+--- !u!114 &3485844511516565281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 95693984416333213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b35ef3afdf6bd7747ad18fe5de761aca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5049006343317683028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1198,7 +1211,7 @@ PrefabInstance:
     - target: {fileID: 6196881652407854780, guid: 0be56a3f78d25e4429a8d0a66ea88e7f,
         type: 3}
       propertyPath: moveSpeed
-      value: 2.5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6196881652407854780, guid: 0be56a3f78d25e4429a8d0a66ea88e7f,
         type: 3}

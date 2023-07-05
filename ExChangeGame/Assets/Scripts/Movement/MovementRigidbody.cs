@@ -256,9 +256,7 @@ namespace Movement
             {
                 var strength = floatStrength;
                 strength *= Time.fixedDeltaTime;
-                
-                print("velocity: " + _playerBody.velocity.y);
-                
+
                 // Wende eine Aufwärtskraft an
                 var distanceFromTop = floatHeight - _currentHeight;
                 

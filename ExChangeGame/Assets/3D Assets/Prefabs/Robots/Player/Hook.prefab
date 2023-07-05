@@ -138,6 +138,8 @@ MonoBehaviour:
   overshootYAxis: 0.25
   grapplingCd: 1
   grappleKey: 323
+  grappleAction: {fileID: -8360465965184044671, guid: 4419d82f33d36e848b3ed5af4c8da37e,
+    type: 3}
 --- !u!1001 &6463869006565664496
 PrefabInstance:
   m_ObjectHideFlags: 0
