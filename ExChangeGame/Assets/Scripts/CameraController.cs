@@ -64,10 +64,6 @@ public class CameraController : MonoBehaviour
 #else
 			Debug.LogError( "Starter Assets package is missing dependencies. Please use Tools/Starter Assets/Reinstall Dependencies to fix it");
 #endif
-
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
-        
         // Start at 180 degrees to avoid camera flipping
         CinemachineCameraTarget.transform.rotation = Quaternion.Euler(0.0f, 180.0f, 0.0f);
     }

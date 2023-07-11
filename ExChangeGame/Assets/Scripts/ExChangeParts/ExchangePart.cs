@@ -14,7 +14,7 @@ namespace ExChangeParts
         
         public enum PartPosition
         {
-            Front, Head, Back, Armor, Side, Other
+            Front, Side, Top1, Top2
         }
         
         [field: SerializeField] public PartType Type { get; protected set; }

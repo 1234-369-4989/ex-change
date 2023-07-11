@@ -1,40 +1,54 @@
-using System.Collections;
-using System.Collections.Generic;
+
+using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PauseMenu : MonoBehaviour
 {
+    [SerializeField] private InputActionReference pauseAction;
     [SerializeField]
     GameObject pauseMenu;
     [SerializeField]
     GameObject optionMenu;
-    // Start is called before the first frame update
-    void Start()
+    
+    
+    public event Action OnPause;
+    public event Action OnResume;
+
+
+    private void Awake()
     {
-        
+        pauseAction.action.performed += SwitchPause;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            switchPause();
-        }
-    }
-
-    void switchPause()
+    private void SwitchPause(InputAction.CallbackContext callbackContext)
     {
         if (pauseMenu.activeSelf || optionMenu.activeSelf)
         {
             Time.timeScale = 1f;
             pauseMenu.SetActive(false);
             optionMenu.SetActive(false);
+            OnResume?.Invoke();
         }
         else
         {
             Time.timeScale = 0f;
             pauseMenu.SetActive(true);
+            OnPause?.Invoke();
         }
+    }
+    
+    
+    public void EndGame()
+    {
+        Application.Quit();
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#endif
+    }
+
+    private void OnDestroy()
+    {
+        pauseAction.action.performed -= SwitchPause;
     }
 }

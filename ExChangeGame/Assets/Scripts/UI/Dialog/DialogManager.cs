@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -23,6 +24,9 @@ namespace Dialog
         
         [SerializeField] private InputActionReference continueButtonAction;
 
+        
+        public event Action OnDialogStarted;
+        public event Action OnDialogEnded;
         public static DialogManager Instance { get; private set; }
 
         private void Awake()
@@ -62,6 +66,7 @@ namespace Dialog
             }
             nameText.text = dialog.name;
             canvasGroup.gameObject.SetActive(true);
+            OnDialogStarted?.Invoke();
             DisplayNextSentence();
             if(animator)animator.SetBool(IsOpen, true);
         }
@@ -98,6 +103,7 @@ namespace Dialog
                 _dialog.onComplete?.Invoke();
             }
             canvasGroup.gameObject.SetActive(false);
+            OnDialogEnded?.Invoke();
             print("EndDialog");
         }
         

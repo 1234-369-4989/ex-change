@@ -8,6 +8,7 @@ namespace Dialog
     {
         [SerializeField] private bool isDialogActive = true;
         [SerializeField] private float delay = 3;
+        [SerializeField] private bool justOnce = true;
         
         bool timerelapsed = false;
 
@@ -26,7 +27,7 @@ namespace Dialog
             }
             if (!other.CompareTag("Player")) return;
             if (isDialogActive) StartDialog();
-            isDialogActive = false;
+            if(justOnce) isDialogActive = false;
         }
     }
 }
