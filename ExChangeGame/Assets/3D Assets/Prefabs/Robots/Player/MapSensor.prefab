@@ -46,7 +46,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Type>k__BackingField: 0
-  <Position>k__BackingField: 1
+  <Position>k__BackingField: 3
+  minimap: {fileID: 0}
 --- !u!1 &7197696156605165606
 GameObject:
   m_ObjectHideFlags: 0

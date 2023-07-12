@@ -113,5 +113,10 @@ namespace ExChangeParts
                 ChangePart(part);
             }
         }
+
+        public IEnumerable<ExchangePart> GetParts()
+        {
+            return parts.Where(part => part.gameObject.activeSelf);
+        }
     }
 }

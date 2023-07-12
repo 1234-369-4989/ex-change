@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace ExChangeParts
 {
@@ -6,7 +7,7 @@ namespace ExChangeParts
     [SelectionBase]
     public abstract class ExchangePart: MonoBehaviour, IExchangable
     {
-
+        public static event Action<ExchangePart> OnPartEquipped;
         public enum PartType
         {
             Sensor, Utility, Movement, Design, Combat, Armor
@@ -22,13 +23,12 @@ namespace ExChangeParts
         
         public void Equip()
         {
-            Debug.Log(name + " Equipped");
             OnEquip();
+            OnPartEquipped?.Invoke(this);
         }
         
         public void Unequip()
         {
-            Debug.Log(name + " Unequipped");
             OnUnequip();
         }
 

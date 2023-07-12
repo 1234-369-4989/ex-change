@@ -1,5 +1,6 @@
 ﻿using System;
 using ExChangeParts;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,7 +17,16 @@ namespace UI
         {
             Image = GetComponent<Image>();
             // set opacity to 0.5f if disabled
-            
+            ExchangePart.OnPartEquipped += OnPartEquipped;
+        }
+
+        private void OnPartEquipped(ExchangePart obj)
+        {
+            if (obj.GetType() == PartGameObject.GetType())
+            {
+                Enable();
+                
+            }
         }
 
         private void Start()
@@ -32,6 +42,7 @@ namespace UI
         {
             IsEnabled = true;
             Image.color = new Color(Image.color.r, Image.color.g, Image.color.b, 1f);
+            ExchangePart.OnPartEquipped -= OnPartEquipped;
         }
     }
 }

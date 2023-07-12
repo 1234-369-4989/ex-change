@@ -9,13 +9,13 @@ namespace UI
 {
     public class ExchangeMenu : MonoBehaviour
     {
+        [SerializeField] private GameObject exchangeMenu;
         [SerializeField] private UI_PartChooser[] partChoosers;
         private UIPartchooserItem[] _items;
-        
         [SerializeField] private Button okButton;
         [SerializeField] private Button cancelButton;
         
-        private readonly Dictionary<UIPartchooserItem, UI_PartChooser> _itemChooserMap = new();
+        private readonly Dictionary<Type, UI_PartChooser> _itemChooserMap = new();
         
         public event Action OnExchangeMenuOpened;
         public event Action OnExchangeMenuClosed;
@@ -34,39 +34,33 @@ namespace UI
             {
                 foreach (var item in chooser.Items)
                 {
-                    _itemChooserMap.Add(item, chooser);
+                    _itemChooserMap.Add(item.PartGameObject.GetType(), chooser);
                 }
                 if(chooser.GetCurrentItem != null && !chooser.GetCurrentItem.IsEnabled) okButton.interactable = false;
             }
             okButton.onClick.AddListener(OnOkButtonPressed);
             cancelButton.onClick.AddListener(CloseMenu);
+            exchangeMenu.SetActive(false);
         }
         
         public void OpenMenu()
         {
-            gameObject.SetActive(true);
+            foreach (ExchangePart part in ExchangeSystem.Instance.GetParts())
+            {
+                Debug.Log(part);
+                var chooser = _itemChooserMap[part.GetType()];
+                chooser.SetCurrentItem(part);
+            }
+            exchangeMenu.SetActive(true);
             OnExchangeMenuOpened?.Invoke();
         }
 
         public void CloseMenu()
         {
-            gameObject.SetActive(false);
+            exchangeMenu.SetActive(false);
             OnExchangeMenuClosed?.Invoke();
         }
 
-        public void EnableItem(ExChangeParts.ExchangePart part)
-        {
-            foreach (var item in _items)
-            {
-                if (item.PartGameObject == part)
-                {
-                    item.Enable();
-                    _itemChooserMap[item].Enable();
-                    break;
-                }
-            }
-        }
-        
         public void OnChooserChanged(UIPartchooserItem item)
         {
             Debug.Log("Chooser changed");
@@ -87,7 +81,7 @@ namespace UI
             Debug.Log(parts.Count);
             if (parts.Count == 0) return;
             ExchangeSystem.Instance.ChangeParts(parts);
-            gameObject.SetActive(false);
+            CloseMenu();
         }
 
     }
