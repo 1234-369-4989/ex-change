@@ -1410,6 +1410,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6888281558828059018, guid: da13cac2f5fdb1843b5e69519ce2c36e,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 6888281560267217876, guid: da13cac2f5fdb1843b5e69519ce2c36e,
         type: 3}
       propertyPath: Player
