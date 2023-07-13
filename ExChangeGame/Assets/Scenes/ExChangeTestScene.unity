@@ -2253,7 +2253,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2035298451}
         m_TargetAssemblyTypeName: ExChangeParts.ExchangeSystem, Assembly-CSharp
-        m_MethodName: ChangeParts
+        m_MethodName: ChangePart
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1948115732}
@@ -2327,7 +2327,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2035298451}
         m_TargetAssemblyTypeName: ExChangeParts.ExchangeSystem, Assembly-CSharp
-        m_MethodName: ChangeParts
+        m_MethodName: ChangePart
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 2753282520898457771}
@@ -2560,7 +2560,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2035298451}
         m_TargetAssemblyTypeName: ExChangeParts.ExchangeSystem, Assembly-CSharp
-        m_MethodName: ChangeParts
+        m_MethodName: ChangePart
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 489851764}
@@ -2634,7 +2634,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2035298451}
         m_TargetAssemblyTypeName: ExChangeParts.ExchangeSystem, Assembly-CSharp
-        m_MethodName: ChangeParts
+        m_MethodName: ChangePart
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1292693048}
@@ -3831,7 +3831,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2035298451}
         m_TargetAssemblyTypeName: ExChangeParts.ExchangeSystem, Assembly-CSharp
-        m_MethodName: ChangeParts
+        m_MethodName: ChangePart
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1497384921}
@@ -4077,7 +4077,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2035298451}
         m_TargetAssemblyTypeName: ExChangeParts.ExchangeSystem, Assembly-CSharp
-        m_MethodName: ChangeParts
+        m_MethodName: ChangePart
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1853732187}
@@ -4247,7 +4247,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2035298451}
         m_TargetAssemblyTypeName: ExChangeParts.ExchangeSystem, Assembly-CSharp
-        m_MethodName: ChangeParts
+        m_MethodName: ChangePart
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1231973466}
@@ -4596,7 +4596,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2035298451}
         m_TargetAssemblyTypeName: ExChangeParts.ExchangeSystem, Assembly-CSharp
-        m_MethodName: ChangeParts
+        m_MethodName: ChangePart
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 2044888625}

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -45,7 +46,7 @@ namespace ExChangeParts
         }
 
 
-        public void ChangeParts(ExchangePart newPart)
+        public void ChangePart(ExchangePart newPart)
         {
             foreach (var part in parts)
             {
@@ -88,10 +89,10 @@ namespace ExChangeParts
             return parts.Any(part => part.GetType() == neededType.GetType() && part.gameObject.activeSelf);
         }
 
-        public void ChangeParts(ExchangePart neededType, ExchangePart givenType)
+        public void ChangePart(ExchangePart neededType, ExchangePart givenType)
         {
             RemovePart(neededType);
-            ChangeParts(givenType);
+            ChangePart(givenType);
         }
 
         private void RemovePart(ExchangePart neededType)
@@ -103,6 +104,19 @@ namespace ExChangeParts
                 part.Unequip();
                 part.gameObject.SetActive(false);
             }
+        }
+
+        public void ChangeParts(IList<ExchangePart> exchangeParts)
+        {
+            foreach (var part in exchangeParts)
+            {
+                ChangePart(part);
+            }
+        }
+
+        public IEnumerable<ExchangePart> GetParts()
+        {
+            return parts.Where(part => part.gameObject.activeSelf);
         }
     }
 }

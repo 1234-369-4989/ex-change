@@ -18,9 +18,6 @@ public class Bar : MonoBehaviour
     {
         value = maxValue;
         delayValue = maxValue;
-        //for functional test
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
     }
 
     // Update is called once per frame

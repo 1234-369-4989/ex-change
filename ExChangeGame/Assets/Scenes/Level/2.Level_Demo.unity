@@ -3091,7 +3091,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1432662717}
         m_TargetAssemblyTypeName: ExChangeParts.ExchangeSystem, Assembly-CSharp
-        m_MethodName: ChangeParts
+        m_MethodName: ChangePart
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 2100888696}
