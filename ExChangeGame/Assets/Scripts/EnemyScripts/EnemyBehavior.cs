@@ -281,12 +281,13 @@ public class EnemyBehavior : MonoBehaviour
     {
         transform.LookAt(Player);
 
+        float distance = Vector3.Distance(transform.position, Player.position);
 
-        if (Vector3.Distance(transform.position, Player.position) >= MinDist)
+        if (distance >= MinDist)
         {
             _agent.destination = Player.position;
 
-            if (Vector3.Distance(transform.position, Player.position) <= AttackDist)
+            if (distance <= AttackDist)
             {
                 _currentState = EnemyState.Attack;
             }
