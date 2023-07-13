@@ -10,7 +10,9 @@ public class UI_PartChooser : MonoBehaviour
     public event Action<UIPartchooserItem> OnPartSelected;
 
     [field: SerializeField] public UIPartchooserItem[] Items { get; private set; }
-    [SerializeField] private ExchangePart defaultPart;
+    [field: SerializeField] public ExchangePart.PartPosition PartPosition { get; private set; }
+    
+    [field: SerializeField] public  ExchangePart DefaultPart { get; private set; }
     private bool _hasDefaultPart;
     [SerializeField] private Button chooserLeft;
     [SerializeField] private Button chooserRight;
@@ -22,7 +24,7 @@ public class UI_PartChooser : MonoBehaviour
 
     private void Start()
     {
-        _hasDefaultPart = defaultPart != null;
+        _hasDefaultPart = DefaultPart != null;
         chooserLeft.onClick.AddListener(OnLeftClick);
         chooserRight.onClick.AddListener(OnRightClick);
         UpdateUI();
@@ -32,7 +34,7 @@ public class UI_PartChooser : MonoBehaviour
     {
         foreach (var item in Items)
         {
-            if (_hasDefaultPart) defaultPart.gameObject.SetActive(false);
+            if (_hasDefaultPart) DefaultPart.gameObject.SetActive(false);
             item.PartGameObject.gameObject.SetActive(false);
             item.gameObject.SetActive(false);
         }
@@ -41,7 +43,7 @@ public class UI_PartChooser : MonoBehaviour
         {
             chooserName.text = "";
             questionMark.gameObject.SetActive(false);
-            if (_hasDefaultPart) defaultPart.gameObject.SetActive(true);
+            if (_hasDefaultPart) DefaultPart.gameObject.SetActive(true);
             return;
         }
 

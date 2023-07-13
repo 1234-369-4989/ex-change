@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Healthbar : MonoBehaviour
 {
-    public BasicHealth playerHealth;
+    private BasicHealth playerHealth;
     [SerializeField]
     private Image bar, delayBar;
     [SerializeField]
@@ -18,6 +18,7 @@ public class Healthbar : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        playerHealth = PlayerInstance.Instance.GetPlayerHealth();
         maxValue = playerHealth.Health;
         value = maxValue;
         delayValue = maxValue;

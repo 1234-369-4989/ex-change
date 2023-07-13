@@ -23,12 +23,14 @@ namespace ExChangeParts
         
         public void Equip()
         {
+            // Debug.Log("Equipping " + gameObject.name);
             OnEquip();
             OnPartEquipped?.Invoke(this);
         }
         
         public void Unequip()
         {
+            // Debug.Log("Unequipping " + gameObject.name);
             OnUnequip();
         }
 

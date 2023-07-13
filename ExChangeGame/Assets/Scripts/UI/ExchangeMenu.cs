@@ -17,6 +17,8 @@ namespace UI
         
         private readonly Dictionary<Type, UI_PartChooser> _itemChooserMap = new();
         
+        public bool IsOpen => exchangeMenu.activeSelf;
+        
         public event Action OnExchangeMenuOpened;
         public event Action OnExchangeMenuClosed;
         
@@ -48,6 +50,7 @@ namespace UI
             foreach (ExchangePart part in ExchangeSystem.Instance.GetParts())
             {
                 Debug.Log(part);
+                if(_itemChooserMap.ContainsKey(part.GetType()) == false){ continue;}
                 var chooser = _itemChooserMap[part.GetType()];
                 chooser.SetCurrentItem(part);
             }
@@ -77,9 +80,14 @@ namespace UI
         public void OnOkButtonPressed()
         {
             Debug.Log("OK");
-            var parts = (from chooser in partChoosers select chooser.GetCurrentItem into part where part != null select part.PartGameObject).ToList();
-            Debug.Log(parts.Count);
-            if (parts.Count == 0) return;
+            var parts = new List<ExchangePart>();
+            foreach (var chooser in partChoosers)
+            {
+                var part = chooser.GetCurrentItem;
+                if (part != null) parts.Add(part.PartGameObject);
+                else if (chooser.DefaultPart) parts.Add(chooser.DefaultPart);
+                else ExchangeSystem.Instance.RemovePart(chooser.PartPosition);
+            }
             ExchangeSystem.Instance.ChangeParts(parts);
             CloseMenu();
         }

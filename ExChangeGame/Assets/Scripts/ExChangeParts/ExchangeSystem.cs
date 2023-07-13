@@ -57,11 +57,16 @@ namespace ExChangeParts
                         part.Unequip();
                         part.gameObject.SetActive(false);
                     }
-                    continue;
                 }
-                if (part.gameObject.activeSelf) continue;
-                part.gameObject.SetActive(true);
-                part.Equip();
+            }
+            foreach (var part in parts)
+            {
+                if (part.GetType() == newPart.GetType())
+                {
+                    if (part.gameObject.activeSelf) continue;
+                    part.gameObject.SetActive(true);
+                    part.Equip();
+                }
             }
         }
         
@@ -100,6 +105,17 @@ namespace ExChangeParts
             foreach (var part in parts)
             {
                 if (part.GetType() != neededType.GetType()) continue;
+                if (!part.gameObject.activeSelf) continue;
+                part.Unequip();
+                part.gameObject.SetActive(false);
+            }
+        }
+        
+        public void RemovePart(ExchangePart.PartPosition position)
+        {
+            foreach (var part in parts)
+            {
+                if (part.Position != position) continue;
                 if (!part.gameObject.activeSelf) continue;
                 part.Unequip();
                 part.gameObject.SetActive(false);

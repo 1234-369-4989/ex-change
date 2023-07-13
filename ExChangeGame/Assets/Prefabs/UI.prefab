@@ -51,7 +51,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0758f2603bc0d49bb6bd8a7ee0c3ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerHealth: {fileID: 0}
   bar: {fileID: 6985784721517186974}
   delayBar: {fileID: 8769678631536522786}
   speed: 20
@@ -6496,6 +6495,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 97990242, guid: 2e5d68e3690c5614489d9da01e13a32e, type: 3}
+      propertyPath: <IsEnabled>k__BackingField
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 97990242, guid: 2e5d68e3690c5614489d9da01e13a32e, type: 3}
       propertyPath: <PartGameObject>k__BackingField
       value: 
       objectReference: {fileID: 5512166853684081228}
@@ -6521,7 +6524,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 745602164, guid: 2e5d68e3690c5614489d9da01e13a32e, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 20
+      value: 18.950012
       objectReference: {fileID: 0}
     - target: {fileID: 745602164, guid: 2e5d68e3690c5614489d9da01e13a32e, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -6531,6 +6534,10 @@ PrefabInstance:
       propertyPath: <PartGameObject>k__BackingField
       value: 
       objectReference: {fileID: 127389955341475707}
+    - target: {fileID: 1106956559, guid: 2e5d68e3690c5614489d9da01e13a32e, type: 3}
+      propertyPath: <IsEnabled>k__BackingField
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1106956559, guid: 2e5d68e3690c5614489d9da01e13a32e, type: 3}
       propertyPath: <PartGameObject>k__BackingField
       value: 
@@ -6559,6 +6566,10 @@ PrefabInstance:
       propertyPath: <PartGameObject>k__BackingField
       value: 
       objectReference: {fileID: 7562035383904205956}
+    - target: {fileID: 1290442406, guid: 2e5d68e3690c5614489d9da01e13a32e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -62.999992
+      objectReference: {fileID: 0}
     - target: {fileID: 1805930772, guid: 2e5d68e3690c5614489d9da01e13a32e, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -6583,6 +6594,10 @@ PrefabInstance:
       propertyPath: <PartGameObject>k__BackingField
       value: 
       objectReference: {fileID: 8517760119724071482}
+    - target: {fileID: 1901920781, guid: 2e5d68e3690c5614489d9da01e13a32e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -87.45001
+      objectReference: {fileID: 0}
     - target: {fileID: 1998312609, guid: 2e5d68e3690c5614489d9da01e13a32e, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0

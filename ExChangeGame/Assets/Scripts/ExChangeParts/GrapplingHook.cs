@@ -172,8 +172,9 @@ namespace ExChangeParts
 
         }
 
-        private void OnDestroy()
+        private void OnDisable()
         {
+            Debug.Log("grapple disabled");
             grappleAction.action.Disable();
             grappleAction.action.performed -= StartGrapple;
         }

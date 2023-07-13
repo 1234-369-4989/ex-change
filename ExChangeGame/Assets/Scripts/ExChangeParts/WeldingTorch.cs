@@ -9,13 +9,23 @@ namespace ExChangeParts
     {
         [SerializeField] private PlayerInput input;
         [SerializeField] private float repairDistance = 5f;
-        
+
         private bool canRepair;
         private readonly RaycastHit[] raycastHits = new RaycastHit[3];
         private Transform _transform;
+        private Animator _animator;
+        private bool _hasAnimator;
+        private static readonly int Action1 = Animator.StringToHash("Action");
 
         private Vector3 rayCastOrigin => transform.position + new Vector3(0, .3f, 0);
-        
+
+
+        private void Awake()
+        {
+            _animator = GetComponent<Animator>();
+            _hasAnimator = _animator != null;
+        }
+
         private void Start()
         {
             _transform = PlayerInstance.Instance.transform;
@@ -25,6 +35,10 @@ namespace ExChangeParts
         private void OnRepair(InputAction.CallbackContext obj)
         {
             print("Repairing");
+            if (_hasAnimator)
+            {
+                _animator.SetTrigger(Action1);
+            }
             if (!canRepair) return;
             var ray = new Ray(rayCastOrigin, _transform.forward);
             var size = Physics.RaycastNonAlloc(ray, raycastHits, repairDistance);

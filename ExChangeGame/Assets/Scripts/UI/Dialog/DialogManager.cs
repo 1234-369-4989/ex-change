@@ -57,7 +57,6 @@ namespace Dialog
 
         public void StartDialog(Dialog dialog)
         {
-            print("StartDialog with + " + dialog.name);
             _dialog = dialog;
             _sentences.Clear();
             foreach (var sentence in dialog.sentences)

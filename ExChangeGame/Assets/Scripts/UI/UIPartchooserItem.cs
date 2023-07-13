@@ -25,7 +25,6 @@ namespace UI
             if (obj.GetType() == PartGameObject.GetType())
             {
                 Enable();
-                
             }
         }
 

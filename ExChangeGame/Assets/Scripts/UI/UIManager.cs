@@ -49,10 +49,9 @@ public class UIManager : MonoBehaviour
 
     private void OnPauseMenuOpened()
     {
-        
         _activeElements++;
         EnableUI(false);
-        if(_exchangeMenu.gameObject.activeSelf) _exchangeMenu.CloseMenu();
+        if(_exchangeMenu.IsOpen) _exchangeMenu.CloseMenu();
         CheckMouse();
     }
 
