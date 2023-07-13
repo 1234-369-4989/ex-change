@@ -8,6 +8,11 @@ public class ContactScript : MonoBehaviour
     [SerializeField] private float pushForceAway = 1f;
     [SerializeField] private float pushForceUp = 1f;
     [SerializeField] private int damage = 2;
+    
+    /// <summary>
+    /// simple Hitbox Script, which reduces the health of the other object then applies knockback
+    /// </summary>
+    /// <param name="other"></param>
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log(other.tag);

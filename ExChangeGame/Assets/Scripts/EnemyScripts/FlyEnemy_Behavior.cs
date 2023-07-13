@@ -15,6 +15,9 @@ public class FlyEnemy_Behavior : EnemyBehavior
     public Transform SpawnPoint;
     public GameObject PlayerCameraRoot; 
 
+    /// <summary>
+    /// As an Attack the robot "charges up" a shot then shoots at the player an instance of the Gameobject "Bullet"
+    /// </summary>
     public override void Attack()
     {
         _agent.destination = transform.position;// lock the robot in place while Shooting at player

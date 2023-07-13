@@ -6,7 +6,9 @@ using UnityEngine;
 public class SawEnemyBehavior : EnemyBehavior
 {
 
-
+/// <summary>
+/// this enemy tries to "drive" the player to death
+/// </summary>
     public override void Attack()
     {
         transform.LookAt(Player);
@@ -16,11 +18,5 @@ public class SawEnemyBehavior : EnemyBehavior
             _agent.destination = Player.position;
             transform.position = Vector3.SmoothDamp(transform.position, new Vector3(_agent.nextPosition.x, 0, _agent.nextPosition.z), ref velocity, 0.3f );
         }
-    }
-    
-    private void OnDestroy()
-    {
-        //drop component here
-        throw new NotImplementedException();
     }
 }

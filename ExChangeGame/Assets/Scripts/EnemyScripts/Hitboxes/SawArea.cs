@@ -6,10 +6,13 @@ using UnityEngine;
 
 public class SawArea : MonoBehaviour
 {
-      [SerializeField] private float damagePerSecond = 1f;
-       [SerializeField] private float pushForceAway = 1f;
+        [SerializeField] private float pushForceAway = 1f;
        [SerializeField] private float pushForceUp = 1f;
 
+       /// <summary>
+       /// simple Hitbox Script, which reduces the health of the other object and applies knockback
+       /// </summary>
+       /// <param name="other"></param>
        private void OnTriggerEnter(Collider other)
        {
            Debug.Log("Player Hit");
