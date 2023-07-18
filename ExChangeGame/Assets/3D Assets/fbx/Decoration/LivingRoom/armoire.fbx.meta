@@ -7,23 +7,23 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: armoire
-    second: {fileID: 2100000, guid: a30557ba09c6a4c408bf9290c6516fda, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: armoireLight
-    second: {fileID: 2100000, guid: b613e68b2e207364ea45bcf883d5d2cb, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: box1
+      name: book2
     second: {fileID: 2100000, guid: 9f26f32abf1b7f84582f476feda3837f, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: box2
-    second: {fileID: 2100000, guid: bab89d28ac3d8804283abd81a244240e, type: 2}
+      name: book3
+    second: {fileID: 2100000, guid: f0ed890f8f54894438d6fc9c4f96b8d2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: shelfMain
+    second: {fileID: 2100000, guid: b613e68b2e207364ea45bcf883d5d2cb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: shelfMedium
+    second: {fileID: 2100000, guid: a30557ba09c6a4c408bf9290c6516fda, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

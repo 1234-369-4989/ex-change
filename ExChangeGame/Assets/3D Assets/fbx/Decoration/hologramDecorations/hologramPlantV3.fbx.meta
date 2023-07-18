@@ -1,9 +1,29 @@
 fileFormatVersion: 2
-guid: a0787266eb39d3b49a79f2f35c0167b9
+guid: 3a856aeebc86dca4da8762bf94885ea4
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Hologram
+    second: {fileID: 2100000, guid: ca68d5b2da1cfe14db4997d52af6d33b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: baseColor
+    second: {fileID: 2100000, guid: a30557ba09c6a4c408bf9290c6516fda, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: baseColor3
+    second: {fileID: 2100000, guid: 1dc1a546e876fc849aa7979b479b742b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ground
+    second: {fileID: 2100000, guid: 682bf432dddcdba45b203ca3da2e8d6a, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
