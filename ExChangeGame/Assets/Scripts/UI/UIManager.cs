@@ -34,7 +34,7 @@ public class UIManager : MonoBehaviour
         CheckMouse();
     }
 
-    private void OnDialogStarted()
+    private void OnDialogStarted(GameObject o)
     {
         _activeElements++;
         CheckMouse();
