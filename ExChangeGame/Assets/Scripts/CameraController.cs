@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using Dialog;
 #if ENABLE_INPUT_SYSTEM 
 using UnityEngine.InputSystem;
 #endif
@@ -29,6 +28,7 @@ public class CameraController : MonoBehaviour
     public float Sensitivity = 1.0f;
 
     public CinemachineVirtualCamera DefaultCamera;
+    public CinemachineVirtualCamera DialogCamera;
     public CinemachineVirtualCamera LowHealthCamera;
 
     // cinemachine
@@ -41,6 +41,8 @@ public class CameraController : MonoBehaviour
     private StarterAssetsInputs _input;
 
     private const float _threshold = 0.01f;
+    
+    private Transform _defaultLookAt;
 
     private bool IsCurrentDeviceMouse
     {
@@ -54,6 +56,31 @@ public class CameraController : MonoBehaviour
         }
     }
 
+    private void Awake()
+    {
+        _defaultLookAt = DefaultCamera.LookAt;
+    }
+
+    private void OnEnable()
+    {
+        DialogManager.Instance.OnDialogStarted += OnDialogStarted;
+        DialogManager.Instance.OnDialogEnded += OnDialogEnded;
+    }
+
+    private void OnDialogStarted(GameObject obj)
+    {
+        DialogCamera.LookAt = obj.transform;
+        DialogCamera.Priority = 100;
+    }
+
+    private void OnDialogEnded()
+    {
+        DialogCamera.Priority = 0;
+        DefaultCamera.LookAt = _defaultLookAt;
+    }
+
+    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -64,18 +91,8 @@ public class CameraController : MonoBehaviour
 #else
 			Debug.LogError( "Starter Assets package is missing dependencies. Please use Tools/Starter Assets/Reinstall Dependencies to fix it");
 #endif
-
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
-        
         // Start at 180 degrees to avoid camera flipping
         CinemachineCameraTarget.transform.rotation = Quaternion.Euler(0.0f, 180.0f, 0.0f);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     private void LateUpdate()

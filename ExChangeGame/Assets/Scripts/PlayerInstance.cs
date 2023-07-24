@@ -13,4 +13,9 @@ public class PlayerInstance : MonoBehaviour
         else
             Destroy(gameObject);
     }
+    
+    public BasicHealth GetPlayerHealth()
+    {
+        return GetComponent<BasicHealth>();
+    }
 }

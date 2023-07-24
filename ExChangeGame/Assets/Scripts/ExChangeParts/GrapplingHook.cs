@@ -63,7 +63,7 @@ namespace ExChangeParts
             }
             
             
-            // if(Input.GetKeyDown(grappleKey)) StartGrapple(null);
+            //if(Input.GetKeyDown(grappleKey)) StartGrapple(null);
 
             if (grapplingTimer > 0)
             {
@@ -172,8 +172,9 @@ namespace ExChangeParts
 
         }
 
-        private void OnDestroy()
+        private void OnDisable()
         {
+            Debug.Log("grapple disabled");
             grappleAction.action.Disable();
             grappleAction.action.performed -= StartGrapple;
         }

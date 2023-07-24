@@ -7,7 +7,7 @@ public class PartDonor : MonoBehaviour
 
     public void DonatePart()
     {
-        ExchangeSystem.Instance.ChangeParts(part);
+        ExchangeSystem.Instance.ChangePart(part);
         part.gameObject.SetActive(false);
     }
 }

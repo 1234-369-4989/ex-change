@@ -16,7 +16,7 @@ namespace ExChangeParts
         public void ExchangeParts()
         {
             if(!ExchangeSystem.Instance.HasPartEquipped(neededType)) return;
-            ExchangeSystem.Instance.ChangeParts(neededType, givenType);
+            ExchangeSystem.Instance.ChangePart(neededType, givenType);
             givenType.gameObject.SetActive(false);
             neededType.gameObject.SetActive(true);
         }
