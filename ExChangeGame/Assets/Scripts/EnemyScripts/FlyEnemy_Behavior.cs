@@ -13,7 +13,6 @@ public class FlyEnemy_Behavior : EnemyBehavior
     private float _bulletTime;
     public GameObject EnemyBullet;
     public Transform SpawnPoint;
-    public GameObject PlayerCameraRoot; 
 
     /// <summary>
     /// As an Attack the robot "charges up" a shot then shoots at the player an instance of the Gameobject "Bullet"
@@ -27,7 +26,6 @@ public class FlyEnemy_Behavior : EnemyBehavior
 
     private void ShootAtPlayer()
     {
-        Debug.Log("Shooting");
         _bulletTime -= Time.deltaTime;
 
         if (_bulletTime > 0) return;//do not shoot until "charging" complete
@@ -43,7 +41,7 @@ public class FlyEnemy_Behavior : EnemyBehavior
             * therefore it needs to shoot at the Cameraroot,
             * since it is the only component right above our player model
             */
-        Vector3 direction = PlayerCameraRoot.transform.position - transform.position;
+        Vector3 direction = Player.transform.position - transform.position;
         direction.Normalize();
         bulletRigidbody.AddForce(direction * bulletSpeed, ForceMode.Impulse);
         

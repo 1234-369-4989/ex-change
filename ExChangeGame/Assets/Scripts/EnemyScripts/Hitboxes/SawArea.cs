@@ -8,6 +8,13 @@ public class SawArea : MonoBehaviour
 {
         [SerializeField] private float pushForceAway = 1f;
        [SerializeField] private float pushForceUp = 1f;
+       
+       private AudioSource _audioSource;
+       
+         private void Awake()
+         {
+              _audioSource = GetComponent<AudioSource>();
+         }
 
        /// <summary>
        /// simple Hitbox Script, which reduces the health of the other object and applies knockback
@@ -18,6 +25,7 @@ public class SawArea : MonoBehaviour
            Debug.Log("Player Hit");
            if (!other.TryGetComponent<BasicHealth>(out var health)) return;
            health.Damage(1);
+           _audioSource.Play();
            Debug.Log(health);
            var direction = other.transform.position - transform.position;
            direction.Normalize();

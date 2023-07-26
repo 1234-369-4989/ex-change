@@ -16,7 +16,7 @@ TagManager:
   - Player
   - Ground
   - whatIsGrappable
-  - MInimap
+  - Minimap
   - Level1
   - Level2
   - Level3
@@ -24,7 +24,7 @@ TagManager:
   - Level2Icon
   - Level3Icon
   - Enemy
-  - 
+  - EnemyUI
   - 
   - 
   - 

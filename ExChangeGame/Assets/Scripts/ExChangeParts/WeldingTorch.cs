@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 namespace ExChangeParts
 {
@@ -9,12 +10,14 @@ namespace ExChangeParts
     {
         [SerializeField] private PlayerInput input;
         [SerializeField] private float repairDistance = 5f;
+        [SerializeField] private AudioSource audioSource;
 
         private bool canRepair;
         private readonly RaycastHit[] raycastHits = new RaycastHit[3];
         private Transform _transform;
         private Animator _animator;
         private bool _hasAnimator;
+        private bool _hasAudioSource;
         private static readonly int Action1 = Animator.StringToHash("Action");
 
         private Vector3 rayCastOrigin => transform.position + new Vector3(0, .3f, 0);
@@ -24,6 +27,7 @@ namespace ExChangeParts
         {
             _animator = GetComponent<Animator>();
             _hasAnimator = _animator != null;
+            _hasAudioSource = audioSource != null;
         }
 
         private void Start()
@@ -38,6 +42,10 @@ namespace ExChangeParts
             if (_hasAnimator)
             {
                 _animator.SetTrigger(Action1);
+            }
+            if (_hasAudioSource)
+            {
+                audioSource.Play();
             }
             if (!canRepair) return;
             var ray = new Ray(rayCastOrigin, _transform.forward);

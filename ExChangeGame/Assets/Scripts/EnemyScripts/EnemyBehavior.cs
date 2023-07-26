@@ -1,9 +1,6 @@
 
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Net.Sockets;
-using System.Threading;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -21,7 +18,7 @@ public class EnemyBehavior : MonoBehaviour
     [Header("Movement Values")]
     public int AttackDist; // How far away the enemy is to attack the player
     public int MinDist; // Minimal Distance for the player to be noticed
-    public Transform Player; //Playerposition
+    protected Transform Player; //Playerposition
 
     [Header("Field of View Values")] [Range(0, 360)]
     public float angle; //FOV angle
@@ -51,6 +48,7 @@ public class EnemyBehavior : MonoBehaviour
 
     private void Start()
     {
+        Player = PlayerInstance.Instance.transform;
         _currentState = EnemyState.Idle;
         _agent = GetComponent<NavMeshAgent>();
         _enemyHeight = transform.position.y;
@@ -143,13 +141,12 @@ public class EnemyBehavior : MonoBehaviour
     private void FixedUpdate()
     {
         setCurrentState();
-        Debug.Log(_currentState);
 
         switch (_currentState)
         {
             case EnemyState.Idle:
             {
-                Patrol();
+                if(Waypoints.Count > 0) Patrol();
                 break;
             }
             case EnemyState.Chase:

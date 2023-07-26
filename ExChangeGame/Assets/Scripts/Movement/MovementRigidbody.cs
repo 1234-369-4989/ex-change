@@ -67,6 +67,14 @@ namespace Movement
         [Header("Player Camera")]
         //PlayerCameraRoot
         [SerializeField] private GameObject playerCameraRoot;
+        
+        [Space(10)]
+        [Header("Sound")]
+        [SerializeField] private AudioSource jumpSound;
+        [SerializeField] private AudioSource landSound;   
+        [SerializeField] private AudioSource floatSound;
+        [SerializeField] private AudioSource sprintSound;
+        
         private float _distancePlayerToCameraRoot;
 
         // player
@@ -82,6 +90,7 @@ namespace Movement
         private float _jumpHeight;
         private float _currentHeight;
         private bool _isJumping;
+        public bool CanMove { get; set; }
 
         // timeout deltatime
         private float _jumpTimeoutDelta;
@@ -132,6 +141,7 @@ namespace Movement
             _jumpHeight = 2;
 
             _exchangeSystem.OnMovementChanged += OnMovementChanged;
+            CanMove = true;
         }
 
         //Is called after a set time, needed for Physics Movement
@@ -140,7 +150,7 @@ namespace Movement
             if (_canFloat) HandleFloat();
             else Jump();
             GroundedCheck();
-            Move();
+            if(CanMove) Move();
             _playerroute.Add(transform.position + new Vector3(0.0f, _distancePlayerToCameraRoot, 0.0f));
 
             if (_playerroute.Count > 1)
@@ -151,10 +161,21 @@ namespace Movement
         }
 
 
+        private bool _sprinting;
         //Method for Calculating Movement and Applying it
         private void Move()
         {
             float targetSpeed = _input.sprint ? _sprintSpeed : _moveSpeed; //set current movementspeed
+            if (_input.sprint && !_sprinting)
+            {
+                sprintSound.Play();
+                _sprinting = true;
+            }
+            else if (!_input.sprint && _sprinting)
+            {
+                sprintSound.Stop();
+                _sprinting = false;
+            }
 
             if (_input.move == Vector2.zero) targetSpeed = 0.0f;
 
@@ -215,6 +236,7 @@ namespace Movement
                 {
                     _playerBody.AddForce(new Vector3(0, _jumpHeight, 0),
                         ForceMode.Impulse); //apply an upwards force to the rigidbody
+                    jumpSound.Play();
                 }
                 else
                 {
@@ -242,6 +264,7 @@ namespace Movement
             }
         }
 
+        private bool _isFloating;
         private void HandleFloat()
         {
             // Raycast nach unten, um den Abstand zum Boden zu ermitteln
@@ -254,6 +277,11 @@ namespace Movement
             // Springen
             if (_isJumping && _canJump)
             {
+                if(!_isFloating)
+                {
+                    floatSound.Play();
+                    _isFloating = true;
+                }
                 var strength = floatStrength;
                 strength *= Time.fixedDeltaTime;
 
@@ -271,16 +299,33 @@ namespace Movement
                     _playerBody.AddForce(new Vector3(0, strength, 0), floatForceMode);
                 }
             }
+            else
+            {
+                if (_isFloating)
+                {
+                    floatSound.Stop();
+                    _isFloating = false;
+                }
+            }
         }
 
         //check if the player is currently grounded
         private void GroundedCheck()
         {
+            var wasGrounded = isGrounded;
             var pos = transform.position;
             //set sphere position, with offset
             Vector3 spherePosition = new Vector3(pos.x, pos.y - groundedOffset, pos.z);
             isGrounded = Physics.CheckSphere(spherePosition, groundedRadius, groundLayers,
                 QueryTriggerInteraction.Ignore);
+            if (!wasGrounded && isGrounded)
+                Land();
+        }
+
+        private void Land()
+        {
+            //TODO Animation
+            landSound.Play();
         }
 
         private void OnDestroy()

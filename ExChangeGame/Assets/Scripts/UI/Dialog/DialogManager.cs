@@ -25,8 +25,8 @@ namespace Dialog
         [SerializeField] private InputActionReference continueButtonAction;
 
         
-        public event Action<GameObject> OnDialogStarted;
-        public event Action OnDialogEnded;
+        public static event Action<GameObject> OnDialogStarted;
+        public static event Action OnDialogEnded;
         public static DialogManager Instance { get; private set; }
 
         private void Awake()

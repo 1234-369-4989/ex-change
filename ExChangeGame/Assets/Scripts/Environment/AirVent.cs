@@ -1,12 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
+using Movement;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-public class AirVent : MonoBehaviour
+public class  AirVent : MonoBehaviour
 {
     [SerializeField] private List<VentEntrance> entrances;
+    [SerializeField] private float fadeTime = 1;
+    [SerializeField] private float inFadeTime = 1;
+    [SerializeField] private float shootTime = 1;
 
-    private WaitForSeconds waitForSeconds = new WaitForSeconds(1f);
+    private WaitForSeconds waitForShoot;
+    private WaitForSeconds waitforFade;
+    private WaitForSeconds waitInFade;
+    
 
     private void Start()
     {
@@ -14,24 +22,34 @@ public class AirVent : MonoBehaviour
         {
             entrance.OnEnterVent += OnEnterVent;
         }
+        waitforFade = new WaitForSeconds(fadeTime);
+        waitInFade = new WaitForSeconds(inFadeTime);
+        waitForShoot = new WaitForSeconds(shootTime);
     }
 
-    private void OnEnterVent(VentEntrance obj, GameObject player)
+    private void OnEnterVent(VentEntrance obj, MovementRigidbody player)
     {
         // set player position to the other entrance
-        StartCoroutine(ShootOutPlayer(obj, player));
+        StartCoroutine(TransferPlayer(obj, player));
     }
 
-    private IEnumerator ShootOutPlayer(VentEntrance obj, GameObject player)
+    private IEnumerator TransferPlayer(VentEntrance firstVent, MovementRigidbody player)
     {
-        var otherEntrance = entrances.Find(entrance => entrance != obj);
+        var playerTransform = player.transform;
+        var otherEntrance = entrances.Find(entrance => entrance != firstVent);
         otherEntrance.Collider.enabled = false;
-        player.transform.GetChild(0).gameObject.SetActive(false);
-        player.transform.position = otherEntrance.ExitPoint.position;
-        yield return waitForSeconds;
-        player.transform.GetChild(0).gameObject.SetActive(true);
+        playerTransform.GetChild(0).gameObject.SetActive(false);
+        player.CanMove = false;
+        Overlay.Instance.FadeIn(fadeTime);
+        yield return waitforFade;
+        playerTransform.position = otherEntrance.ExitPoint.position;
+        yield return waitInFade;
+        Overlay.Instance.FadeOut(fadeTime);
+        yield return waitforFade;
+        playerTransform.GetChild(0).gameObject.SetActive(true);
         player.GetComponent<Rigidbody>().AddForce(otherEntrance.transform.forward * otherEntrance.ShootOutForce, ForceMode.VelocityChange);
-        yield return waitForSeconds;
+        player.CanMove = true;
+        yield return waitForShoot;
         otherEntrance.Collider.enabled = true;
     }
 

@@ -20,6 +20,8 @@ namespace ExChangeParts
         
         [field: SerializeField] public PartType Type { get; protected set; }
         [field: SerializeField] public PartPosition Position { get; protected set; }
+
+        [SerializeField] protected bool isPlayerPart;
         
         public void Equip()
         {

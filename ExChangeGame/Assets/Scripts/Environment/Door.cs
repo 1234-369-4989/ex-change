@@ -7,9 +7,11 @@ namespace Environment
     [SelectionBase]
     [RequireComponent(typeof(Collider))]
     [RequireComponent(typeof(Animator))]
+    [RequireComponent(typeof(AudioSource))]
     public class Door : Activatable
     {
         private Animator _animator;
+        private AudioSource _audioSource;
         private static readonly int Open = Animator.StringToHash("Open");
 
         [Header("Colors to change")] [SerializeField]
@@ -52,6 +54,7 @@ namespace Environment
         private void Awake()
         {
             _animator = GetComponent<Animator>();
+            _audioSource = GetComponent<AudioSource>();
         }
 
         private void Start()
@@ -80,6 +83,7 @@ namespace Environment
             if (other.CompareTag("Player"))
             {
                 _animator.SetBool(Open, true);
+                _audioSource.Play();
                 SwapColors(State.Active);
             }
         }
@@ -89,6 +93,7 @@ namespace Environment
             if (other.CompareTag("Player"))
             {
                 _animator.SetBool(Open, false);
+                _audioSource.Play();
                 SwapColors(State.Standby);
             }
         }

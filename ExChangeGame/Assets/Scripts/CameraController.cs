@@ -63,8 +63,8 @@ public class CameraController : MonoBehaviour
 
     private void OnEnable()
     {
-        DialogManager.Instance.OnDialogStarted += OnDialogStarted;
-        DialogManager.Instance.OnDialogEnded += OnDialogEnded;
+        DialogManager.OnDialogStarted += OnDialogStarted;
+        DialogManager.OnDialogEnded += OnDialogEnded;
     }
 
     private void OnDialogStarted(GameObject obj)
@@ -93,6 +93,7 @@ public class CameraController : MonoBehaviour
 #endif
         // Start at 180 degrees to avoid camera flipping
         CinemachineCameraTarget.transform.rotation = Quaternion.Euler(0.0f, 180.0f, 0.0f);
+        DialogCamera.Priority = 0;
     }
 
     private void LateUpdate()

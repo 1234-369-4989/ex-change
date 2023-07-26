@@ -88,4 +88,12 @@ public class UI_PartChooser : MonoBehaviour
             }
         }
     }
+
+    public void SetAllActive()
+    {
+        foreach (var item in Items)
+        {
+            item.Enable();
+        }
+    }
 }
