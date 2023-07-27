@@ -42,7 +42,11 @@ public class BossBehavior : MonoBehaviour
     void Update()
     {
         transform.LookAt(Player.transform.position);
-        CheckRadius();
+        if (!_isShooting && !_isCQCing)
+        {
+            CheckRadius();
+            
+        }
     }
 
     private void FixedUpdate()
@@ -55,7 +59,7 @@ public class BossBehavior : MonoBehaviour
         {
             Melee();
         }
-        else
+        else// when completely out of range drive at player
         {
             _agent.destination = Player.transform.position;
         }
@@ -95,11 +99,10 @@ public class BossBehavior : MonoBehaviour
     {
         _isCQCing = true;
         _agent.destination = transform.position;
-        //_animator.SetTrigger("isSlashing");
-        
-        //Debug.Log(random);
-        //do not loop animation
-
+        int random = Random.Range(0, 1);
+        Debug.Log(random);
+        if(random == 1) _animator.SetTrigger("isSlashing");
+        else if(random == 0) _animator.SetTrigger("isStabbing");
         _isCQCing = false;
     }
 }
