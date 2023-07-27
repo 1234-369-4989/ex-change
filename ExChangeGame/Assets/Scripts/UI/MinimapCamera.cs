@@ -30,7 +30,7 @@ public class MinimapCamera : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void LateUpdate()
     {
         float angle = MainCamera.transform.eulerAngles.y;
         gameObject.transform.rotation = Quaternion.Euler(90f, angle, 0);

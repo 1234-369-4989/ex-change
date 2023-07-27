@@ -12,7 +12,7 @@ namespace Dialog
             Debug.Log("StartDialog", this);
             print(DialogManager.Instance);
             print(dialog);
-            DialogManager.Instance.StartDialog(dialog);
+            DialogManager.Instance.StartDialog(dialog, gameObject);
         }
     }
 }

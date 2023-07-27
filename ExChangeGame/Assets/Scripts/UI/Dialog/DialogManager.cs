@@ -25,8 +25,8 @@ namespace Dialog
         [SerializeField] private InputActionReference continueButtonAction;
 
         
-        public event Action OnDialogStarted;
-        public event Action OnDialogEnded;
+        public static event Action<GameObject> OnDialogStarted;
+        public static event Action OnDialogEnded;
         public static DialogManager Instance { get; private set; }
 
         private void Awake()
@@ -55,7 +55,7 @@ namespace Dialog
             continueButton.onClick.Invoke();
         }
 
-        public void StartDialog(Dialog dialog)
+        public void StartDialog(Dialog dialog, GameObject source)
         {
             _dialog = dialog;
             _sentences.Clear();
@@ -65,7 +65,7 @@ namespace Dialog
             }
             nameText.text = dialog.name;
             canvasGroup.gameObject.SetActive(true);
-            OnDialogStarted?.Invoke();
+            OnDialogStarted?.Invoke(source);
             DisplayNextSentence();
             if(animator)animator.SetBool(IsOpen, true);
         }

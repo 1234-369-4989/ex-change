@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 namespace UI
 {
+    [RequireComponent(typeof(AudioSource))]
     public class ExchangeMenu : MonoBehaviour
     {
         [SerializeField] private GameObject exchangeMenu;
@@ -14,6 +15,9 @@ namespace UI
         private UIPartchooserItem[] _items;
         [SerializeField] private Button okButton;
         [SerializeField] private Button cancelButton;
+        [SerializeField] private bool allActive;
+        
+        private AudioSource _audioSource;
         
         private readonly Dictionary<Type, UI_PartChooser> _itemChooserMap = new();
         
@@ -28,6 +32,7 @@ namespace UI
             {
                 chooser.OnPartSelected += OnChooserChanged;
             }
+            _audioSource = GetComponent<AudioSource>();
         }
 
         private void Start()
@@ -38,6 +43,7 @@ namespace UI
                 {
                     _itemChooserMap.Add(item.PartGameObject.GetType(), chooser);
                 }
+                if(allActive) chooser.SetAllActive();
                 if(chooser.GetCurrentItem != null && !chooser.GetCurrentItem.IsEnabled) okButton.interactable = false;
             }
             okButton.onClick.AddListener(OnOkButtonPressed);
@@ -67,14 +73,8 @@ namespace UI
         public void OnChooserChanged(UIPartchooserItem item)
         {
             Debug.Log("Chooser changed");
-            if (!item || item.IsEnabled)
-            {
-               okButton.interactable = true;
-            }
-            else
-            {
-                okButton.interactable = false;
-            }
+            var valid = partChoosers.All(chooser => chooser.GetCurrentItem == null || chooser.GetCurrentItem.IsEnabled);
+            okButton.interactable = valid;
         }
 
         public void OnOkButtonPressed()
@@ -88,6 +88,8 @@ namespace UI
                 else if (chooser.DefaultPart) parts.Add(chooser.DefaultPart);
                 else ExchangeSystem.Instance.RemovePart(chooser.PartPosition);
             }
+            //TODO Exchange Animation
+            _audioSource.Play();
             ExchangeSystem.Instance.ChangeParts(parts);
             CloseMenu();
         }
