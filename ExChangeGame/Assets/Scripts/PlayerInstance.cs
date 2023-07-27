@@ -10,9 +10,14 @@ public class PlayerInstance : MonoBehaviour
     private BasicHealth _playerHealth;
     
     [SerializeField] private MovementRigidbody playerMovement;
+    public MovementRigidbody PlayerMovement => playerMovement;
     [SerializeField] private GameObject playerModel;
     [SerializeField] private AudioSource damageAudioSource;
     [SerializeField] private AudioSource deathAudioSource;
+    
+    [SerializeField] private GameObject deathEffect;
+    
+    
 
     private void Awake()
     {
@@ -23,6 +28,11 @@ public class PlayerInstance : MonoBehaviour
         _playerHealth = GetComponent<BasicHealth>();
         _playerHealth.OnDeath += OnPlayerDeath;
         _playerHealth.OnDamage += OnPlayerDamage;
+    }
+
+    private void Start()
+    {
+        deathEffect.SetActive(false);
     }
 
     private void OnPlayerDamage(BasicHealth obj)
@@ -38,11 +48,14 @@ public class PlayerInstance : MonoBehaviour
     
     private IEnumerator DeathCoroutine()
     {
-        playerMovement.enabled = false;
+        deathEffect.SetActive(true);
+        playerMovement.Stop();
+        playerMovement.CanMove = false;
         playerModel.SetActive(false);
         deathAudioSource.Play();
         yield return new WaitForSeconds(2f);
-        gameObject.SetActive(false);
+        deathEffect.SetActive(false);
+        Respawner.Respawn(this);
     }
 
     public BasicHealth GetPlayerHealth()
@@ -50,9 +63,16 @@ public class PlayerInstance : MonoBehaviour
         return GetComponent<BasicHealth>();
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         _playerHealth.OnDeath -= OnPlayerDeath;
         _playerHealth.OnDamage -= OnPlayerDamage;
+    }
+
+    public void Respawn()
+    {
+        _playerHealth.FullHealth();
+        playerMovement.enabled = true;
+        playerModel.SetActive(true);
     }
 }

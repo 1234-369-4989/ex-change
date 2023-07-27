@@ -27,4 +27,8 @@ public void Heal(int amount)
     if ((Health += amount) >= maxHealth) Health = maxHealth;
 }
 
+public void FullHealth()
+{
+    Health = maxHealth;
+}
 }
