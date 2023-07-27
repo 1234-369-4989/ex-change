@@ -19,6 +19,7 @@ public class Puddle : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         if(!other.TryGetComponent<BasicHealth>(out var health)) return;
+        // if(other.CompareTag("Player")) return;
         health.Damage((int) (damagePerSecond * Time.deltaTime));
     }
 }

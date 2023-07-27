@@ -183,8 +183,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Type>k__BackingField: 0
   <Position>k__BackingField: 0
+  isPlayerPart: 0
   input: {fileID: 0}
   repairDistance: 5
+  audioSource: {fileID: 0}
 --- !u!1 &343841026
 GameObject:
   m_ObjectHideFlags: 0
@@ -869,6 +871,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Type>k__BackingField: 0
   <Position>k__BackingField: 0
+  isPlayerPart: 0
 --- !u!1 &782278245
 GameObject:
   m_ObjectHideFlags: 0
@@ -1128,6 +1131,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Type>k__BackingField: 0
   <Position>k__BackingField: 0
+  isPlayerPart: 0
   canJump: 0
   canFloat: 0
   moveSpeed: 5
@@ -1317,6 +1321,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Type>k__BackingField: 0
   <Position>k__BackingField: 0
+  isPlayerPart: 0
 --- !u!1 &1218024053
 GameObject:
   m_ObjectHideFlags: 0
@@ -1880,6 +1885,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Type>k__BackingField: 0
   <Position>k__BackingField: 2
+  isPlayerPart: 0
 --- !u!1 &1862333147
 GameObject:
   m_ObjectHideFlags: 0
@@ -2237,6 +2243,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Type>k__BackingField: 0
   <Position>k__BackingField: 0
+  isPlayerPart: 0
   grapplingHook: {fileID: 0}
 --- !u!1 &2107866407
 GameObject:
@@ -2345,6 +2352,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Type>k__BackingField: 0
   <Position>k__BackingField: 0
+  isPlayerPart: 0
   canJump: 0
   canFloat: 0
   moveSpeed: 5
@@ -2458,7 +2466,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Type>k__BackingField: 0
   <Position>k__BackingField: 3
-  minimap: {fileID: 0}
+  isPlayerPart: 0
 --- !u!1 &858977037700320893
 GameObject:
   m_ObjectHideFlags: 0
@@ -2681,6 +2689,7 @@ MonoBehaviour:
   - {fileID: 39719205288960013}
   okButton: {fileID: 1477655756}
   cancelButton: {fileID: 525952769}
+  allActive: 0
 --- !u!82 &3945463364079936834
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2690,7 +2699,7 @@ AudioSource:
   m_GameObject: {fileID: 2856058492477854823}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 2135793757404546989, guid: f8bd4315728044b4eb1d5eafd2dde379,
+  OutputAudioMixerGroup: {fileID: -816053517969311317, guid: f8bd4315728044b4eb1d5eafd2dde379,
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 5126a7700f830f348bdbb623ca509275, type: 3}
   m_PlayOnAwake: 0

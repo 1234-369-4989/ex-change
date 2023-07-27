@@ -1,4 +1,5 @@
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,7 +13,7 @@ public enum EnemyState
     Attack
 }
 
-
+[RequireComponent(typeof(BasicHealth))]
 public class EnemyBehavior : MonoBehaviour
 {
     [Header("Movement Values")]
@@ -44,6 +45,18 @@ public class EnemyBehavior : MonoBehaviour
     
     [Header("Do you want your own Rotation?")]
     public bool DefaultRotation;
+    
+    [Header("Health")]
+    [SerializeField] private EnemyHealth enemyHealth;
+    private BasicHealth _health;
+    
+
+    private void Awake()
+    {
+        _health = GetComponent<BasicHealth>();
+        _health.OnDeath += OnDeath;
+        _health.OnDamage += OnDamage;
+    }
 
 
     private void Start()
@@ -301,5 +314,22 @@ public class EnemyBehavior : MonoBehaviour
     public virtual void Attack()
     {
         //depends on how the enemy will attack, use subclass for this
+    }
+
+    protected virtual void OnDeath(BasicHealth h)
+    {
+        
+    }
+    
+    protected virtual void OnDamage(BasicHealth h)
+    {
+        enemyHealth.UpdateHealthBar(h.Health, h.MaxHealth);
+    }
+
+    private void OnDisable()
+    {
+        _agent.enabled = false;
+        _health.OnDeath -= OnDeath;
+        _health.OnDamage -= OnDamage;
     }
 }

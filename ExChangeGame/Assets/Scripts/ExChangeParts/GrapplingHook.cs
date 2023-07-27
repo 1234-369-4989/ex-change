@@ -1,4 +1,3 @@
-using System;
 using Movement;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -38,6 +37,10 @@ namespace ExChangeParts
         
         [SerializeField] private InputActionReference grappleAction;
         
+        [Header("Audio")]
+        [SerializeField] private AudioSource startGrapple;
+        
+        
         private void OnEnable()
         {
             grappleAction.action.Enable();
@@ -61,9 +64,6 @@ namespace ExChangeParts
             {
                 pm.MoveSpeed = _speedStorage;
             }
-            
-            
-            //if(Input.GetKeyDown(grappleKey)) StartGrapple(null);
 
             if (grapplingTimer > 0)
             {
@@ -100,10 +100,12 @@ namespace ExChangeParts
         private void StartGrapple(InputAction.CallbackContext obj)
         {
             if (grapplingTimer > 0) return;
-    
+            
             grappling = true;
             _freeze = true;
     
+            startGrapple.Play();
+            
             RaycastHit hit;
             if (Physics.Raycast(camera.position, camera.forward, out hit, maxGrappleDistance, whatIsGrappable))
             {
