@@ -12,9 +12,9 @@ public class BossEditor : Editor
       BossBehavior bossBehavior = (BossBehavior)target;
 
       Handles.color = Color.red;
-      Handles.DrawWireArc(bossBehavior.transform.position, Vector3.up, Vector3.forward, 360, bossBehavior.ShootRadius);
+      Handles.DrawWireArc(bossBehavior.transform.position, Vector3.up, Vector3.forward, 360, bossBehavior.AttackRadius);
 
-      Handles.color = Color.yellow;
-      Handles.DrawWireArc(bossBehavior.transform.position, Vector3.up, Vector3.forward, 360, bossBehavior.CQCRadius);
+      Handles.color = Color.green;
+      Handles.DrawWireArc(bossBehavior.transform.position, Vector3.up, Vector3.forward, 360, bossBehavior.ShootingRadius);
    }
 }
