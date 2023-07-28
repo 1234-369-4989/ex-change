@@ -588,6 +588,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Type>k__BackingField: 1
   <Position>k__BackingField: 0
+  isPlayerPart: 0
+  grapplingHook: {fileID: 0}
 --- !u!1001 &1323853159098662308
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -758,6 +760,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Type>k__BackingField: 2
   <Position>k__BackingField: 4
+  isPlayerPart: 0
   canJump: 1
   canFloat: 1
   moveSpeed: 0
@@ -826,6 +829,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -5492332523894496352, guid: 3880500904c92054fa1f26bf16773ed7,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 34bc0325b4f61ed46b54eaace557d473, type: 2}
     - target: {fileID: 919132149155446097, guid: 3880500904c92054fa1f26bf16773ed7,
         type: 3}
       propertyPath: m_Name
@@ -1153,8 +1161,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Type>k__BackingField: 1
   <Position>k__BackingField: 5
+  isPlayerPart: 0
   input: {fileID: 4452500458851065201}
   repairDistance: 1.5
+  audioSource: {fileID: 0}
+  particleSystem: {fileID: 0}
 --- !u!4 &6093754692370117199 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 98bf7412f84eb7f4282049e236ecc4a2,
@@ -1181,8 +1192,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Type>k__BackingField: 1
   <Position>k__BackingField: 5
+  isPlayerPart: 0
   input: {fileID: 4452500458851065201}
   repairDistance: 1.5
+  audioSource: {fileID: 0}
+  particleSystem: {fileID: 0}
 --- !u!1001 &6124923753083276424
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1208,17 +1222,17 @@ PrefabInstance:
     - target: {fileID: 2070925441746177912, guid: a1a802ecaf6775746bb2a929fb554ad8,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.842171e-14
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2070925441746177912, guid: a1a802ecaf6775746bb2a929fb554ad8,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.25699997
+      value: 0.257
       objectReference: {fileID: 0}
     - target: {fileID: 2070925441746177912, guid: a1a802ecaf6775746bb2a929fb554ad8,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.2900002
+      value: -2.29
       objectReference: {fileID: 0}
     - target: {fileID: 2070925441746177912, guid: a1a802ecaf6775746bb2a929fb554ad8,
         type: 3}
@@ -1369,17 +1383,17 @@ PrefabInstance:
     - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.842171e-14
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.25699997
+      value: 0.257
       objectReference: {fileID: 0}
     - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.2900002
+      value: -2.29
       objectReference: {fileID: 0}
     - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f,
         type: 3}
@@ -1513,6 +1527,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Type>k__BackingField: 2
   <Position>k__BackingField: 4
+  isPlayerPart: 0
   canJump: 1
   canFloat: 0
   moveSpeed: 2
@@ -1614,6 +1629,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Type>k__BackingField: 4
   <Position>k__BackingField: 0
+  isPlayerPart: 0
 --- !u!4 &7627031487549156549 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c78541411d561c54397dd8a2e3e33614,
