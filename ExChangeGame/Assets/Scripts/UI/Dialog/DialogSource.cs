@@ -6,13 +6,15 @@ namespace Dialog
     {
         [SerializeField] public Dialog dialog;
         
+        [field: SerializeField] public AudioSource AudioSource { get; private set; }
+        
         
         public void StartDialog()
         {
             Debug.Log("StartDialog", this);
             print(DialogManager.Instance);
             print(dialog);
-            DialogManager.Instance.StartDialog(dialog, gameObject);
+            DialogManager.Instance.StartDialog(dialog, this);
         }
     }
 }

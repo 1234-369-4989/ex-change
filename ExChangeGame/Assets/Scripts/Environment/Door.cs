@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Environment
 {
@@ -7,11 +8,12 @@ namespace Environment
     [SelectionBase]
     [RequireComponent(typeof(Collider))]
     [RequireComponent(typeof(Animator))]
-    [RequireComponent(typeof(AudioSource))]
     public class Door : Activatable
     {
         private Animator _animator;
-        private AudioSource _audioSource;
+        [Header("Audio")]
+        [SerializeField] private AudioSource openCloseAudioSource;
+        [SerializeField] private AudioSource accessDeniedAudioSource;
         private static readonly int Open = Animator.StringToHash("Open");
 
         [Header("Colors to change")] [SerializeField]
@@ -41,7 +43,7 @@ namespace Environment
         private bool isActivated;
 
         [SerializeField] private Collider _closeCollider;
-        [SerializeField] private Collider _openCollider;
+        [SerializeField] private GameObject minimapIcon;
 
 
         private enum State
@@ -54,7 +56,6 @@ namespace Environment
         private void Awake()
         {
             _animator = GetComponent<Animator>();
-            _audioSource = GetComponent<AudioSource>();
         }
 
         private void Start()
@@ -72,28 +73,36 @@ namespace Environment
         {
             isActivated = value;
             SwapColors(value ? State.Standby : State.Inactive);
-            _openCollider.enabled = value;
             _closeCollider.enabled = !value;
+            minimapIcon.SetActive(!value);
         }
 
 
         private void OnTriggerEnter(Collider other)
         {
-            if (!isActivated) return;
+            if (!isActivated)
+            {
+                accessDeniedAudioSource.Play();
+                return;
+            }
             if (other.CompareTag("Player"))
             {
                 _animator.SetBool(Open, true);
-                _audioSource.Play();
+                openCloseAudioSource.Play();
                 SwapColors(State.Active);
             }
         }
 
         private void OnTriggerExit(Collider other)
         {
+            if (!isActivated)
+            {
+                return;
+            }
             if (other.CompareTag("Player"))
             {
                 _animator.SetBool(Open, false);
-                _audioSource.Play();
+                openCloseAudioSource.Play();
                 SwapColors(State.Standby);
             }
         }

@@ -2,29 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using Movement;
 using UnityEngine;
-using UnityEngine.Serialization;
 
+[RequireComponent(typeof(AudioSource))]
 public class  AirVent : MonoBehaviour
 {
     [SerializeField] private List<VentEntrance> entrances;
     [SerializeField] private float fadeTime = 1;
     [SerializeField] private float inFadeTime = 1;
     [SerializeField] private float shootTime = 1;
+    
+    [Header("Sound")]
+    private AudioSource _audioSource;
 
-    private WaitForSeconds waitForShoot;
-    private WaitForSeconds waitforFade;
-    private WaitForSeconds waitInFade;
+    private WaitForSeconds _waitForShoot;
+    private WaitForSeconds _waitforFade;
+    private WaitForSeconds _waitInFade;
     
 
     private void Start()
     {
+        _audioSource = GetComponent<AudioSource>();
         foreach (var entrance in entrances)
         {
             entrance.OnEnterVent += OnEnterVent;
         }
-        waitforFade = new WaitForSeconds(fadeTime);
-        waitInFade = new WaitForSeconds(inFadeTime);
-        waitForShoot = new WaitForSeconds(shootTime);
+        _waitforFade = new WaitForSeconds(fadeTime);
+        _waitInFade = new WaitForSeconds(inFadeTime);
+        _waitForShoot = new WaitForSeconds(shootTime);
     }
 
     private void OnEnterVent(VentEntrance obj, MovementRigidbody player)
@@ -40,16 +44,17 @@ public class  AirVent : MonoBehaviour
         otherEntrance.Collider.enabled = false;
         playerTransform.GetChild(0).gameObject.SetActive(false);
         player.CanMove = false;
+        _audioSource.Play();
         Overlay.Instance.FadeIn(fadeTime);
-        yield return waitforFade;
+        yield return _waitforFade;
         playerTransform.position = otherEntrance.ExitPoint.position;
-        yield return waitInFade;
+        yield return _waitInFade;
         Overlay.Instance.FadeOut(fadeTime);
-        yield return waitforFade;
+        yield return _waitforFade;
         playerTransform.GetChild(0).gameObject.SetActive(true);
         player.GetComponent<Rigidbody>().AddForce(otherEntrance.transform.forward * otherEntrance.ShootOutForce, ForceMode.VelocityChange);
         player.CanMove = true;
-        yield return waitForShoot;
+        yield return _waitForShoot;
         otherEntrance.Collider.enabled = true;
     }
 

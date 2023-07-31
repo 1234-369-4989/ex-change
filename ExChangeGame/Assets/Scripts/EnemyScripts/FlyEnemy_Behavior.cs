@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
+
 
 
 public class FlyEnemy_Behavior : EnemyBehavior
@@ -10,9 +8,15 @@ public class FlyEnemy_Behavior : EnemyBehavior
     [Header("Shooting Variables")]
     [SerializeField] private float timer = 5f;
     [SerializeField] private float bulletSpeed = 5f;
+    [SerializeField] private Vector3 offSet;
     private float _bulletTime;
     public GameObject EnemyBullet;
     public Transform SpawnPoint;
+    
+    [Header("Audio")]
+    [SerializeField] private AudioSource hoverSound;
+    [SerializeField] private AudioSource shootSound;
+    [SerializeField] private AudioSource deathSound;
 
     /// <summary>
     /// As an Attack the robot "charges up" a shot then shoots at the player an instance of the Gameobject "Bullet"
@@ -32,6 +36,7 @@ public class FlyEnemy_Behavior : EnemyBehavior
 
         _bulletTime = timer;
 
+          shootSound.Play();  
         GameObject bulletObject =
             Instantiate(EnemyBullet, SpawnPoint.transform.position, transform.rotation);
         Rigidbody bulletRigidbody = bulletObject.GetComponent<Rigidbody>();
@@ -41,9 +46,15 @@ public class FlyEnemy_Behavior : EnemyBehavior
             * therefore it needs to shoot at the Cameraroot,
             * since it is the only component right above our player model
             */
-        Vector3 direction = Player.transform.position - transform.position;
+        Vector3 direction = (Player.transform.position+offSet) - transform.position;
         direction.Normalize();
         bulletRigidbody.AddForce(direction * bulletSpeed, ForceMode.Impulse);
-        
+    }
+
+    protected override void OnDeath(BasicHealth h)
+    {
+        base.OnDeath(h);
+        hoverSound.Stop();
+        deathSound.Play();
     }
 }

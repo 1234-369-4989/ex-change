@@ -1,10 +1,10 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SawEnemyBehavior : EnemyBehavior
 {
+    
+    [SerializeField] private AudioSource idleSound;
+    [SerializeField] private AudioSource deathSound;
 
 /// <summary>
 /// this enemy tries to "drive" the player to death
@@ -18,5 +18,12 @@ public class SawEnemyBehavior : EnemyBehavior
             _agent.destination = Player.position;
             transform.position = Vector3.SmoothDamp(transform.position, new Vector3(_agent.nextPosition.x, 0, _agent.nextPosition.z), ref velocity, 0.3f );
         }
+    }
+
+    protected override void OnDeath(BasicHealth h)
+    {
+        base.OnDeath(h);
+        idleSound.Stop();
+        deathSound.Play();
     }
 }

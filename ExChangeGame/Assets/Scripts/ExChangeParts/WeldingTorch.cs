@@ -11,6 +11,7 @@ namespace ExChangeParts
         [SerializeField] private PlayerInput input;
         [SerializeField] private float repairDistance = 5f;
         [SerializeField] private AudioSource audioSource;
+        [SerializeField] private ParticleSystem particleSystem;
 
         private bool canRepair;
         private readonly RaycastHit[] raycastHits = new RaycastHit[3];
@@ -81,6 +82,11 @@ namespace ExChangeParts
         {
             if(!input) return;
            input.actions["Repair"].performed -= OnRepair;
+        }
+        
+        public void PlayParticles()
+        {
+            particleSystem.Play();
         }
     }
 }

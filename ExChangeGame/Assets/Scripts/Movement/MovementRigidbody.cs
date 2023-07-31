@@ -75,6 +75,12 @@ namespace Movement
         [SerializeField] private AudioSource floatSound;
         [SerializeField] private AudioSource sprintSound;
         
+        [Header("VFX")]
+        [SerializeField] private ParticleSystem jumpVFX;
+        // [SerializeField] private ParticleSystem landVFX;
+        [SerializeField] private ParticleSystem floatVFX;
+        [SerializeField] private ParticleSystem sprintVFX;
+        
         private float _distancePlayerToCameraRoot;
 
         // player
@@ -169,11 +175,13 @@ namespace Movement
             if (_input.sprint && !_sprinting)
             {
                 sprintSound.Play();
+                sprintVFX.Play();
                 _sprinting = true;
             }
             else if (!_input.sprint && _sprinting)
             {
                 sprintSound.Stop();
+                sprintVFX.Stop();
                 _sprinting = false;
             }
 
@@ -237,6 +245,7 @@ namespace Movement
                     _playerBody.AddForce(new Vector3(0, _jumpHeight, 0),
                         ForceMode.Impulse); //apply an upwards force to the rigidbody
                     jumpSound.Play();
+                    jumpVFX.Play();
                 }
                 else
                 {
@@ -267,25 +276,26 @@ namespace Movement
         private bool _isFloating;
         private void HandleFloat()
         {
-            // Raycast nach unten, um den Abstand zum Boden zu ermitteln
+            // raycast to ground
             Ray ray = new Ray(transform.position, Vector3.down);
             if (Physics.Raycast(ray, out var hit))
             {
                 _currentHeight = hit.distance;
             }
 
-            // Springen
+            // jump
             if (_isJumping && _canJump)
             {
                 if(!_isFloating)
                 {
                     floatSound.Play();
+                    floatVFX.Play();
                     _isFloating = true;
                 }
                 var strength = floatStrength;
                 strength *= Time.fixedDeltaTime;
 
-                // Wende eine Aufwärtskraft an
+                // upwards force
                 var distanceFromTop = floatHeight - _currentHeight;
                 
                 if(_playerBody.velocity.y < 0 && distanceFromTop > floatHeight * floatFallDecelarationHeight)
@@ -304,6 +314,7 @@ namespace Movement
                 if (_isFloating)
                 {
                     floatSound.Stop();
+                    floatVFX.Stop();
                     _isFloating = false;
                 }
             }
@@ -325,6 +336,7 @@ namespace Movement
         private void Land()
         {
             //TODO Animation
+            //landVFX.Play();
             landSound.Play();
         }
 
@@ -342,6 +354,26 @@ namespace Movement
             _canJump = movementvariables.CanJump;
             _canFloat = movementvariables.CanFloat;
             _jumpHeight = movementvariables.JumpHeight ?? 0;
+        }
+
+        public void Stop()
+        {
+            _playerBody.velocity = Vector3.zero;
+            _playerBody.angularVelocity = Vector3.zero;
+            _input.move = Vector2.zero;
+            _input.jump = false;
+            _input.sprint = false;
+            _input.analogMovement = false;
+            _input.look = Vector2.zero;
+            _lastSpeed = 0;
+            jumpSound.Stop();
+            floatSound.Stop();
+            sprintSound.Stop();
+            landSound.Stop();
+            sprintVFX.Stop();
+            floatVFX.Stop();
+            jumpVFX.Stop();
+            //TODO: landVFX.Stop();
         }
     }
 }
