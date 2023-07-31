@@ -11,8 +11,8 @@ public class BossBehavior : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private GameObject Player;
-    public float AttackRadius;
-    public float ShootingRadius; //minimal radius away from Boss so he can shoot at player
+    public float AttackRadius; 
+    public float MeleeRange; //minimal radius away from Boss so he can shoot at player
     [SerializeField] private LayerMask whatIsPlayer;
     [SerializeField] private Animator Animator;
 
@@ -30,8 +30,7 @@ public class BossBehavior : MonoBehaviour
     //private variables
     private NavMeshAgent _agent;
     private bool _inAttackRange;
-    private bool _inShootingRange;
-    private bool _attacking;
+    private bool _inMeleeRange;
 
 
 
@@ -46,14 +45,14 @@ public class BossBehavior : MonoBehaviour
     {
         RotateToPoint(Player.transform.position);
         _inAttackRange = Physics.CheckSphere(transform.position, AttackRadius, whatIsPlayer);
+        _inMeleeRange = Physics.CheckSphere(transform.position, MeleeRange, whatIsPlayer);
     }
 
     private void FixedUpdate()
     {
         if (_inAttackRange)
         {
-            _inShootingRange = !Physics.CheckSphere(transform.position, ShootingRadius, whatIsPlayer);// check if Player is within minimal radius
-            _agent.destination = transform.position;
+            if (!_inMeleeRange) _agent.destination = Player.transform.position;
             RandomizedAttackPattern();
         }
         else// when completely out of range shoot one last time, then follow player
@@ -66,20 +65,12 @@ public class BossBehavior : MonoBehaviour
     private void RandomizedAttackPattern()
     {
         if (Animator.GetInteger("AttackIndex") == 0)
-        {
-            if(_inShootingRange) Animator.SetInteger("AttackIndex", Random.Range(1,4));// if he could shoot include shoot
-            else Animator.SetInteger("AttackIndex", Random.Range(1,3));//if not do not include shoot
-
-                Debug.Log(Animator.GetInteger("AttackIndex"));
-            
-            if (Animator.GetInteger("AttackIndex") == 3 && _inShootingRange) ShootWithoutWaitTime();
-            else
-            {
-                _attacking = true;
-                Animator.SetTrigger("Attacking");
-            }
-            
-            StartCoroutine(returnToZero(TimeBetweenAttacks));
+        { 
+           Animator.SetInteger("AttackIndex", Random.Range(1,4));
+           if(Animator.GetInteger("AttackIndex") == 3) ShootWithoutWaitTime();
+           Debug.Log(Animator.GetInteger("AttackIndex"));
+           Animator.SetTrigger("Attacking");
+           StartCoroutine(returnToZero(TimeBetweenAttacks));
         }
         
         
@@ -89,7 +80,6 @@ public class BossBehavior : MonoBehaviour
     {
         yield return new WaitForSeconds(secs);
         Animator.SetInteger("AttackIndex", 0);
-        _attacking = false;
     }
 
 

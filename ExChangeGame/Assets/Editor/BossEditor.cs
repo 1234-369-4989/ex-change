@@ -15,6 +15,6 @@ public class BossEditor : Editor
       Handles.DrawWireArc(bossBehavior.transform.position, Vector3.up, Vector3.forward, 360, bossBehavior.AttackRadius);
 
       Handles.color = Color.green;
-      Handles.DrawWireArc(bossBehavior.transform.position, Vector3.up, Vector3.forward, 360, bossBehavior.ShootingRadius);
+      Handles.DrawWireArc(bossBehavior.transform.position, Vector3.up, Vector3.forward, 360, bossBehavior.MeleeRange);
    }
 }
