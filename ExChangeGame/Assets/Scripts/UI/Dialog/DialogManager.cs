@@ -28,6 +28,8 @@ namespace Dialog
         public static event Action<GameObject> OnDialogStarted;
         public static event Action OnDialogEnded;
         public static DialogManager Instance { get; private set; }
+        
+        private AudioSource _currentAudioSource;
 
         private void Awake()
         {
@@ -55,8 +57,9 @@ namespace Dialog
             continueButton.onClick.Invoke();
         }
 
-        public void StartDialog(Dialog dialog, GameObject source)
+        public void StartDialog(Dialog dialog, DialogSource source)
         {
+            _currentAudioSource = source.AudioSource;
             _dialog = dialog;
             _sentences.Clear();
             foreach (var sentence in dialog.sentences)
@@ -65,19 +68,20 @@ namespace Dialog
             }
             nameText.text = dialog.name;
             canvasGroup.gameObject.SetActive(true);
-            OnDialogStarted?.Invoke(source);
+            OnDialogStarted?.Invoke(source.gameObject);
             DisplayNextSentence();
             if(animator)animator.SetBool(IsOpen, true);
         }
 
         public void DisplayNextSentence()
         {
+            _currentAudioSource.Stop();
+            _currentAudioSource.Play();
             if (_sentences is {Count: 0})
             {
                 EndDialog();
                 return;
             }
-
             string sentence = _sentences.Dequeue();
             StopAllCoroutines();
             StartCoroutine(TypeSentence(sentence));
@@ -101,6 +105,7 @@ namespace Dialog
             {
                 _dialog.onComplete?.Invoke();
             }
+            _currentAudioSource.Stop();
             canvasGroup.gameObject.SetActive(false);
             OnDialogEnded?.Invoke();
             print("EndDialog");

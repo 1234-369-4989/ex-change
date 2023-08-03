@@ -160,6 +160,7 @@ MonoBehaviour:
     onComplete:
       m_PersistentCalls:
         m_Calls: []
+  <AudioSource>k__BackingField: {fileID: 0}
   isDialogActive: 1
   delay: 3
   justOnce: 1
@@ -384,6 +385,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+  <AudioSource>k__BackingField: {fileID: 0}
   isDialogActive: 1
   delay: 3
   justOnce: 1
@@ -955,69 +957,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9d1c9ebeaf3c83e46a2935d39694dc95, type: 3}
---- !u!114 &3535557348078195244 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3377354516938065060, guid: 9d1c9ebeaf3c83e46a2935d39694dc95,
-    type: 3}
-  m_PrefabInstance: {fileID: 2291791967897425544}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4982813686578229566}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 95d186df9f6a24d47b7b136afe0ddcb3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &4279769517904136427 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2642169410724699747, guid: 9d1c9ebeaf3c83e46a2935d39694dc95,
     type: 3}
   m_PrefabInstance: {fileID: 2291791967897425544}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &4982813686578229566 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6550650597034272694, guid: 9d1c9ebeaf3c83e46a2935d39694dc95,
-    type: 3}
-  m_PrefabInstance: {fileID: 2291791967897425544}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &234957516
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4982813686578229566}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af4d91c9744ac384495eb909341fed52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dialog:
-    name: Mysterious Drone
-    sentences:
-    - "Hey, you don't look like a AI Slave Robot. I think I can trust you. My sy\u20B4tem
-      is severely d\u20B3maged. We d\u0398n't have that much \u20AEime\u2026"
-    - "I give you th1s techNology. It\u2019s very 0ld and spec\u20ACal. But be c\u0394reful.
-      The AI wants this technology\u25E6 \u25E6 \u25E6"
-    - "You can also have my turbines... These will help you... o\u03B7 your jou\u03C1ney...
-      Hurr\u03A5... Yo\u222A shall take this tec\u0127...nol0gy... to..."
-    onComplete:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 3535557348078195244}
-          m_TargetAssemblyTypeName: PartDonor, Assembly-CSharp
-          m_MethodName: DonatePart
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  isDialogActive: 1
-  delay: 3
-  justOnce: 1
 --- !u!1001 &2551263645657598262
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1253,6 +1198,16 @@ PrefabInstance:
     - target: {fileID: 1956284607, guid: c367e78e733c45b4e9ddca4f50f6bfe3, type: 3}
       propertyPath: m_Radius
       value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 781632171433768303, guid: c367e78e733c45b4e9ddca4f50f6bfe3,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6492677338061563112, guid: c367e78e733c45b4e9ddca4f50f6bfe3,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7067836684448895789, guid: c367e78e733c45b4e9ddca4f50f6bfe3,
         type: 3}

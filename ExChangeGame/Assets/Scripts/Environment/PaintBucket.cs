@@ -6,17 +6,17 @@ using UnityEngine;
 public class PaintBucket : MonoBehaviour
 {
     [SerializeField] private Color color;
-    private Renderer _ren;
+    [SerializeField] private Renderer renderer;
     private Material _mat;
 
     private void Awake()
     {
-        _ren = GetComponent<Renderer>();
+        renderer = GetComponent<Renderer>();
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision other)
     {
-        if (other.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player"))
         {
             ExchangeSystem.Instance.ChangeColor(color);
         }
@@ -25,13 +25,13 @@ public class PaintBucket : MonoBehaviour
     private void OnValidate()
     {
         if(PrefabUtility.IsPartOfPrefabAsset(gameObject)) return;
-        if (_ren == null)
-            _ren = GetComponent<Renderer>();
+        if (renderer == null)
+            renderer = GetComponent<Renderer>();
         if (_mat == null)
         {
-            _mat = Instantiate(_ren.sharedMaterials[1]);
+            _mat = Instantiate(renderer.sharedMaterial);
             _mat.color = color;
-            _ren.materials = new[] { _ren.sharedMaterials[0], _mat };
+            renderer.material = _mat;
         }
         _mat.color = color;
     }
