@@ -31,21 +31,32 @@ public class BossBehavior : MonoBehaviour
     private NavMeshAgent _agent;
     private bool _inAttackRange;
     private bool _inMeleeRange;
+    private bool _attacking;
 
+    
+    //hard coded Rotation for Attacking
+    private Vector3 to = new Vector3(0, 40, 0);
+    private Vector3 start = new Vector3(0, 0, 0);
 
 
     // Start is called before the first frame update
     void Start()
     {
         _agent = GetComponent<NavMeshAgent>();
+        Animator = GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        RotateToPoint(Player.transform.position);
-        _inAttackRange = Physics.CheckSphere(transform.position, AttackRadius, whatIsPlayer);
-        _inMeleeRange = Physics.CheckSphere(transform.position, MeleeRange, whatIsPlayer);
+        
+        Debug.Log(_attacking);
+        if (!_attacking)
+        {
+            RotateToPoint(Player.transform.position);
+            _inAttackRange = Physics.CheckSphere(transform.position, AttackRadius, whatIsPlayer);
+            _inMeleeRange = Physics.CheckSphere(transform.position, MeleeRange, whatIsPlayer);
+        }
     }
 
     private void FixedUpdate()
@@ -67,13 +78,28 @@ public class BossBehavior : MonoBehaviour
         if (Animator.GetInteger("AttackIndex") == 0)
         { 
            Animator.SetInteger("AttackIndex", Random.Range(1,4));
-           if(Animator.GetInteger("AttackIndex") == 3) ShootWithoutWaitTime();
            Debug.Log(Animator.GetInteger("AttackIndex"));
-           Animator.SetTrigger("Attacking");
+           StartCoroutine(Attacking(Animator.GetInteger("AttackIndex")));
            StartCoroutine(returnToZero(TimeBetweenAttacks));
         }
         
         
+    }
+
+    IEnumerator Attacking(int index)
+    {
+        _attacking = true;
+        Debug.Log(_attacking);
+        _agent.destination = transform.position;
+        if (Vector3.Distance(transform.rotation.eulerAngles, transform.rotation.eulerAngles + to) > 0.01f)
+        {
+            transform.eulerAngles = Vector3.Lerp(transform.rotation.eulerAngles, transform.rotation.eulerAngles + to, Time.deltaTime);
+        }
+
+        yield return new WaitForSeconds(4.0f);
+        if(index == 3) ShootWithoutWaitTime();
+        else Animator.SetTrigger("Attacking");
+        _attacking = false;
     }
 
     IEnumerator returnToZero(float secs)
