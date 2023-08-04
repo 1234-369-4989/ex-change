@@ -803,7 +803,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
+  far clip plane: 100
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -908,7 +908,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0, y: -120}
+  m_AnchoredPosition: {x: 0, y: -120}
   m_SizeDelta: {x: 550, y: 140}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &788670696
@@ -1676,10 +1676,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -1696,16 +1696,16 @@ Canvas:
   m_GameObject: {fileID: 1149996317}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
-  m_PlaneDistance: 100
+  m_RenderMode: 1
+  m_Camera: {fileID: 612319238}
+  m_PlaneDistance: 0.58
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 25
-  m_SortingLayerID: 0
+  m_AdditionalShaderChannelsFlag: -1
+  m_SortingLayerID: 1994074971
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!224 &1149996321
@@ -21370,6 +21370,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1387b755e177c94ca45d469403c685c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  openCloseAudioSource: {fileID: 0}
+  accessDeniedAudioSource: {fileID: 0}
   lights: []
   activeColor: {r: 0.34901962, g: 0.8509804, b: 0.52156866, a: 1}
   standbyColor: {r: 0.8509804, g: 0.8, b: 0.20392157, a: 1}
@@ -21391,7 +21393,7 @@ MonoBehaviour:
   inactiveRenderers: []
   isActivated: 1
   _closeCollider: {fileID: 2958960763485428030}
-  _openCollider: {fileID: 4559230760680633093}
+  minimapIcon: {fileID: 0}
 --- !u!1 &4033693545516527806
 GameObject:
   m_ObjectHideFlags: 0
@@ -23964,6 +23966,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1387b755e177c94ca45d469403c685c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  openCloseAudioSource: {fileID: 0}
+  accessDeniedAudioSource: {fileID: 0}
   lights: []
   activeColor: {r: 0.34901962, g: 0.8509804, b: 0.52156866, a: 1}
   standbyColor: {r: 0.8509804, g: 0.8, b: 0.20392157, a: 1}
@@ -23984,7 +23988,7 @@ MonoBehaviour:
   - {fileID: 1414829609705753311}
   isActivated: 1
   _closeCollider: {fileID: 4644205838849166221}
-  _openCollider: {fileID: 4644205838849166218}
+  minimapIcon: {fileID: 0}
 --- !u!65 &4644205838849166221
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -39545,6 +39549,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1387b755e177c94ca45d469403c685c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  openCloseAudioSource: {fileID: 0}
+  accessDeniedAudioSource: {fileID: 0}
   lights: []
   activeColor: {r: 0.34901962, g: 0.8509804, b: 0.52156866, a: 1}
   standbyColor: {r: 0.8509804, g: 0.8, b: 0.20392157, a: 1}
@@ -39564,7 +39570,7 @@ MonoBehaviour:
   - {fileID: 1386441454099457366}
   isActivated: 1
   _closeCollider: {fileID: 3274630148738511624}
-  _openCollider: {fileID: 5974510863357122911}
+  minimapIcon: {fileID: 0}
 --- !u!33 &7668261250135197976
 MeshFilter:
   m_ObjectHideFlags: 0

@@ -8,7 +8,7 @@
        public float? MoveSpeed;
        public float? SprintSpeed;
        public float? JumpHeight;
-       
+
        //tostring
        
          public override string ToString()

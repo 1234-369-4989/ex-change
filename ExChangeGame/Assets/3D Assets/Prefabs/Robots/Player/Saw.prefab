@@ -42,6 +42,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8373259066603311010}
   - component: {fileID: 7946868181828040965}
+  - component: {fileID: 2922448392043122138}
+  - component: {fileID: 1240707745537158032}
   m_Layer: 0
   m_Name: Saw
   m_TagString: Untagged
@@ -79,6 +81,43 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Type>k__BackingField: 4
   <Position>k__BackingField: 0
+  isPlayerPart: 0
+  pushForceAway: 3
+  pushForceUp: 3
+--- !u!95 &2922448392043122138
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9185120497346925848}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 70ef4edef962e8a47b1b0f2070360d48, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!135 &1240707745537158032
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9185120497346925848}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.15
+  m_Center: {x: 0.17, y: 0.03, z: 0}
 --- !u!1001 &7841488114013324823
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -174,6 +213,11 @@ PrefabInstance:
     - target: {fileID: -7002191831512202852, guid: c78541411d561c54397dd8a2e3e33614,
         type: 3}
       propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7002191831512202852, guid: c78541411d561c54397dd8a2e3e33614,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7002191831512202852, guid: c78541411d561c54397dd8a2e3e33614,
