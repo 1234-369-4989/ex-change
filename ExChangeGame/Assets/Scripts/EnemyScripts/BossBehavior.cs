@@ -57,7 +57,7 @@ public class BossBehavior : MonoBehaviour
         if (_inAttackRange)
         {
             if (!_inMeleeRange) _agent.destination = Player.transform.position;
-            RandomizedAttackPattern();
+            else RandomizedAttackPattern();
         }
         else// when completely out of range shoot one last time, then follow player
         {
@@ -144,11 +144,13 @@ public class BossBehavior : MonoBehaviour
     /// <param name="target">target to look at</param>
     private void RotateToPoint(Vector3 target)
     {
-        Vector3 targetDirection = target - transform.position;
-                
-        float SingleStep = _agent.angularSpeed * Time.fixedDeltaTime;
-        Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, SingleStep, 0.0f);
-        newDirection.y = 0;//lock rotation in x-z plane
-        transform.rotation = Quaternion.LookRotation(newDirection); 
+        //find the vector pointing from our position to the target
+        var _direction = (Player.transform.position - transform.position).normalized;
+
+        //create the rotation we need to be in to look at the target
+        var _lookRotation = Quaternion.LookRotation(_direction);
+
+        //rotate us over time according to speed until we are in the required rotation
+        transform.rotation = Quaternion.Slerp(transform.rotation, _lookRotation, Time.deltaTime * (_agent.speed/2));
     }
 }
