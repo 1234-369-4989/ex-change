@@ -33,11 +33,6 @@ public class BossBehavior : MonoBehaviour
     private bool _inMeleeRange;
     private bool _attacking;
 
-    
-    //hard coded Rotation for Attacking
-    private Vector3 to = new Vector3(0, 40, 0);
-    private Vector3 start = new Vector3(0, 0, 0);
-
 
     // Start is called before the first frame update
     void Start()
@@ -49,8 +44,6 @@ public class BossBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        Debug.Log(_attacking);
         if (!_attacking)
         {
             RotateToPoint(Player.transform.position);
@@ -73,43 +66,44 @@ public class BossBehavior : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// this attack randomly picks an Integer and attacks depending on the State Machine in the Animator
+    /// </summary>
     private void RandomizedAttackPattern()
     {
         if (Animator.GetInteger("AttackIndex") == 0)
-        { 
+        {
+            Debug.Log("Attacking");
+           _attacking = true;
            Animator.SetInteger("AttackIndex", Random.Range(1,4));
            Debug.Log(Animator.GetInteger("AttackIndex"));
-           StartCoroutine(Attacking(Animator.GetInteger("AttackIndex")));
+           if(Animator.GetInteger("AttackIndex") == 3) ShootWithoutWaitTime();
+           else Animator.SetTrigger("Attacking");
            StartCoroutine(returnToZero(TimeBetweenAttacks));
         }
         
         
     }
 
-    IEnumerator Attacking(int index)
-    {
-        _attacking = true;
-        Debug.Log(_attacking);
-        _agent.destination = transform.position;
-        if (Vector3.Distance(transform.rotation.eulerAngles, transform.rotation.eulerAngles + to) > 0.01f)
-        {
-            transform.eulerAngles = Vector3.Lerp(transform.rotation.eulerAngles, transform.rotation.eulerAngles + to, Time.deltaTime);
-        }
-
-        yield return new WaitForSeconds(4.0f);
-        if(index == 3) ShootWithoutWaitTime();
-        else Animator.SetTrigger("Attacking");
-        _attacking = false;
-    }
-
+    
+    /// <summary>
+    /// this resets all necessary variables after the animation is finished
+    /// </summary>
+    /// <param name="secs"></param>
+    /// <returns></returns>
     IEnumerator returnToZero(float secs)
     {
         yield return new WaitForSeconds(secs);
         Animator.SetInteger("AttackIndex", 0);
+        _attacking = false;
     }
 
 
 
+    /// <summary>
+    /// This method shoots at the Player after a certain time is finished
+    /// </summary>
+    
     private void ShootAfterWaitTime()
     {
         _agent.destination = transform.position;
@@ -127,6 +121,10 @@ public class BossBehavior : MonoBehaviour
         direction.Normalize();
         bulletRigidbody.AddForce(direction * bulletSpeed, ForceMode.Impulse);
     }
+    
+    /// <summary>
+    /// this method shoots at the Player without a "charging up" time
+    /// </summary>
 
     private void ShootWithoutWaitTime()
     {
