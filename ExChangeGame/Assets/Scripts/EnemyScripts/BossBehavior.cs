@@ -15,6 +15,7 @@ public class BossBehavior : MonoBehaviour
     public float MeleeRange; //minimal radius away from Boss so he can shoot at player
     [SerializeField] private LayerMask whatIsPlayer;
     [SerializeField] private Animator Animator;
+    [SerializeField] private bool Hostile;
 
     [Header("Shooting Variables")]
     [SerializeField] private float timer = 5f;
@@ -23,8 +24,9 @@ public class BossBehavior : MonoBehaviour
     public GameObject EnemyBullet;
     public Transform SpawnPoint;
 
-    [Header("AttackingVariables")]
+    [Header("Attacking Variables")]
     [SerializeField] private float TimeBetweenAttacks;
+    
 
     
     //private variables
@@ -44,12 +46,16 @@ public class BossBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!_attacking)
+        if (Hostile)
         {
-            RotateToPoint(Player.transform.position);
-            _inAttackRange = Physics.CheckSphere(transform.position, AttackRadius, whatIsPlayer);
-            _inMeleeRange = Physics.CheckSphere(transform.position, MeleeRange, whatIsPlayer);
+            if (!_attacking)
+            {
+                RotateToPoint(Player.transform.position);
+                _inAttackRange = Physics.CheckSphere(transform.position, AttackRadius, whatIsPlayer);
+                _inMeleeRange = Physics.CheckSphere(transform.position, MeleeRange, whatIsPlayer);
+            }
         }
+      
     }
 
     private void FixedUpdate()
