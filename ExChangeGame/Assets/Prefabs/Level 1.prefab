@@ -186,10 +186,10 @@ MonoBehaviour:
     onComplete:
       m_PersistentCalls:
         m_Calls: []
-  <AudioSource>k__BackingField: {fileID: 0}
+  <AudioSource>k__BackingField: {fileID: 1013250706940541034}
   isDialogActive: 1
-  delay: 3
-  justOnce: 1
+  justOnce: 0
+  delay: 1
 --- !u!1 &404812493
 GameObject:
   m_ObjectHideFlags: 0
@@ -411,10 +411,10 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  <AudioSource>k__BackingField: {fileID: 0}
+  <AudioSource>k__BackingField: {fileID: 1013250706940541034}
   isDialogActive: 1
-  delay: 3
   justOnce: 1
+  delay: 1
 --- !u!1 &763882344
 GameObject:
   m_ObjectHideFlags: 0
@@ -3111,6 +3111,12 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 1956284607, guid: c367e78e733c45b4e9ddca4f50f6bfe3, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: c367e78e733c45b4e9ddca4f50f6bfe3, type: 3}
+--- !u!82 &1013250706940541034 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 4975634286355668307, guid: c367e78e733c45b4e9ddca4f50f6bfe3,
+    type: 3}
+  m_PrefabInstance: {fileID: 5405105855020492089}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2960214224643323412 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7067836684448895789, guid: c367e78e733c45b4e9ddca4f50f6bfe3,

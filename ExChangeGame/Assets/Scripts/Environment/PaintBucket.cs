@@ -6,7 +6,7 @@ using UnityEngine;
 public class PaintBucket : MonoBehaviour
 {
     [SerializeField] private Color color;
-    [SerializeField] private Renderer renderer;
+    [SerializeField] private new Renderer renderer;
     private Material _mat;
 
     private void Awake()
@@ -29,6 +29,7 @@ public class PaintBucket : MonoBehaviour
             renderer = GetComponent<Renderer>();
         if (_mat == null)
         {
+            if(renderer.sharedMaterial == null) return;
             _mat = Instantiate(renderer.sharedMaterial);
             _mat.color = color;
             renderer.material = _mat;

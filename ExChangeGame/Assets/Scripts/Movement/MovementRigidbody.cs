@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using DefaultNamespace;
 using ExChangeParts;
 using StarterAssets;
 using UnityEngine;
@@ -13,10 +14,9 @@ namespace Movement
     [SelectionBase]
     public class MovementRigidbody : MonoBehaviour
     {
-        [Header("Player")]
-        [Header("Movement Settings")]
-        [Tooltip("Move speed of the character")]
-        [SerializeField] private float defaultMoveSpeed = 2.0f;
+        [Header("Player")] [Header("Movement Settings")] [Tooltip("Move speed of the character")] [SerializeField]
+        private float defaultMoveSpeed = 2.0f;
+
         private float _moveSpeed = 2.0f;
 
         public float MoveSpeed
@@ -25,62 +25,67 @@ namespace Movement
             set => _moveSpeed = value;
         }
 
-        [Tooltip("Sprint speed of the character in m/s")]
-        [SerializeField] private float defaultSprintSpeed = 5.335f;
+        [Tooltip("Sprint speed of the character in m/s")] [SerializeField]
+        private float defaultSprintSpeed = 5.335f;
+
+        [SerializeField] private float defaultSprintEnergyCost = 10f;
         private float _sprintSpeed = 5.335f;
+        private BasicEnergy _playerEnergy;
 
-        [Tooltip("How fast the character turns to face movement direction")] 
-        [SerializeField][Range(0.0f, 0.3f)] private float rotationSmoothTime = 0.12f;
+        [Tooltip("How fast the character turns to face movement direction")] [SerializeField] [Range(0.0f, 0.3f)]
+        private float rotationSmoothTime = 0.12f;
 
-        [Tooltip("Acceleration and deceleration")]
-        [SerializeField] private float speedChangeRate = 10.0f;
-        
+        [Tooltip("Acceleration and deceleration")] [SerializeField]
+        private float speedChangeRate = 10.0f;
+
         [Space(10)]
         [Header("Jump Settings")]
         [Tooltip("Time required to pass before being able to jump again. Set to 0f to instantly jump again")]
-        [SerializeField] private float jumpTimeout = 0.50f;
+        [SerializeField]
+        private float jumpTimeout = 0.50f;
+        [SerializeField] private float jumpEnergyCost = 20f;
 
-        [Space(10)]
-        [Header("Floating Settings")]
-        [Tooltip("Maximum height to which can be floated")]
-        [SerializeField] private float floatHeight = 1f;
+        [Space(10)] [Header("Floating Settings")] [Tooltip("Maximum height to which can be floated")] [SerializeField]
+        private float floatHeight = 1f;
+
         [SerializeField] private float floatStrength;
         [SerializeField] private float floatFallDecelaration = 1.1f;
         [SerializeField] private float floatFallDecelarationHeight = .5f;
         [SerializeField] private ForceMode floatForceMode;
+        [SerializeField] private float floatEnergyCost = 10f;
 
-        [Space(10)]
-        [Header("Player Grounded")]
-        [Tooltip("If the cahracter is grounded or not.")]
-        [SerializeField] private bool isGrounded = true;
+        [Space(10)] [Header("Player Grounded")] [Tooltip("If the cahracter is grounded or not.")] [SerializeField]
+        private bool isGrounded = true;
 
-        [Tooltip("Useful for rough ground")]
-        [SerializeField] private float groundedOffset = -0.14f;
+        [Tooltip("Useful for rough ground")] [SerializeField]
+        private float groundedOffset = -0.14f;
 
         [Tooltip("The radius of the grounded check. Should match the radius of the CharacterController")]
-        [SerializeField] private float groundedRadius = 0.28f;
+        [SerializeField]
+        private float groundedRadius = 0.28f;
 
-        [Tooltip("What layers the character uses as ground")]
-        [SerializeField] private LayerMask groundLayers;
-        
+        [Tooltip("What layers the character uses as ground")] [SerializeField]
+        private LayerMask groundLayers;
+
         [Space(10)]
         [Header("Player Camera")]
         //PlayerCameraRoot
-        [SerializeField] private GameObject playerCameraRoot;
-        
-        [Space(10)]
-        [Header("Sound")]
-        [SerializeField] private AudioSource jumpSound;
-        [SerializeField] private AudioSource landSound;   
+        [SerializeField]
+        private GameObject playerCameraRoot;
+
+        [Space(10)] [Header("Sound")] [SerializeField]
+        private AudioSource jumpSound;
+
+        [SerializeField] private AudioSource landSound;
         [SerializeField] private AudioSource floatSound;
         [SerializeField] private AudioSource sprintSound;
-        
-        [Header("VFX")]
-        [SerializeField] private ParticleSystem jumpVFX;
+
+        [Header("VFX")] [SerializeField] private ParticleSystem jumpVFX;
+
         // [SerializeField] private ParticleSystem landVFX;
         [SerializeField] private ParticleSystem floatVFX;
         [SerializeField] private ParticleSystem sprintVFX;
-        
+
         private float _distancePlayerToCameraRoot;
 
         // player
@@ -108,7 +113,8 @@ namespace Movement
         private Rigidbody _playerBody;
         private StarterAssetsInputs _input;
         private GameObject _mainCamera;
-        
+
+
         private void Awake()
         {
             _playerroute = new List<Vector3>();
@@ -116,7 +122,7 @@ namespace Movement
             _playerBody = GetComponent<Rigidbody>();
             _input = GetComponent<StarterAssetsInputs>();
             _playerInput = GetComponent<PlayerInput>();
-            
+
             _playerInput.actions["Jump"].performed += JumpPerformed;
 
             //get a reference for the main camera
@@ -126,18 +132,18 @@ namespace Movement
             }
 
             _exchangeSystem = GetComponent<ExchangeSystem>();
+            _playerEnergy = GetComponent<BasicEnergy>();
         }
 
         private void JumpPerformed(InputAction.CallbackContext obj)
         {
-              _isJumping = !_isJumping;
+            _isJumping = !_isJumping;
         }
 
 
         // Start is called before the first frame update
         void Start()
         {
-
             // reset our timeouts on start
             _jumpTimeoutDelta = jumpTimeout;
 
@@ -156,7 +162,7 @@ namespace Movement
             if (_canFloat) HandleFloat();
             else Jump();
             GroundedCheck();
-            if(CanMove) Move();
+            if (CanMove) Move();
             _playerroute.Add(transform.position + new Vector3(0.0f, _distancePlayerToCameraRoot, 0.0f));
 
             if (_playerroute.Count > 1)
@@ -168,10 +174,24 @@ namespace Movement
 
 
         private bool _sprinting;
+
         //Method for Calculating Movement and Applying it
         private void Move()
         {
-            float targetSpeed = _input.sprint ? _sprintSpeed : _moveSpeed; //set current movementspeed
+            float targetSpeed; //set current movementspeed
+            if (_input.sprint)
+            {
+                if (_playerEnergy.Use(defaultSprintEnergyCost * Time.deltaTime))
+                    targetSpeed = _sprintSpeed;
+                else
+                {
+                    targetSpeed = _moveSpeed;
+                    _input.sprint = false;
+                }
+            }
+            else
+                targetSpeed = _moveSpeed;
+
             if (_input.sprint && !_sprinting)
             {
                 sprintSound.Play();
@@ -242,6 +262,11 @@ namespace Movement
                 //Jumping
                 if (_input.jump && _canJump && _jumpTimeoutDelta <= 0.0f)
                 {
+                    if(!_playerEnergy.Use(jumpEnergyCost))
+                    {
+                        _input.jump = false;
+                        return;
+                    }
                     _playerBody.AddForce(new Vector3(0, _jumpHeight, 0),
                         ForceMode.Impulse); //apply an upwards force to the rigidbody
                     jumpSound.Play();
@@ -274,6 +299,7 @@ namespace Movement
         }
 
         private bool _isFloating;
+
         private void HandleFloat()
         {
             // raycast to ground
@@ -282,26 +308,36 @@ namespace Movement
             {
                 _currentHeight = hit.distance;
             }
-
+           
             // jump
             if (_isJumping && _canJump)
             {
-                if(!_isFloating)
+                if(!_playerEnergy.Use(floatEnergyCost * Time.fixedDeltaTime))
+                {
+                    _isJumping = false;
+                    _input.jump = false;
+                    floatSound.Stop();
+                    floatVFX.Stop();
+                    _isFloating = false;
+                    return;
+                }
+                if (!_isFloating)
                 {
                     floatSound.Play();
                     floatVFX.Play();
                     _isFloating = true;
                 }
+
                 var strength = floatStrength;
                 strength *= Time.fixedDeltaTime;
 
                 // upwards force
                 var distanceFromTop = floatHeight - _currentHeight;
-                
-                if(_playerBody.velocity.y < 0 && distanceFromTop > floatHeight * floatFallDecelarationHeight)
+
+                if (_playerBody.velocity.y < 0 && distanceFromTop > floatHeight * floatFallDecelarationHeight)
                     strength *= floatFallDecelaration;
-                
-                if(distanceFromTop >= 0)
+
+                if (distanceFromTop >= 0)
                     _playerBody.AddForce(new Vector3(0, strength, 0), floatForceMode);
                 else
                 {

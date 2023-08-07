@@ -1,8 +1,11 @@
+using System;
 using System.Collections;
+using DefaultNamespace;
 using Movement;
 using UnityEngine;
 
 [RequireComponent(typeof(BasicHealth))]
+[RequireComponent(typeof(BasicEnergy))]
 public class PlayerInstance : MonoBehaviour
 {
     public static PlayerInstance Instance { get; private set; }
@@ -14,8 +17,10 @@ public class PlayerInstance : MonoBehaviour
     [SerializeField] private GameObject playerModel;
     [SerializeField] private AudioSource damageAudioSource;
     [SerializeField] private AudioSource deathAudioSource;
-    
     [SerializeField] private GameObject deathEffect;
+
+    public static event Action OnPlayerDeath;
+    public static event Action OnPlayerRespawn;
     
     
 
@@ -26,7 +31,7 @@ public class PlayerInstance : MonoBehaviour
         else
             Destroy(gameObject);
         _playerHealth = GetComponent<BasicHealth>();
-        _playerHealth.OnDeath += OnPlayerDeath;
+        _playerHealth.OnDeath += OnPlayerDeathMethod;
         _playerHealth.OnDamage += OnPlayerDamage;
     }
 
@@ -40,9 +45,10 @@ public class PlayerInstance : MonoBehaviour
         damageAudioSource.Play();
     }
 
-    private void OnPlayerDeath(BasicHealth obj)
+    private void OnPlayerDeathMethod(BasicHealth obj)
     {
         Debug.Log("Player died");
+        OnPlayerDeath?.Invoke();
         StartCoroutine(DeathCoroutine());
     }
     
@@ -62,10 +68,15 @@ public class PlayerInstance : MonoBehaviour
     {
         return GetComponent<BasicHealth>();
     }
+    
+    public BasicEnergy GetPlayerEnergy()
+    {
+        return GetComponent<BasicEnergy>();
+    }
 
     private void OnDestroy()
     {
-        _playerHealth.OnDeath -= OnPlayerDeath;
+        _playerHealth.OnDeath -= OnPlayerDeathMethod;
         _playerHealth.OnDamage -= OnPlayerDamage;
     }
 
@@ -74,5 +85,6 @@ public class PlayerInstance : MonoBehaviour
         _playerHealth.FullHealth();
         playerMovement.enabled = true;
         playerModel.SetActive(true);
+        OnPlayerRespawn?.Invoke();
     }
 }
