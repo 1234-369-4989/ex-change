@@ -11809,7 +11809,7 @@ PrefabInstance:
     - target: {fileID: 95693983307356977, guid: d2a3de1e2b47de6408c0f0f42a74630a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.000000014901161
+      value: -0.000000029802322
       objectReference: {fileID: 0}
     - target: {fileID: 95693983307356977, guid: d2a3de1e2b47de6408c0f0f42a74630a,
         type: 3}
@@ -11819,7 +11819,7 @@ PrefabInstance:
     - target: {fileID: 95693983307356977, guid: d2a3de1e2b47de6408c0f0f42a74630a,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.1227534
+      value: -0.2236841
       objectReference: {fileID: 0}
     - target: {fileID: 95693983307356977, guid: d2a3de1e2b47de6408c0f0f42a74630a,
         type: 3}
@@ -11839,7 +11839,7 @@ PrefabInstance:
     - target: {fileID: 95693984178291893, guid: d2a3de1e2b47de6408c0f0f42a74630a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.000000014901161
+      value: -0.000000029802322
       objectReference: {fileID: 0}
     - target: {fileID: 95693984178291893, guid: d2a3de1e2b47de6408c0f0f42a74630a,
         type: 3}
@@ -11849,7 +11849,7 @@ PrefabInstance:
     - target: {fileID: 95693984178291893, guid: d2a3de1e2b47de6408c0f0f42a74630a,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.1227534
+      value: -0.2236841
       objectReference: {fileID: 0}
     - target: {fileID: 95693984386424338, guid: d2a3de1e2b47de6408c0f0f42a74630a,
         type: 3}
@@ -14267,6 +14267,7 @@ GameObject:
   - component: {fileID: 756471006}
   - component: {fileID: 756471005}
   - component: {fileID: 756471004}
+  - component: {fileID: 756471007}
   m_Layer: 0
   m_Name: ExplosionTrigger
   m_TagString: Untagged
@@ -14307,10 +14308,10 @@ MonoBehaviour:
     onComplete:
       m_PersistentCalls:
         m_Calls: []
-  <AudioSource>k__BackingField: {fileID: 0}
+  <AudioSource>k__BackingField: {fileID: 756471007}
   isDialogActive: 1
-  delay: 3
   justOnce: 1
+  delay: 3
 --- !u!4 &756471006
 Transform:
   m_ObjectHideFlags: 0
@@ -14326,6 +14327,103 @@ Transform:
   m_Father: {fileID: 6739335748640783872}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &756471007
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 756471003}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: -9109962991127036389, guid: f8bd4315728044b4eb1d5eafd2dde379,
+    type: 2}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!43 &762168197
 Mesh:
   m_ObjectHideFlags: 0
@@ -18038,8 +18136,8 @@ MonoBehaviour:
           m_CallState: 2
   <AudioSource>k__BackingField: {fileID: 0}
   isDialogActive: 1
-  delay: 0
   justOnce: 0
+  delay: 0
 --- !u!135 &988667287
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -24078,8 +24176,8 @@ MonoBehaviour:
         m_Calls: []
   <AudioSource>k__BackingField: {fileID: 0}
   isDialogActive: 1
-  delay: 3
   justOnce: 1
+  delay: 3
 --- !u!135 &1377555495
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -26881,117 +26979,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!21 &1495942631
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: liquid(Clone)
-  m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap:
-    RenderType: Opaque
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _BaseMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _BumpMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailAlbedoMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailMask:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailNormalMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _EmissionMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MetallicGlossMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _OcclusionMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _ParallaxMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SpecGlossMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - unity_Lightmaps:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - unity_LightmapsInd:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - unity_ShadowMasks:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Ints: []
-    m_Floats:
-    - _AlphaClip: 0
-    - _Blend: 0
-    - _BumpScale: 1
-    - _ClearCoatMask: 0
-    - _ClearCoatSmoothness: 0
-    - _Cull: 2
-    - _Cutoff: 0.5
-    - _DetailAlbedoMapScale: 1
-    - _DetailNormalMapScale: 1
-    - _DstBlend: 0
-    - _EnvironmentReflections: 1
-    - _GlossMapScale: 0
-    - _Glossiness: 0
-    - _GlossyReflections: 0
-    - _Metallic: 0
-    - _OcclusionStrength: 1
-    - _Parallax: 0.005
-    - _QueueOffset: 0
-    - _ReceiveShadows: 1
-    - _Smoothness: 0.5
-    - _SmoothnessTextureChannel: 0
-    - _SpecularHighlights: 1
-    - _SrcBlend: 1
-    - _Surface: 0
-    - _WorkflowMode: 1
-    - _ZWrite: 1
-    m_Colors:
-    - _BaseColor: {r: 0.2980392, g: 1, b: 0.46006274, a: 0}
-    - _Color: {r: 0.29803917, g: 1, b: 0.46006268, a: 0}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-  m_BuildTextureStacks: []
 --- !u!43 &1496228418
 Mesh:
   m_ObjectHideFlags: 0

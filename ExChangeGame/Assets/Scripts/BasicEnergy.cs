@@ -18,19 +18,15 @@ namespace DefaultNamespace
 
         public bool Use(float amount)
         {
-            Debug.Log("Using energy");
             if (Energy - amount < 0) return false;
             StopCoroutine(nameof(EnergyRecoveryCoroutine));
-            Debug.Log("Energy used: " + amount);
             Energy -= amount;
-            Debug.Log("Energy: " + Energy);
             StartCoroutine(nameof(EnergyRecoveryCoroutine));
             return true;
         }
         
         private IEnumerator EnergyRecoveryCoroutine()
         {
-            Debug.Log("Starting energy recovery");
             yield return _energyRecoveryDelay;
             while (true)
             {

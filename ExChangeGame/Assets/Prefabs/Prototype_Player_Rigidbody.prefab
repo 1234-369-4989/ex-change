@@ -960,8 +960,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b5eebc35fde467b89d9be06cf01a42d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Energy>k__BackingField: 0
-  <MaxEnergy>k__BackingField: 0
+  <Energy>k__BackingField: 100
+  <MaxEnergy>k__BackingField: 100
   energyRecoveryRate: 1
   energyRecoveryDelay: 1
 --- !u!1 &453778594996113729
