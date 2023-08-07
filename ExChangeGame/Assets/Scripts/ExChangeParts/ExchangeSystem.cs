@@ -15,7 +15,8 @@ namespace ExChangeParts
         [Header("Visuals")]
         [SerializeField] private Renderer[] colorRenderers;
         public static ExchangeSystem Instance { get; private set; }
-        
+        public bool Aiming { get; set; }
+
         //OnMovementChange event
         public delegate void OnMovement(MovementVariables movementVariables);
         public OnMovement OnMovementChanged;

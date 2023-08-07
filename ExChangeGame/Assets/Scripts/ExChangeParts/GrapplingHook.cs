@@ -1,3 +1,4 @@
+using DefaultNamespace;
 using Movement;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -14,6 +15,7 @@ namespace ExChangeParts
         public LayerMask whatIsGrappable;
         public LineRenderer lr;
         public Rigidbody rb;
+        private BasicEnergy _playerEnergy;
 
         [Header("GrappleValues")]
         public float maxGrappleDistance;
@@ -36,6 +38,9 @@ namespace ExChangeParts
         private float _speedStorage;
         
         [SerializeField] private InputActionReference grappleAction;
+
+        [Header("Energy")] [SerializeField]
+        private float energyCost = 25f;
         
         [Header("Audio")]
         [SerializeField] private AudioSource startGrapple;
@@ -52,6 +57,7 @@ namespace ExChangeParts
             pm = GetComponentInParent<MovementRigidbody>();
             _speedStorage = pm.MoveSpeed;
             rb = GetComponentInParent<Rigidbody>();
+            _playerEnergy = PlayerInstance.Instance.GetPlayerEnergy();
         }
     
         private void Update()
@@ -99,7 +105,9 @@ namespace ExChangeParts
 
         private void StartGrapple(InputAction.CallbackContext obj)
         {
+            if(UIManager.Instance.HasActiveElements) return;
             if (grapplingTimer > 0) return;
+            if (!_playerEnergy.Use(energyCost)) return;
             
             grappling = true;
             _freeze = true;
@@ -176,7 +184,6 @@ namespace ExChangeParts
 
         private void OnDisable()
         {
-            Debug.Log("grapple disabled");
             grappleAction.action.Disable();
             grappleAction.action.performed -= StartGrapple;
         }

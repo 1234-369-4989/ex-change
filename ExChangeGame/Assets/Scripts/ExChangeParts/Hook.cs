@@ -9,11 +9,14 @@ namespace ExChangeParts
         protected override void OnEquip()
         {
            grapplingHook.enabled = true;
+           ExchangeSystem.Instance.Aiming = true;
+           Debug.Log("Hook Equipped");
         }
 
         protected override void OnUnequip()
         {
            grapplingHook.enabled = false;
+              ExchangeSystem.Instance.Aiming = false;
         }
     }
 }

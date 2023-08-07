@@ -27,6 +27,7 @@ public class EnemyBehavior : MonoBehaviour
     public LayerMask obstructionMask; //Mask for things the enemy can not see through 
     public LayerMask whatIsPlayer; //Layermask for defining what is the player
     public bool canSeePlayer; //can the enemy see the player
+    private bool _isPlayerDead; //is the player dead?
 
 
     [Header("Patrol Values")] public List<Transform> Waypoints; //List of Patrolpoints
@@ -50,12 +51,15 @@ public class EnemyBehavior : MonoBehaviour
     [SerializeField] private EnemyHealth enemyHealth;
     private BasicHealth _health;
     
+    
 
     private void Awake()
     {
         _health = GetComponent<BasicHealth>();
         _health.OnDeath += OnDeath;
         _health.OnDamage += OnDamage;
+        PlayerInstance.OnPlayerDeath += HandlePlayerDeath;
+        PlayerInstance.OnPlayerRespawn += HandlePlayerRespawn;
     }
 
 
@@ -95,6 +99,11 @@ public class EnemyBehavior : MonoBehaviour
     /// </summary>
     private void FieldOfViewCheck()
     {
+        if (_isPlayerDead)
+        {
+            canSeePlayer = false;
+            return;
+        }
         Collider[] rangeChecks = Physics.OverlapSphere(transform.position, CheckRadius, whatIsPlayer);
 
         if (rangeChecks.Length != 0) //we are only looking for one object, if this does not work look that only the player has the Player Layer
@@ -128,7 +137,7 @@ public class EnemyBehavior : MonoBehaviour
     /// </summary>
     private void setCurrentState()
     {
-        _playerInAttackRange = Physics.CheckSphere(transform.position, CheckRadius / 2, whatIsPlayer);
+        _playerInAttackRange = !_isPlayerDead && Physics.CheckSphere(transform.position, CheckRadius / 2, whatIsPlayer);
 
 
         if (!canSeePlayer && !_playerInAttackRange)
@@ -325,11 +334,32 @@ public class EnemyBehavior : MonoBehaviour
     {
         enemyHealth.UpdateHealthBar(h.Health, h.MaxHealth);
     }
+    
+    private void HandlePlayerRespawn()
+    {
+       SetPlayerDead(false);
+    }
+
+    private void HandlePlayerDeath()
+    {
+        SetPlayerDead(true);
+    }
+    
+    private void SetPlayerDead(bool b)
+    { 
+        _isPlayerDead = b;
+    }
 
     private void OnDisable()
     {
         _agent.enabled = false;
         _health.OnDeath -= OnDeath;
         _health.OnDamage -= OnDamage;
+    }
+
+    private void OnDestroy()
+    {
+        PlayerInstance.OnPlayerDeath -= HandlePlayerDeath;
+        PlayerInstance.OnPlayerRespawn -= HandlePlayerRespawn;
     }
 }

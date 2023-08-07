@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using DefaultNamespace;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class EnergyBar : MonoBehaviour
 {
-    //public BasicEnergy? playerEnergy;
+    private BasicEnergy playerEnergy;
     [SerializeField]
     private Image bar, delayBar;
     [SerializeField]
@@ -18,7 +19,8 @@ public class EnergyBar : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //maxValue = playerEnergy.Energy;
+        playerEnergy = PlayerInstance.Instance.GetPlayerEnergy();
+        maxValue = playerEnergy.Energy;
         value = maxValue;
         delayValue = maxValue;
         lastValue = maxValue;
@@ -33,7 +35,7 @@ public class EnergyBar : MonoBehaviour
 
     private void decreaseGuage()
     {
-        //value = playerEnergy.Energy;
+        value = playerEnergy.Energy;
         valueRatio = value / maxValue;
         bar.fillAmount = valueRatio;
         if (value < delayValue)
