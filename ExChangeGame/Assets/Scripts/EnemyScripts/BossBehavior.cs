@@ -15,6 +15,7 @@ public class BossBehavior : MonoBehaviour
     public float MeleeRange; //minimal radius away from Boss so he can shoot at player
     [SerializeField] private LayerMask whatIsPlayer;
     [SerializeField] private Animator Animator;
+    [SerializeField] private bool Hostile;
 
     [Header("Shooting Variables")]
     [SerializeField] private float timer = 5f;
@@ -23,29 +24,38 @@ public class BossBehavior : MonoBehaviour
     public GameObject EnemyBullet;
     public Transform SpawnPoint;
 
-    [Header("AttackingVariables")]
+    [Header("Attacking Variables")]
     [SerializeField] private float TimeBetweenAttacks;
+    
 
     
     //private variables
     private NavMeshAgent _agent;
     private bool _inAttackRange;
     private bool _inMeleeRange;
-
+    private bool _attacking;
 
 
     // Start is called before the first frame update
     void Start()
     {
         _agent = GetComponent<NavMeshAgent>();
+        Animator = GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        RotateToPoint(Player.transform.position);
-        _inAttackRange = Physics.CheckSphere(transform.position, AttackRadius, whatIsPlayer);
-        _inMeleeRange = Physics.CheckSphere(transform.position, MeleeRange, whatIsPlayer);
+        if (Hostile)
+        {
+            if (!_attacking)
+            {
+                RotateToPoint(Player.transform.position);
+                _inAttackRange = Physics.CheckSphere(transform.position, AttackRadius, whatIsPlayer);
+                _inMeleeRange = Physics.CheckSphere(transform.position, MeleeRange, whatIsPlayer);
+            }
+        }
+      
     }
 
     private void FixedUpdate()
@@ -53,7 +63,7 @@ public class BossBehavior : MonoBehaviour
         if (_inAttackRange)
         {
             if (!_inMeleeRange) _agent.destination = Player.transform.position;
-            RandomizedAttackPattern();
+            else RandomizedAttackPattern();
         }
         else// when completely out of range shoot one last time, then follow player
         {
@@ -62,28 +72,44 @@ public class BossBehavior : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// this attack randomly picks an Integer and attacks depending on the State Machine in the Animator
+    /// </summary>
     private void RandomizedAttackPattern()
     {
         if (Animator.GetInteger("AttackIndex") == 0)
-        { 
+        {
+            Debug.Log("Attacking");
+           _attacking = true;
            Animator.SetInteger("AttackIndex", Random.Range(1,4));
-           if(Animator.GetInteger("AttackIndex") == 3) ShootWithoutWaitTime();
            Debug.Log(Animator.GetInteger("AttackIndex"));
-           Animator.SetTrigger("Attacking");
+           if(Animator.GetInteger("AttackIndex") == 3) ShootWithoutWaitTime();
+           else Animator.SetTrigger("Attacking");
            StartCoroutine(returnToZero(TimeBetweenAttacks));
         }
         
         
     }
 
+    
+    /// <summary>
+    /// this resets all necessary variables after the animation is finished
+    /// </summary>
+    /// <param name="secs"></param>
+    /// <returns></returns>
     IEnumerator returnToZero(float secs)
     {
         yield return new WaitForSeconds(secs);
         Animator.SetInteger("AttackIndex", 0);
+        _attacking = false;
     }
 
 
 
+    /// <summary>
+    /// This method shoots at the Player after a certain time is finished
+    /// </summary>
+    
     private void ShootAfterWaitTime()
     {
         _agent.destination = transform.position;
@@ -101,6 +127,10 @@ public class BossBehavior : MonoBehaviour
         direction.Normalize();
         bulletRigidbody.AddForce(direction * bulletSpeed, ForceMode.Impulse);
     }
+    
+    /// <summary>
+    /// this method shoots at the Player without a "charging up" time
+    /// </summary>
 
     private void ShootWithoutWaitTime()
     {
@@ -120,11 +150,13 @@ public class BossBehavior : MonoBehaviour
     /// <param name="target">target to look at</param>
     private void RotateToPoint(Vector3 target)
     {
-        Vector3 targetDirection = target - transform.position;
-                
-        float SingleStep = _agent.angularSpeed * Time.fixedDeltaTime;
-        Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, SingleStep, 0.0f);
-        newDirection.y = 0;//lock rotation in x-z plane
-        transform.rotation = Quaternion.LookRotation(newDirection); 
+        //find the vector pointing from our position to the target
+        var _direction = (Player.transform.position - transform.position).normalized;
+
+        //create the rotation we need to be in to look at the target
+        var _lookRotation = Quaternion.LookRotation(_direction);
+
+        //rotate us over time according to speed until we are in the required rotation
+        transform.rotation = Quaternion.Slerp(transform.rotation, _lookRotation, Time.deltaTime * (_agent.speed/2));
     }
 }
