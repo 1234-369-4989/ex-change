@@ -211,7 +211,7 @@ public class EnemyBehavior : MonoBehaviour
         Vector3 target = _agent.pathEndPosition;
         Vector3 directionTarget = (target - transform.position).normalized;
         
-        Debug.Log(Vector3.Angle(transform.forward, directionTarget));
+        // Debug.Log(Vector3.Angle(transform.forward, directionTarget));
 
         if (!DefaultRotation)
         {
