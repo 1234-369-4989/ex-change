@@ -71,12 +71,12 @@ public class EnemyBehavior : MonoBehaviour
         Player = PlayerInstance.Instance.transform;
         _currentState = EnemyState.Idle;
         _agent = GetComponent<NavMeshAgent>();
-        _enemyHeight = transform.position.y;
+        _enemyHeight = transform.position.y - _agent.destination.y;
         
         if(!DefaultRotation) _agent.updateRotation = false;
 
-        
-        _agent.updatePosition = false;
+
+        //_agent.updatePosition = false;
 
         StartCoroutine(FOVRoutine());
     }
@@ -165,7 +165,9 @@ public class EnemyBehavior : MonoBehaviour
     /// </summary>
     private void FixedUpdate()
     {
+        Debug.Log(_agent.hasPath);
         setCurrentState();
+        Debug.Log(_currentState);
 
         switch (_currentState)
         {
@@ -207,23 +209,32 @@ public class EnemyBehavior : MonoBehaviour
     private void Patrol()
     {
         float distance = Vector3.Distance(transform.position, Waypoints[currentTarget].position) - _enemyHeight;
+        Debug.Log(distance);
         _agent.destination = Waypoints[currentTarget].position;
+        _enemyHeight = transform.position.y - _agent.destination.y;
+        
         transform.position = Vector3.SmoothDamp(transform.position,
-                new Vector3(_agent.nextPosition.x, 0, _agent.nextPosition.z), ref velocity, 0.3f);
+        new Vector3(_agent.nextPosition.x, 0, _agent.nextPosition.z), ref velocity, 0.3f);
 
         Vector3 target = _agent.pathEndPosition;
         Vector3 directionTarget = (target - transform.position).normalized;
         
-        // Debug.Log(Vector3.Angle(transform.forward, directionTarget));
+        Debug.Log(Vector3.Angle(transform.forward, directionTarget));
 
         if (!DefaultRotation)
         {
             
             if (!IsValueBetween(0f, 5f, Vector3.Angle(transform.forward, directionTarget)))
             {
-                _agent.isStopped = true;//Stop the Agent while Rotating
+                
+                if(Vector3.Angle(transform.forward, directionTarget) < 15f) transform.LookAt(target);
+                else
+                {
+                    _agent.isStopped = true;//Stop the Agent while Rotating
 
-                RotateToPoint(target);
+                    RotateToPoint(target);
+                }
+                
             }
             else
             {
@@ -232,11 +243,12 @@ public class EnemyBehavior : MonoBehaviour
             
         }
         
-        if (IsValueBetween(0.0f, 0.15f, distance) && !_targetReached)
+        if (IsValueBetween(0.0f, 0.5f, distance) && !_targetReached)
             {
             
             
                 _targetReached = true;
+
 
                 if (_reverse == false)
                 {
@@ -270,8 +282,8 @@ public class EnemyBehavior : MonoBehaviour
     {
         Vector3 targetDirection = target - transform.position;
                 
-        float SingleStep = _agent.angularSpeed * Time.fixedDeltaTime;
-        Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, SingleStep, 0.0f);
+        float SingleStep = _agent.angularSpeed * Time.deltaTime;
+        Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, SingleStep, 0.3f);
         transform.rotation = Quaternion.LookRotation(newDirection); 
     }
     
@@ -316,7 +328,7 @@ public class EnemyBehavior : MonoBehaviour
         }
 
         transform.position = Vector3.SmoothDamp(transform.position,
-            new Vector3(_agent.nextPosition.x, 0, _agent.nextPosition.z), ref velocity, 0.3f);
+        new Vector3(_agent.nextPosition.x, 0, _agent.nextPosition.z), ref velocity, 0.3f);
     }
 
 
