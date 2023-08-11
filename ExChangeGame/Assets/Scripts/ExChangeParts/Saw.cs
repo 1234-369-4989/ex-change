@@ -1,7 +1,27 @@
+using UnityEngine;
+
 namespace ExChangeParts
 {
+    [RequireComponent(typeof(Collider))]
     public class Saw : ExchangePart
     {
+        
+        [SerializeField] private float pushForceAway = 1f;
+        [SerializeField] private float pushForceUp = 1f;
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if(!isPlayerPart) return;
+            if (other.CompareTag("Player")) return;
+            if (!other.TryGetComponent(out BasicHealth health)) return;
+            Debug.Log("Saw hit");
+            health.Damage(1);
+            var direction = other.transform.position - transform.position;
+            direction.y = 0;
+            direction.Normalize();
+            other.GetComponent<Rigidbody>().AddForce(direction * pushForceAway + Vector3.up * pushForceUp, ForceMode.VelocityChange);
+        }
+
         protected override void OnEquip()
         {
       
@@ -11,19 +31,5 @@ namespace ExChangeParts
         {
        
         }
-        
-        // void FixedUpdate()
-        // {
-        //     // Bewegung mit dem Character Controller durchführen
-        //     controller.Move(new Vector3(0f, -1f, 0f) * Time.fixedDeltaTime);
-        //
-        //     // Überprüfen, ob das zusätzliche Objekt mit einem anderen Objekt kollidiert
-        //     Collider[] colliders = Physics.OverlapBox(additionalObject.transform.position, additionalObject.transform.localScale / 2f, additionalObject.transform.rotation, LayerMask.GetMask("Walls"));
-        //     if (colliders.Length > 0)
-        //     {
-        //         // Wenn das Objekt mit einem anderen Objekt kollidiert, den Character Controller anhalten
-        //         controller.Move(new Vector3(0f, 1f, 0f) * Time.fixedDeltaTime);
-        //     }
-        // }
     }
 }

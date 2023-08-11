@@ -1,4 +1,5 @@
 using Dialog;
+using ExChangeParts;
 using UI;
 using UnityEngine;
 
@@ -15,9 +16,12 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Vector2 cursorHotspotMain;
     [SerializeField] private Texture2D cursorTextureCrosshair;
     [SerializeField] private Vector2 cursorHotspotCrosshair;
+    [SerializeField] private Canvas _crosshairCanvas;
 
 
     private int _activeElements;
+    
+    public bool HasActiveElements => _activeElements > 0;
     
     public static UIManager Instance { get; private set; }
 
@@ -39,7 +43,6 @@ public class UIManager : MonoBehaviour
     {
         _activeElements = 0;
         CheckMouse();
-        Debug.Log(Cursor.lockState);
     }
 
     private void OnDialogEnded()
@@ -98,15 +101,17 @@ public class UIManager : MonoBehaviour
         // if Mouse is not used and activeElements > 0 -> set Mouse active
         if (_activeElements == 0)
         {
-            Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
             Cursor.SetCursor(cursorTextureCrosshair, cursorHotspotCrosshair, CursorMode.Auto);
+            _crosshairCanvas.enabled = ExchangeSystem.Instance.Aiming;
         }
         else
         {
             Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
+            Cursor.lockState = CursorLockMode.Confined;
             Cursor.SetCursor(cursorTextureMain, cursorHotspotMain, CursorMode.Auto);
+            _crosshairCanvas.enabled = false;
         }
     }
 }

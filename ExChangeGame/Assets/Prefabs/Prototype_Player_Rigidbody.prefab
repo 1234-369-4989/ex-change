@@ -185,7 +185,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 95693983307356974}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.225, z: -3}
+  m_LocalPosition: {x: 2.910383e-11, y: 0.2249999, z: 0.00031638148}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -466,7 +466,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 95693984178291891}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.225, z: -3}
+  m_LocalPosition: {x: 2.910383e-11, y: 0.2249999, z: 0.00031638148}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -653,6 +653,7 @@ GameObject:
   - component: {fileID: 8909006192052784580}
   - component: {fileID: 2531973230262734642}
   - component: {fileID: 3485844511516565281}
+  - component: {fileID: 4444195970762535325}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -809,12 +810,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec996bdaf014b0c43a6cf5532f31db7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CinemachineCameraTarget: {fileID: 95693983900728893}
+  CinemachineCameraTarget: {fileID: 95693983900728892}
   TopClamp: 70
   BottomClamp: -15
   CameraAngleOverride: 0
   LockCameraPosition: 0
   Sensitivity: 0.15
+  _cameraStartRotation: {x: 0, y: 90, z: 0}
   DefaultCamera: {fileID: 95693984178291890}
   DialogCamera: {fileID: 5740719121144179429}
   LowHealthCamera: {fileID: 95693982752581942}
@@ -832,14 +834,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultMoveSpeed: 1.5
   defaultSprintSpeed: 5
+  defaultSprintEnergyCost: 10
   rotationSmoothTime: 0.12
   speedChangeRate: 10
   jumpTimeout: 0.2
+  jumpEnergyCost: 20
   floatHeight: 0.6
   floatStrength: 11
   floatFallDecelaration: 1.2
   floatFallDecelarationHeight: 0.5
   floatForceMode: 2
+  floatEnergyCost: 10
   isGrounded: 1
   groundedOffset: -0.16
   groundedRadius: 0.2
@@ -943,6 +948,22 @@ MonoBehaviour:
   damageAudioSource: {fileID: 7586728913039694064}
   deathAudioSource: {fileID: 3147082719260709474}
   deathEffect: {fileID: 8421303983555655458}
+--- !u!114 &4444195970762535325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 95693984416333213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b5eebc35fde467b89d9be06cf01a42d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Energy>k__BackingField: 0
+  <MaxEnergy>k__BackingField: 0
+  energyRecoveryRate: 1
+  energyRecoveryDelay: 1
 --- !u!1 &453778594996113729
 GameObject:
   m_ObjectHideFlags: 0
@@ -1178,8 +1199,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1832631270490808834}
-  m_LocalRotation: {x: 0.115133464, y: 0.13890582, z: -0.016261749, w: 0.98345566}
-  m_LocalPosition: {x: -0.49, y: 0.645, z: -1.7}
+  m_LocalRotation: {x: 0.11513351, y: 0.13890584, z: -0.016261755, w: 0.98345566}
+  m_LocalPosition: {x: -0.49, y: 0.645, z: -1.6999998}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3464,6 +3485,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8170361720632344611}
     m_Modifications:
+    - target: {fileID: 7946868181828040965, guid: 03331c56953c895468a1bdac425b6d40,
+        type: 3}
+      propertyPath: isPlayerPart
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8373259066603311010, guid: 03331c56953c895468a1bdac425b6d40,
         type: 3}
       propertyPath: m_RootOrder
