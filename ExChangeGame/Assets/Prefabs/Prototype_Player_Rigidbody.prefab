@@ -962,7 +962,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Energy>k__BackingField: 100
   <MaxEnergy>k__BackingField: 100
-  energyRecoveryRate: 1
+  energyRecoveryRate: 10
   energyRecoveryDelay: 1
 --- !u!1 &453778594996113729
 GameObject:

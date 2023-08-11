@@ -50,7 +50,6 @@ public class Respawner : MonoBehaviour
         var playerTransform = player.transform;
         playerTransform.GetChild(0).gameObject.SetActive(false);
         player.PlayerMovement.CanMove = false;
-        _audioSource.Play();
         Overlay.Instance.FadeIn(fadeTime);
         yield return _waitforFade;
         player.transform.position = transform.position + spawnPoint;
@@ -59,6 +58,7 @@ public class Respawner : MonoBehaviour
         yield return _waitforFade;
         player.PlayerMovement.CanMove = true;
         player.Respawn();
+        _audioSource.Play();
     }
 
     private void OnTriggerEnter(Collider other)

@@ -49,6 +49,9 @@ public class EnemyBehavior : MonoBehaviour
     
     [Header("Health")]
     [SerializeField] private EnemyHealth enemyHealth;
+    [SerializeField] private AudioSource deathAudioSource;
+    [SerializeField] private GameObject deathEffect;
+    [SerializeField] private GameObject graphics;
     private BasicHealth _health;
     
     
@@ -327,8 +330,20 @@ public class EnemyBehavior : MonoBehaviour
 
     protected virtual void OnDeath(BasicHealth h)
     {
-        
+        StartCoroutine(DeathCoroutine());
     }
+    
+    
+    private IEnumerator DeathCoroutine()
+    {
+        deathEffect.SetActive(true);
+        this.enabled = false;
+        graphics.SetActive(false);
+        deathAudioSource.Play();
+        yield return new WaitForSeconds(2f);
+       gameObject.SetActive(false);
+    }
+
     
     protected virtual void OnDamage(BasicHealth h)
     {

@@ -24,6 +24,5 @@ public class SawEnemyBehavior : EnemyBehavior
     {
         base.OnDeath(h);
         idleSound.Stop();
-        deathSound.Play();
     }
 }

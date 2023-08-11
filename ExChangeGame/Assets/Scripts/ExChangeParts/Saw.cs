@@ -8,11 +8,13 @@ namespace ExChangeParts
         
         [SerializeField] private float pushForceAway = 1f;
         [SerializeField] private float pushForceUp = 1f;
+        [SerializeField] private AudioSource audioSource;
 
         private void OnTriggerEnter(Collider other)
         {
             if(!isPlayerPart) return;
             if (other.CompareTag("Player")) return;
+            audioSource.Play();
             if (!other.TryGetComponent(out BasicHealth health)) return;
             Debug.Log("Saw hit");
             health.Damage(1);
