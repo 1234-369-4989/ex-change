@@ -200,6 +200,7 @@ MonoBehaviour:
   <AudioSource>k__BackingField: {fileID: 637313886036013464}
   isDialogActive: 1
   justOnce: 0
+  delay: 1
 --- !u!1 &8976695779833330189
 GameObject:
   m_ObjectHideFlags: 0
@@ -420,22 +421,22 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 6d7680a0b90561d43b596a0d5e80c59d, type: 2}
+      objectReference: {fileID: 2100000, guid: f55e3af629756d74e82779fb0b5fdcfb, type: 2}
     - target: {fileID: 6259867220797470746, guid: 928cef4df52359746a59890a26e8e209,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 6d7680a0b90561d43b596a0d5e80c59d, type: 2}
+      objectReference: {fileID: 2100000, guid: f55e3af629756d74e82779fb0b5fdcfb, type: 2}
     - target: {fileID: 7591660347651642627, guid: 928cef4df52359746a59890a26e8e209,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 6d7680a0b90561d43b596a0d5e80c59d, type: 2}
+      objectReference: {fileID: 2100000, guid: f55e3af629756d74e82779fb0b5fdcfb, type: 2}
     - target: {fileID: 7593417714351236688, guid: 928cef4df52359746a59890a26e8e209,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 6d7680a0b90561d43b596a0d5e80c59d, type: 2}
+      objectReference: {fileID: 2100000, guid: f55e3af629756d74e82779fb0b5fdcfb, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 928cef4df52359746a59890a26e8e209, type: 3}
 --- !u!1 &177626143984588738 stripped
