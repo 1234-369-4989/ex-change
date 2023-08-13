@@ -106,15 +106,15 @@ NavMeshSettings:
   m_BuildSettings:
     serializedVersion: 2
     agentTypeID: 0
-    agentRadius: 0.3
-    agentHeight: 1
-    agentSlope: 13.4
+    agentRadius: 0.25
+    agentHeight: 0.5
+    agentSlope: 10
     agentClimb: 0.3
     ledgeDropHeight: 0
     maxJumpAcrossDistance: 0
     minRegionArea: 2
     manualCellSize: 0
-    cellSize: 0.1
+    cellSize: 0.083333336
     manualTileSize: 0
     tileSize: 256
     accuratePlacement: 0
@@ -31756,6 +31756,11 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
+    - target: {fileID: 2286652700988875012, guid: 90e57765ea514fe4e9ae4d5c476b7795,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -8.29
+      objectReference: {fileID: 0}
     - target: {fileID: 2289575222893186817, guid: 90e57765ea514fe4e9ae4d5c476b7795,
         type: 3}
       propertyPath: m_StaticEditorFlags
@@ -33396,6 +33401,16 @@ PrefabInstance:
       propertyPath: whatIsPlayer.m_Bits
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3876929494927475989, guid: 90e57765ea514fe4e9ae4d5c476b7795,
+        type: 3}
+      propertyPath: m_BaseOffset
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3876929495041513814, guid: 90e57765ea514fe4e9ae4d5c476b7795,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3876929495165034803, guid: 90e57765ea514fe4e9ae4d5c476b7795,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -33690,6 +33705,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 4100321961027637856, guid: 90e57765ea514fe4e9ae4d5c476b7795,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 6.32
       objectReference: {fileID: 0}
     - target: {fileID: 4100501458604793947, guid: 90e57765ea514fe4e9ae4d5c476b7795,
         type: 3}
@@ -34604,7 +34624,17 @@ PrefabInstance:
     - target: {fileID: 5023944999344795509, guid: 90e57765ea514fe4e9ae4d5c476b7795,
         type: 3}
       propertyPath: m_BaseOffset
-      value: 1.55
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5023944999344795509, guid: 90e57765ea514fe4e9ae4d5c476b7795,
+        type: 3}
+      propertyPath: m_StoppingDistance
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5023944999566832438, guid: 90e57765ea514fe4e9ae4d5c476b7795,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5026971114156927743, guid: 90e57765ea514fe4e9ae4d5c476b7795,
         type: 3}
@@ -35521,6 +35551,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5785241706760708058, guid: 90e57765ea514fe4e9ae4d5c476b7795,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5785241707316649526, guid: 90e57765ea514fe4e9ae4d5c476b7795,
+        type: 3}
+      propertyPath: m_StoppingDistance
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5785241707316649527, guid: 90e57765ea514fe4e9ae4d5c476b7795,
+        type: 3}
+      propertyPath: whatIsPlayer.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
+    - target: {fileID: 5785241707316649527, guid: 90e57765ea514fe4e9ae4d5c476b7795,
+        type: 3}
+      propertyPath: obstructionMask.m_Bits
+      value: 7169
       objectReference: {fileID: 0}
     - target: {fileID: 5795826160213179267, guid: 90e57765ea514fe4e9ae4d5c476b7795,
         type: 3}
@@ -36528,10 +36578,55 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0.023
       objectReference: {fileID: 0}
+    - target: {fileID: 6763827115181809246, guid: 90e57765ea514fe4e9ae4d5c476b7795,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6763827115638661041, guid: 90e57765ea514fe4e9ae4d5c476b7795,
         type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6763827115638661042, guid: 90e57765ea514fe4e9ae4d5c476b7795,
+        type: 3}
+      propertyPath: m_AutoBraking
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6763827115638661042, guid: 90e57765ea514fe4e9ae4d5c476b7795,
+        type: 3}
+      propertyPath: m_WalkableMask
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6763827115638661042, guid: 90e57765ea514fe4e9ae4d5c476b7795,
+        type: 3}
+      propertyPath: m_StoppingDistance
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6763827115638661042, guid: 90e57765ea514fe4e9ae4d5c476b7795,
+        type: 3}
+      propertyPath: m_ObstacleAvoidanceType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6763827115638661043, guid: 90e57765ea514fe4e9ae4d5c476b7795,
+        type: 3}
+      propertyPath: CheckRadius
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6763827115638661043, guid: 90e57765ea514fe4e9ae4d5c476b7795,
+        type: 3}
+      propertyPath: DefaultRotation
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6763827115638661043, guid: 90e57765ea514fe4e9ae4d5c476b7795,
+        type: 3}
+      propertyPath: whatIsPlayer.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
+    - target: {fileID: 6763827115638661043, guid: 90e57765ea514fe4e9ae4d5c476b7795,
+        type: 3}
+      propertyPath: obstructionMask.m_Bits
+      value: 7169
       objectReference: {fileID: 0}
     - target: {fileID: 6763843139396213219, guid: 90e57765ea514fe4e9ae4d5c476b7795,
         type: 3}
@@ -43977,6 +44072,36 @@ PrefabInstance:
         type: 3}
       propertyPath: m_VersionIndex
       value: 222
+      objectReference: {fileID: 0}
+    - target: {fileID: 8986283414973810940, guid: 06ec0c4ef51b7774a8e5835b2f2505db,
+        type: 3}
+      propertyPath: whatIsPlayer.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
+    - target: {fileID: 8986283414973810940, guid: 06ec0c4ef51b7774a8e5835b2f2505db,
+        type: 3}
+      propertyPath: obstructionMask.m_Bits
+      value: 7169
+      objectReference: {fileID: 0}
+    - target: {fileID: 8986283414973810941, guid: 06ec0c4ef51b7774a8e5835b2f2505db,
+        type: 3}
+      propertyPath: m_AutoRepath
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8986283414973810941, guid: 06ec0c4ef51b7774a8e5835b2f2505db,
+        type: 3}
+      propertyPath: m_WalkableMask
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8986283414973810941, guid: 06ec0c4ef51b7774a8e5835b2f2505db,
+        type: 3}
+      propertyPath: m_ObstacleAvoidanceType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8986283415756245265, guid: 06ec0c4ef51b7774a8e5835b2f2505db,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8986283416427343298, guid: 06ec0c4ef51b7774a8e5835b2f2505db,
         type: 3}
