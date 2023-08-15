@@ -1468,7 +1468,7 @@ MonoBehaviour:
     m_Bits: 1
   whatIsPlayer:
     serializedVersion: 2
-    m_Bits: 7232
+    m_Bits: 64
   canSeePlayer: 0
   Waypoints:
   - {fileID: 0}

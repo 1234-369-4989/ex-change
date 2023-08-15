@@ -165,9 +165,7 @@ public class EnemyBehavior : MonoBehaviour
     /// </summary>
     private void FixedUpdate()
     {
-        Debug.Log(_agent.hasPath);
         setCurrentState();
-        Debug.Log(_currentState);
 
         switch (_currentState)
         {
@@ -209,7 +207,6 @@ public class EnemyBehavior : MonoBehaviour
     private void Patrol()
     {
         float distance = Vector3.Distance(transform.position, Waypoints[currentTarget].position) - _enemyHeight;
-        Debug.Log(distance);
         _agent.destination = Waypoints[currentTarget].position;
         _enemyHeight = transform.position.y - _agent.destination.y;
         
@@ -218,8 +215,6 @@ public class EnemyBehavior : MonoBehaviour
 
         Vector3 target = _agent.pathEndPosition;
         Vector3 directionTarget = (target - transform.position).normalized;
-        
-        Debug.Log(Vector3.Angle(transform.forward, directionTarget));
 
         if (!DefaultRotation)
         {
