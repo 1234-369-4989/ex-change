@@ -78,7 +78,7 @@ namespace Environment
             if (col)
             {
                 var player = PlayerInstance.Instance;
-                if (col.bounds.Contains(player.transform.position))
+                if (player && col.bounds.Contains(player.transform.position))
                     {
                         _animator.SetBool(Open, true);
                         openCloseAudioSource.Play();

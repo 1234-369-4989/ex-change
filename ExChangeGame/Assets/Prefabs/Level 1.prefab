@@ -828,7 +828,7 @@ Transform:
   m_Children:
   - {fileID: 2716792023708720751}
   m_Father: {fileID: 6739335749325886720}
-  m_RootOrder: 6
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4044049623531985339
 GameObject:
@@ -1983,6 +1983,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3534048735420855591, guid: 9d1c9ebeaf3c83e46a2935d39694dc95,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 5126a7700f830f348bdbb623ca509275, type: 3}
     - target: {fileID: 6550650597034272694, guid: 9d1c9ebeaf3c83e46a2935d39694dc95,
         type: 3}
       propertyPath: m_Name
@@ -3147,6 +3152,11 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 4975634286355668307, guid: c367e78e733c45b4e9ddca4f50f6bfe3,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: b39e4abaec960944f8d65eb6f04b3ab3, type: 3}
     - target: {fileID: 6492677338061563112, guid: c367e78e733c45b4e9ddca4f50f6bfe3,
         type: 3}
       propertyPath: m_RootOrder
@@ -4949,25 +4959,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7594159386220402567, guid: 6647f76f055d1ae43a29ce0eb7176369,
-        type: 3}
-      propertyPath: m_Size.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7594159386220402567, guid: 6647f76f055d1ae43a29ce0eb7176369,
-        type: 3}
-      propertyPath: m_IsTrigger
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8482509692135000072, guid: 6647f76f055d1ae43a29ce0eb7176369,
         type: 3}
       propertyPath: m_Name
       value: door V1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9166563167732809148, guid: 6647f76f055d1ae43a29ce0eb7176369,
-        type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6647f76f055d1ae43a29ce0eb7176369, type: 3}
@@ -5888,6 +5883,10 @@ PrefabInstance:
       propertyPath: isActivated
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2061455146, guid: bf1f0ba962882b04db22f5c86fffa7af, type: 3}
+      propertyPath: swapRenderers.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2061455147, guid: bf1f0ba962882b04db22f5c86fffa7af, type: 3}
       propertyPath: m_Size.x
       value: 0.2
@@ -5951,10 +5950,40 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5762586348668538978, guid: bf1f0ba962882b04db22f5c86fffa7af,
+        type: 3}
+      propertyPath: MaxDistance
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 5762586348668538978, guid: bf1f0ba962882b04db22f5c86fffa7af,
+        type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6227706840894111730, guid: bf1f0ba962882b04db22f5c86fffa7af,
         type: 3}
       propertyPath: m_Name
       value: door V3 smal
+      objectReference: {fileID: 0}
+    - target: {fileID: 7242566872668109091, guid: bf1f0ba962882b04db22f5c86fffa7af,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057795005372460318, guid: bf1f0ba962882b04db22f5c86fffa7af,
+        type: 3}
+      propertyPath: MaxDistance
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057795005372460318, guid: bf1f0ba962882b04db22f5c86fffa7af,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 5126a7700f830f348bdbb623ca509275, type: 3}
+    - target: {fileID: 9057795005372460318, guid: bf1f0ba962882b04db22f5c86fffa7af,
+        type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bf1f0ba962882b04db22f5c86fffa7af, type: 3}
