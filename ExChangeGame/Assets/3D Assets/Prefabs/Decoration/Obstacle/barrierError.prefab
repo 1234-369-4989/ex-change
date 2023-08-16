@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2001954133120044949}
   - component: {fileID: 3199672536492261424}
   - component: {fileID: 829632589464679674}
+  - component: {fileID: 4853409046635113651}
   m_Layer: 0
   m_Name: barrierError
   m_TagString: Untagged
@@ -84,3 +85,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &4853409046635113651
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1189950865722479919}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.36, y: 0.099999994, z: 0.36}
+  m_Center: {x: 0, y: 0.049999997, z: 0}
