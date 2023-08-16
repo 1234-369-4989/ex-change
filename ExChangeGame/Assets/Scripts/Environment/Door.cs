@@ -79,12 +79,13 @@ namespace Environment
             {
                 var player = PlayerInstance.Instance;
                 if (player && col.bounds.Contains(player.transform.position))
-                    {
-                        _animator.SetBool(Open, true);
-                        openCloseAudioSource.Play();
-                        SwapColors(State.Active);
-                    }
+                {
+                    _animator.SetBool(Open, true);
+                    openCloseAudioSource.Play();
+                    SwapColors(State.Active);
+                }
             }
+
             minimapIcon.SetActive(!value);
         }
 
@@ -99,6 +100,7 @@ namespace Environment
                 accessDeniedAudioSource.Play();
                 return;
             }
+
             Debug.Log("Door Trigger Enter");
             _animator.SetBool(Open, true);
             openCloseAudioSource.Play();

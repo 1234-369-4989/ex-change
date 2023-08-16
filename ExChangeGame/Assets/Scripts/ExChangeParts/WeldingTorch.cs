@@ -69,12 +69,14 @@ namespace ExChangeParts
         protected override void OnEquip()
         {
             canRepair = true;
+            UIControlls.Instance.setRepairActiveTrue();
             input.actions["Repair"].performed += OnRepair;
         }
 
         protected override void OnUnequip()
         {
            canRepair = false; 
+           UIControlls.Instance.setRepairActiveFalse();
            input.actions["Repair"].performed -= OnRepair;
         }
         

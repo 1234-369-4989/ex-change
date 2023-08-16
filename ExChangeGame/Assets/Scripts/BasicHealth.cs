@@ -12,6 +12,7 @@ public int MaxHealth => maxHealth;
 public event Action<BasicHealth> OnDamage;
 public event Action<BasicHealth> OnDeath;
 
+
 public void Damage(int amount)
 {
     Health -= amount;

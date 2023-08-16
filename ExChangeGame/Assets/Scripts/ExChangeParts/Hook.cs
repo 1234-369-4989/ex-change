@@ -6,17 +6,20 @@ namespace ExChangeParts
     public class Hook : ExchangePart
     {
         [SerializeField] private GrapplingHook grapplingHook;
+
         protected override void OnEquip()
         {
-           grapplingHook.enabled = true;
-           ExchangeSystem.Instance.Aiming = true;
-           Debug.Log("Hook Equipped");
+            grapplingHook.enabled = true;
+            ExchangeSystem.Instance.Aiming = true;
+            UIControlls.Instance.setShootActiveTrue();
+            Debug.Log("Hook Equipped");
         }
 
         protected override void OnUnequip()
         {
-           grapplingHook.enabled = false;
-              ExchangeSystem.Instance.Aiming = false;
+            grapplingHook.enabled = false;
+            UIControlls.Instance.setShootActiveFalse();
+            ExchangeSystem.Instance.Aiming = false;
         }
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -9,6 +10,19 @@ public class UIControlls : MonoBehaviour
     [SerializeField] private TextMeshProUGUI repair;
     [SerializeField] private TextMeshProUGUI shoot;
     
+    public static UIControlls Instance { get; private set; }
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        } else if (Instance != null)
+        {
+            Destroy(gameObject);
+        }
+    }
+
     void Start()
     {
         setAllControllsActiveFalse();
