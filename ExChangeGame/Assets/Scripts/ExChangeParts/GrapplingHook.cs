@@ -2,6 +2,7 @@ using DefaultNamespace;
 using Movement;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 namespace ExChangeParts
 {
@@ -13,7 +14,8 @@ namespace ExChangeParts
         public Transform camera;
         public Transform gunTip;
         public LayerMask whatIsGrappable;
-        public LineRenderer lr;
+        [FormerlySerializedAs("lr")] public LineRenderer lr_Left;
+        public LineRenderer lr_Right;
         public Rigidbody rb;
         private BasicEnergy _playerEnergy;
 
@@ -99,7 +101,8 @@ namespace ExChangeParts
         {
             if (grappling)
             {
-                lr.SetPosition(0,gunTip.position);
+                lr_Left.SetPosition(0,gunTip.position);
+                lr_Right.SetPosition(0,gunTip.position);
             }
         }
 
@@ -128,8 +131,10 @@ namespace ExChangeParts
                 Invoke(nameof(StopGrapple), grappleDelayTime);
             }
 
-            lr.enabled = true;
-            lr.SetPosition(1, grapplePoint);
+            lr_Left.enabled = true;
+            lr_Left.SetPosition(1, grapplePoint);
+            lr_Right.enabled = true;
+            lr_Right.SetPosition(1, grapplePoint);
 
         }
 
@@ -141,7 +146,8 @@ namespace ExChangeParts
             
                 grapplingTimer = grapplingCd;
 
-            lr.enabled = false;
+            lr_Left.enabled = false;
+            lr_Right.enabled = false;
         }
 
         private void JumpToPosition(Vector3 targetPosition, float trajectoryHeight)

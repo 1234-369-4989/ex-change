@@ -279,6 +279,7 @@ public class EnemyBehavior : MonoBehaviour
                 
         float SingleStep = _agent.angularSpeed * Time.deltaTime;
         Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, SingleStep, 0.3f);
+        newDirection.y = 0;
         transform.rotation = Quaternion.LookRotation(newDirection); 
     }
     

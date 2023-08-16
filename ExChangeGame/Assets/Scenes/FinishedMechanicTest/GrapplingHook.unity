@@ -477,8 +477,18 @@ PrefabInstance:
       objectReference: {fileID: 1531888338}
     - target: {fileID: 4191998390171495782, guid: d2a3de1e2b47de6408c0f0f42a74630a,
         type: 3}
+      propertyPath: lr_Right
+      value: 
+      objectReference: {fileID: 2042980039}
+    - target: {fileID: 4191998390171495782, guid: d2a3de1e2b47de6408c0f0f42a74630a,
+        type: 3}
       propertyPath: whatIsGrappable.m_Bits
       value: 1025
+      objectReference: {fileID: 0}
+    - target: {fileID: 4904677212681274710, guid: d2a3de1e2b47de6408c0f0f42a74630a,
+        type: 3}
+      propertyPath: m_Name
+      value: GunTip_Right
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d2a3de1e2b47de6408c0f0f42a74630a, type: 3}
@@ -615,6 +625,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &949537285
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 949537286}
+  m_Layer: 0
+  m_Name: GunTip_Left
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &949537286
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 949537285}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.1637, y: 0.0456, z: 0.156}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2042980038}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1004226407
 GameObject:
@@ -1327,6 +1368,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &2042980038 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2622098407322271385, guid: d2a3de1e2b47de6408c0f0f42a74630a,
+    type: 3}
+  m_PrefabInstance: {fileID: 349167299}
+  m_PrefabAsset: {fileID: 0}
+--- !u!120 &2042980039 stripped
+LineRenderer:
+  m_CorrespondingSourceObject: {fileID: 7713315543599158825, guid: d2a3de1e2b47de6408c0f0f42a74630a,
+    type: 3}
+  m_PrefabInstance: {fileID: 349167299}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3460251872194752840
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1404,15 +1457,20 @@ PrefabInstance:
       propertyPath: m_Name
       value: FlyEnemy
       objectReference: {fileID: 0}
-    - target: {fileID: 3460251873364119722, guid: da13cac2f5fdb1843b5e69519ce2c36e,
+    - target: {fileID: 3460251872145402063, guid: da13cac2f5fdb1843b5e69519ce2c36e,
         type: 3}
-      propertyPath: m_AnchorMax.x
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3460251873364119722, guid: da13cac2f5fdb1843b5e69519ce2c36e,
         type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3460251873364119722, guid: da13cac2f5fdb1843b5e69519ce2c36e,
+        type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: da13cac2f5fdb1843b5e69519ce2c36e, type: 3}
@@ -1520,12 +1578,12 @@ PrefabInstance:
     - target: {fileID: 6418538157935366319, guid: 04e33b2cfd20f234ea36ef3678a54062,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6418538157935366319, guid: 04e33b2cfd20f234ea36ef3678a54062,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6418538158830007697, guid: 04e33b2cfd20f234ea36ef3678a54062,
         type: 3}
@@ -1596,6 +1654,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SawEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 6418538159411770492, guid: 04e33b2cfd20f234ea36ef3678a54062,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 04e33b2cfd20f234ea36ef3678a54062, type: 3}
