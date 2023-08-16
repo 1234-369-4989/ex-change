@@ -73,18 +73,35 @@ namespace Environment
             isActivated = value;
             SwapColors(value ? State.Standby : State.Inactive);
             _closeCollider.enabled = !value;
+            var col = GetComponent<CapsuleCollider>();
+            // check if player tag is inside of collider
+            if (col)
+            {
+                var player = PlayerInstance.Instance;
+                if (player && col.bounds.Contains(player.transform.position))
+                {
+                    _animator.SetBool(Open, true);
+                    openCloseAudioSource.Play();
+                    SwapColors(State.Active);
+                }
+            }
+
             minimapIcon.SetActive(!value);
         }
 
 
         private void OnTriggerEnter(Collider other)
         {
-            if (!CompareTag("Player")) return;
+            Debug.Log("Door Trigger Enter");
+            if (!other.CompareTag("Player")) return;
+            Debug.Log("Door Trigger Enter");
             if (!isActivated)
             {
                 accessDeniedAudioSource.Play();
                 return;
             }
+
+            Debug.Log("Door Trigger Enter");
             _animator.SetBool(Open, true);
             openCloseAudioSource.Play();
             SwapColors(State.Active);

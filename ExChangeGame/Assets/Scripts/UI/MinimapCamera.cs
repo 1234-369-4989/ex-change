@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class MinimapCamera : MonoBehaviour
@@ -12,6 +14,9 @@ public class MinimapCamera : MonoBehaviour
     private float height2to3 = -4;
     private int nowLevel;
     private Camera mapCamera;
+    
+    
+    public static event Action<int> OnOnLevelChange;
 
     // Start is called before the first frame update
     void Start()
@@ -44,6 +49,7 @@ public class MinimapCamera : MonoBehaviour
             mapCamera.cullingMask |= 1 << LayerMask.NameToLayer("Level3Icon");
             mapCamera.cullingMask |= 1 << LayerMask.NameToLayer("Minimap");
             nowLevel = 3;
+            OnOnLevelChange?.Invoke(3);
         }
         else if (height2to3 <Player.transform.position.y && Player.transform.position.y < height1to2 && nowLevel != 2)
         {
@@ -51,6 +57,7 @@ public class MinimapCamera : MonoBehaviour
             mapCamera.cullingMask |= 1 << LayerMask.NameToLayer("Level2Icon");
             mapCamera.cullingMask |= 1 << LayerMask.NameToLayer("Minimap");
             nowLevel = 2;
+            OnOnLevelChange?.Invoke(2);
         }
         else if (Player.transform.position.y > height1to2  && nowLevel != 1)
         {
@@ -58,6 +65,7 @@ public class MinimapCamera : MonoBehaviour
             mapCamera.cullingMask |= 1 << LayerMask.NameToLayer("Level1Icon");
             mapCamera.cullingMask |= 1 << LayerMask.NameToLayer("Minimap");
             nowLevel = 1;
+            OnOnLevelChange?.Invoke(1);
         }
     }
 }

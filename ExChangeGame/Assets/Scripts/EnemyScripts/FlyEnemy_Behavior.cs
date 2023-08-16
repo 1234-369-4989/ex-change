@@ -16,7 +16,8 @@ public class FlyEnemy_Behavior : EnemyBehavior
     [Header("Audio")]
     [SerializeField] private AudioSource hoverSound;
     [SerializeField] private AudioSource shootSound;
-
+    
+    
     /// <summary>
     /// As an Attack the robot "charges up" a shot then shoots at the player an instance of the Gameobject "Bullet"
     /// </summary>
@@ -54,5 +55,11 @@ public class FlyEnemy_Behavior : EnemyBehavior
     {
         base.OnDeath(h);
         hoverSound.Stop();
+    }
+
+    protected override void HandleLevelChange(int floor)
+    {
+        base.HandleLevelChange(floor);
+        hoverSound.mute = floor != floorLayer;
     }
 }
