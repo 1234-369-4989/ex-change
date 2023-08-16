@@ -54,6 +54,9 @@ public class EnemyBehavior : MonoBehaviour
     [SerializeField] private GameObject graphics;
     private BasicHealth _health;
     
+    [Header("WorldSettings")]
+    [SerializeField] protected int floorLayer;
+    
     
 
     private void Awake()
@@ -63,6 +66,11 @@ public class EnemyBehavior : MonoBehaviour
         _health.OnDamage += OnDamage;
         PlayerInstance.OnPlayerDeath += HandlePlayerDeath;
         PlayerInstance.OnPlayerRespawn += HandlePlayerRespawn;
+        MinimapCamera.OnOnLevelChange += HandleLevelChange;
+    }
+
+    protected virtual void HandleLevelChange(int floor)
+    {
     }
 
 
@@ -384,5 +392,6 @@ public class EnemyBehavior : MonoBehaviour
     {
         PlayerInstance.OnPlayerDeath -= HandlePlayerDeath;
         PlayerInstance.OnPlayerRespawn -= HandlePlayerRespawn;
+        MinimapCamera.OnOnLevelChange -= HandleLevelChange;
     }
 }
