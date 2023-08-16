@@ -11,8 +11,7 @@ namespace Environment
     public class Door : Activatable
     {
         private Animator _animator;
-        [Header("Audio")]
-        [SerializeField] private AudioSource openCloseAudioSource;
+        [Header("Audio")] [SerializeField] private AudioSource openCloseAudioSource;
         [SerializeField] private AudioSource accessDeniedAudioSource;
         private static readonly int Open = Animator.StringToHash("Open");
 
@@ -80,17 +79,15 @@ namespace Environment
 
         private void OnTriggerEnter(Collider other)
         {
+            if (!CompareTag("Player")) return;
             if (!isActivated)
             {
                 accessDeniedAudioSource.Play();
                 return;
             }
-            if (other.CompareTag("Player"))
-            {
-                _animator.SetBool(Open, true);
-                openCloseAudioSource.Play();
-                SwapColors(State.Active);
-            }
+            _animator.SetBool(Open, true);
+            openCloseAudioSource.Play();
+            SwapColors(State.Active);
         }
 
         private void OnTriggerExit(Collider other)
@@ -99,6 +96,7 @@ namespace Environment
             {
                 return;
             }
+
             if (other.CompareTag("Player"))
             {
                 _animator.SetBool(Open, false);
@@ -161,7 +159,6 @@ namespace Environment
         {
             foreach (var r in swapRenderers)
             {
-                
                 var materials = r.materials;
                 for (var i = 0; i < materials.Length; i++)
                 {

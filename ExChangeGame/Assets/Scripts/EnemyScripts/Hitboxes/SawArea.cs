@@ -23,8 +23,8 @@ public class SawArea : MonoBehaviour
        /// <param name="other"></param>
        private void OnTriggerEnter(Collider other)
        {
-           Debug.Log("Player Hit");
            if (!other.TryGetComponent<BasicHealth>(out var health)) return;
+           Debug.Log("Saw Hit", other.gameObject);
            health.Damage(Damage);
            _audioSource.Play();
            Debug.Log(health);
