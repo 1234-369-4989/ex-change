@@ -406,10 +406,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1931754d31205044aab9cfcbb3d81eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AttackDist: 2
-  MinDist: 5
+  AttackDist: 4
+  MinDist: 8
   angle: 90
-  CheckRadius: 5
+  CheckRadius: 10
   obstructionMask:
     serializedVersion: 2
     m_Bits: 7169
@@ -427,7 +427,7 @@ MonoBehaviour:
   deathAudioSource: {fileID: 6558556322458294741}
   deathEffect: {fileID: 2341346430167383660}
   graphics: {fileID: 3460251872443178419}
-  timer: 3
+  timer: 1.5
   bulletSpeed: 15
   offSet: {x: 0, y: 0.2, z: 0}
   EnemyBullet: {fileID: 4516485619991750221, guid: f03bc413b7ad0934f972254bee9070b7,
