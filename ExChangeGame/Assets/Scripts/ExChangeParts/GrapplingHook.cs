@@ -12,7 +12,6 @@ namespace ExChangeParts
         [Header("References")]
         private MovementRigidbody pm;
         public Transform camera;
-        public Transform gunTip;
         public LayerMask whatIsGrappable;
         [FormerlySerializedAs("lr")] public LineRenderer lr_Left;
         public LineRenderer lr_Right;
@@ -41,8 +40,10 @@ namespace ExChangeParts
         
         [SerializeField] private InputActionReference grappleAction;
 
-        [Header("Energy")] [SerializeField]
+        [Header("Energy & Damage")] [SerializeField]
         private float energyCost = 25f;
+        [SerializeField] private int damage = 1;
+        
         
         [Header("Audio")]
         [SerializeField] private AudioSource startGrapple;
@@ -101,13 +102,14 @@ namespace ExChangeParts
         {
             if (grappling)
             {
-                lr_Left.SetPosition(0,gunTip.position);
-                lr_Right.SetPosition(0,gunTip.position);
+                lr_Left.SetPosition(0,lr_Left.transform.position);
+                lr_Right.SetPosition(0,lr_Right.transform.position);
             }
         }
 
         private void StartGrapple(InputAction.CallbackContext obj)
         {
+            Debug.Log("Start Grapple");
             if(UIManager.Instance.HasActiveElements) return;
             if (grapplingTimer > 0) return;
             if (!_playerEnergy.Use(energyCost)) return;
@@ -122,12 +124,15 @@ namespace ExChangeParts
             {
                 grapplePoint = hit.point;
                 _isGrappable = true;
+                Debug.Log("Collider hit" , hit.collider);
+                MakeDamage(hit.collider);
                 Invoke(nameof(ExecuteGrapple), grappleDelayTime);
             }
             else
             {
                 grapplePoint = camera.position + camera.forward * maxGrappleDistance;
                 _isGrappable = false;
+                Debug.Log("No Collider hit");
                 Invoke(nameof(StopGrapple), grappleDelayTime);
             }
 
@@ -138,8 +143,17 @@ namespace ExChangeParts
 
         }
 
+        private void MakeDamage(Collider raycastHit)
+        {
+            if (raycastHit.TryGetComponent(out BasicHealth health))
+            {
+                health.Damage(damage);
+            }
+        }
+
         private void StopGrapple()
         {
+            Debug.Log("Stop Grapple");
             _freeze = false;
             grappling = false;
             _isGrappable = false;

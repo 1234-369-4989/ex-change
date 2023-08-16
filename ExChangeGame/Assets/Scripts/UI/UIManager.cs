@@ -48,18 +48,21 @@ public class UIManager : MonoBehaviour
     private void OnDialogEnded()
     {
         _activeElements--;
+        Debug.Log("active --");
         CheckMouse();
     }
 
     private void OnDialogStarted(GameObject o)
     {
         _activeElements++;
+        Debug.Log("active ++");
         CheckMouse();
     }
 
     private void OnPauseMenuClosed()
     {
         _activeElements--;
+        Debug.Log("active --");
         EnableUI(true);
         CheckMouse();
     }
@@ -67,6 +70,7 @@ public class UIManager : MonoBehaviour
     private void OnPauseMenuOpened()
     {
         _activeElements++;
+        Debug.Log("active ++");
         EnableUI(false);
         if (_exchangeMenu.IsOpen) _exchangeMenu.CloseMenu();
         CheckMouse();
@@ -76,6 +80,7 @@ public class UIManager : MonoBehaviour
     private void OnExchangeMenuClosed()
     {
         _activeElements--;
+        Debug.Log("active --");
         EnableUI(true);
         CheckMouse();
     }
@@ -83,6 +88,7 @@ public class UIManager : MonoBehaviour
     private void OnExchangeMenuOpened()
     {
         _activeElements++;
+        Debug.Log("active ++");
         EnableUI(false);
         CheckMouse();
     }
