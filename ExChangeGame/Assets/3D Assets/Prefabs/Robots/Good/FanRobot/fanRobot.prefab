@@ -1349,7 +1349,11 @@ MonoBehaviour:
   dialog:
     name: Fanbot
     sentences:
-    - Hello. Jet gegen Hook
+    - Hello friend! It's been a long time since we last met.
+    - Are those turbines with you? You can glide with them. I'd like to have something
+      like that...
+    - "Wait, do you want to exchange? You can have my grappling hook and I\u2019ll
+      get the jets from you."
     onComplete:
       m_PersistentCalls:
         m_Calls:
