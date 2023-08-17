@@ -30192,6 +30192,11 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
+    - target: {fileID: 548588833176873582, guid: 90e57765ea514fe4e9ae4d5c476b7795,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 549436267065118614, guid: 90e57765ea514fe4e9ae4d5c476b7795,
         type: 3}
       propertyPath: m_StaticEditorFlags
@@ -30426,6 +30431,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 722903476252634090, guid: 90e57765ea514fe4e9ae4d5c476b7795,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 724253712387172299, guid: 90e57765ea514fe4e9ae4d5c476b7795,
         type: 3}
@@ -33624,18 +33634,43 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3876929494927475986, guid: 90e57765ea514fe4e9ae4d5c476b7795,
         type: 3}
+      propertyPath: MinDist
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3876929494927475986, guid: 90e57765ea514fe4e9ae4d5c476b7795,
+        type: 3}
+      propertyPath: CheckRadius
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3876929494927475986, guid: 90e57765ea514fe4e9ae4d5c476b7795,
+        type: 3}
       propertyPath: whatIsPlayer.m_Bits
-      value: 0
+      value: 64
       objectReference: {fileID: 0}
     - target: {fileID: 3876929494927475989, guid: 90e57765ea514fe4e9ae4d5c476b7795,
         type: 3}
       propertyPath: m_BaseOffset
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 3876929494927475989, guid: 90e57765ea514fe4e9ae4d5c476b7795,
+        type: 3}
+      propertyPath: m_WalkableMask
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3876929494927475989, guid: 90e57765ea514fe4e9ae4d5c476b7795,
+        type: 3}
+      propertyPath: m_ObstacleAvoidanceType
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3876929495041513814, guid: 90e57765ea514fe4e9ae4d5c476b7795,
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3876929495041513817, guid: 90e57765ea514fe4e9ae4d5c476b7795,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.375
       objectReference: {fileID: 0}
     - target: {fileID: 3876929495165034803, guid: 90e57765ea514fe4e9ae4d5c476b7795,
         type: 3}
@@ -34847,6 +34882,21 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5023944999344795506, guid: 90e57765ea514fe4e9ae4d5c476b7795,
+        type: 3}
+      propertyPath: MinDist
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5023944999344795506, guid: 90e57765ea514fe4e9ae4d5c476b7795,
+        type: 3}
+      propertyPath: AttackDist
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5023944999344795506, guid: 90e57765ea514fe4e9ae4d5c476b7795,
+        type: 3}
+      propertyPath: CheckRadius
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 5023944999344795509, guid: 90e57765ea514fe4e9ae4d5c476b7795,
         type: 3}
       propertyPath: m_BaseOffset
@@ -35790,8 +35840,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5785241707316649526, guid: 90e57765ea514fe4e9ae4d5c476b7795,
         type: 3}
+      propertyPath: m_BaseOffset
+      value: -0.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 5785241707316649526, guid: 90e57765ea514fe4e9ae4d5c476b7795,
+        type: 3}
+      propertyPath: m_WalkableMask
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5785241707316649526, guid: 90e57765ea514fe4e9ae4d5c476b7795,
+        type: 3}
       propertyPath: m_StoppingDistance
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5785241707316649526, guid: 90e57765ea514fe4e9ae4d5c476b7795,
+        type: 3}
+      propertyPath: m_ObstacleAvoidanceType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5785241707316649527, guid: 90e57765ea514fe4e9ae4d5c476b7795,
+        type: 3}
+      propertyPath: MinDist
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5785241707316649527, guid: 90e57765ea514fe4e9ae4d5c476b7795,
         type: 3}
@@ -36804,6 +36874,11 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6763827114493468845, guid: 90e57765ea514fe4e9ae4d5c476b7795,
+        type: 3}
+      propertyPath: pushForceAway
+      value: 7.5
+      objectReference: {fileID: 0}
     - target: {fileID: 6763827115181809217, guid: 90e57765ea514fe4e9ae4d5c476b7795,
         type: 3}
       propertyPath: m_LocalPosition.y
@@ -36814,10 +36889,20 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6763827115638661040, guid: 90e57765ea514fe4e9ae4d5c476b7795,
+        type: 3}
+      propertyPath: m_Interpolate
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6763827115638661041, guid: 90e57765ea514fe4e9ae4d5c476b7795,
         type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6763827115638661042, guid: 90e57765ea514fe4e9ae4d5c476b7795,
+        type: 3}
+      propertyPath: m_BaseOffset
+      value: -0.03
       objectReference: {fileID: 0}
     - target: {fileID: 6763827115638661042, guid: 90e57765ea514fe4e9ae4d5c476b7795,
         type: 3}
@@ -36837,12 +36922,27 @@ PrefabInstance:
     - target: {fileID: 6763827115638661042, guid: 90e57765ea514fe4e9ae4d5c476b7795,
         type: 3}
       propertyPath: m_ObstacleAvoidanceType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6763827115638661043, guid: 90e57765ea514fe4e9ae4d5c476b7795,
+        type: 3}
+      propertyPath: angle
+      value: 65
+      objectReference: {fileID: 0}
+    - target: {fileID: 6763827115638661043, guid: 90e57765ea514fe4e9ae4d5c476b7795,
+        type: 3}
+      propertyPath: MinDist
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6763827115638661043, guid: 90e57765ea514fe4e9ae4d5c476b7795,
         type: 3}
+      propertyPath: AttackDist
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6763827115638661043, guid: 90e57765ea514fe4e9ae4d5c476b7795,
+        type: 3}
       propertyPath: CheckRadius
-      value: 10
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6763827115638661043, guid: 90e57765ea514fe4e9ae4d5c476b7795,
         type: 3}
@@ -43284,6 +43384,11 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2807074524534897953, guid: 06ec0c4ef51b7774a8e5835b2f2505db,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3124360141856509071, guid: 06ec0c4ef51b7774a8e5835b2f2505db,
         type: 3}
       propertyPath: m_StaticEditorFlags
@@ -44492,12 +44597,12 @@ PrefabInstance:
     - target: {fileID: 8562156678865176026, guid: 06ec0c4ef51b7774a8e5835b2f2505db,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8562156678865176026, guid: 06ec0c4ef51b7774a8e5835b2f2505db,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8562156679306440673, guid: 06ec0c4ef51b7774a8e5835b2f2505db,
         type: 3}
@@ -44507,7 +44612,7 @@ PrefabInstance:
     - target: {fileID: 8562156679908882148, guid: 06ec0c4ef51b7774a8e5835b2f2505db,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8562156679908882155, guid: 06ec0c4ef51b7774a8e5835b2f2505db,
         type: 3}
@@ -44531,6 +44636,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8986283414973810940, guid: 06ec0c4ef51b7774a8e5835b2f2505db,
         type: 3}
+      propertyPath: MinDist
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8986283414973810940, guid: 06ec0c4ef51b7774a8e5835b2f2505db,
+        type: 3}
       propertyPath: obstructionMask.m_Bits
       value: 7169
       objectReference: {fileID: 0}
@@ -44541,13 +44651,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8986283414973810941, guid: 06ec0c4ef51b7774a8e5835b2f2505db,
         type: 3}
+      propertyPath: m_BaseOffset
+      value: -0.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 8986283414973810941, guid: 06ec0c4ef51b7774a8e5835b2f2505db,
+        type: 3}
       propertyPath: m_WalkableMask
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8986283414973810941, guid: 06ec0c4ef51b7774a8e5835b2f2505db,
         type: 3}
       propertyPath: m_ObstacleAvoidanceType
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8986283415756245265, guid: 06ec0c4ef51b7774a8e5835b2f2505db,
         type: 3}
