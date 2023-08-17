@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Cinemachine;
 using Dialog;
@@ -11,7 +12,7 @@ public class CameraController : MonoBehaviour
 {
     [Header("Cinemachine")]
     [Tooltip("The follow target set in the Cinemachine Virtual Camera that the camera will follow")]
-    public GameObject CinemachineCameraTarget;
+    public Transform CinemachineCameraTarget;
 
     [Tooltip("How far in degrees can you move the camera up")]
     public float TopClamp = 70.0f;
@@ -26,6 +27,9 @@ public class CameraController : MonoBehaviour
     public bool LockCameraPosition = false;
 
     public float Sensitivity = 1.0f;
+    
+    [Tooltip("Rotation of the camera at the start of the game")]
+    [SerializeField] private Vector3 _cameraStartRotation;
 
     public CinemachineVirtualCamera DefaultCamera;
     public CinemachineVirtualCamera DialogCamera;
@@ -69,6 +73,7 @@ public class CameraController : MonoBehaviour
 
     private void OnDialogStarted(GameObject obj)
     {
+        if(!obj) return;
         DialogCamera.LookAt = obj.transform;
         DialogCamera.Priority = 100;
     }
@@ -84,7 +89,8 @@ public class CameraController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
+        CinemachineCameraTarget.rotation = Quaternion.Euler(_cameraStartRotation);
+        _cinemachineTargetYaw = CinemachineCameraTarget.rotation.eulerAngles.y;
         _input = GetComponent<StarterAssetsInputs>();
 #if ENABLE_INPUT_SYSTEM
         _playerInput = GetComponent<PlayerInput>();
@@ -92,7 +98,6 @@ public class CameraController : MonoBehaviour
 			Debug.LogError( "Starter Assets package is missing dependencies. Please use Tools/Starter Assets/Reinstall Dependencies to fix it");
 #endif
         // Start at 180 degrees to avoid camera flipping
-        CinemachineCameraTarget.transform.rotation = Quaternion.Euler(0.0f, 180.0f, 0.0f);
         DialogCamera.Priority = 0;
     }
 
@@ -119,7 +124,7 @@ public class CameraController : MonoBehaviour
         _cinemachineTargetPitch = ClampAngle(_cinemachineTargetPitch, BottomClamp, TopClamp);
 
         // Cinemachine will follow this target
-        CinemachineCameraTarget.transform.rotation = Quaternion.Euler(_cinemachineTargetPitch + CameraAngleOverride,
+        CinemachineCameraTarget.rotation = Quaternion.Euler(_cinemachineTargetPitch + CameraAngleOverride,
             _cinemachineTargetYaw, 0.0f);
     }
 
@@ -129,7 +134,7 @@ public class CameraController : MonoBehaviour
         if (lfAngle > 360f) lfAngle -= 360f;
         return Mathf.Clamp(lfAngle, lfMin, lfMax);
     }
-
+    
     // private void OnGUI()
     // {
     //     GUI.Label(new Rect(15, 0, 100, 80), "Test Button");

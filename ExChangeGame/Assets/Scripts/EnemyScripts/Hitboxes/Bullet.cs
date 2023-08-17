@@ -6,6 +6,11 @@ public class Bullet : MonoBehaviour
     [SerializeField] private float pushForceAway = 1f;
     [SerializeField] private float pushForceUp = 1f;
     [SerializeField] private int damage = 2;
+    [SerializeField] private ParticleSystem glow1;
+    [SerializeField] private ParticleSystem glow2;
+    [SerializeField] private ParticleSystem trail;
+    [SerializeField] private ParticleSystem particles;
+    
     
     private AudioSource hitSound;
     private Renderer _renderer;
@@ -49,7 +54,24 @@ public class Bullet : MonoBehaviour
         _rigidbody.velocity = Vector3.zero;
         _rigidbody.useGravity = false;
         _rigidbody.constraints = RigidbodyConstraints.FreezeAll;
-        yield return new WaitForSeconds(3f);
+        glow1.Stop();
+        Destroy(glow1);
+        glow2.Stop();
+        trail.Stop();
+        particles.Stop();
+        while (trail || particles)
+        {
+            if (trail)
+            {
+                Destroy(trail, trail.main.duration);
+            }
+            if (particles)
+            {
+                Destroy(particles, particles.main.duration);
+            }
+
+            yield return null;
+        }
         Destroy(gameObject);
     }
 }

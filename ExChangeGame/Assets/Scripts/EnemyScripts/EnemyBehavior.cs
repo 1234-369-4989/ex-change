@@ -27,6 +27,7 @@ public class EnemyBehavior : MonoBehaviour
     public LayerMask obstructionMask; //Mask for things the enemy can not see through 
     public LayerMask whatIsPlayer; //Layermask for defining what is the player
     public bool canSeePlayer; //can the enemy see the player
+    private bool _isPlayerDead; //is the player dead?
 
 
     [Header("Patrol Values")] public List<Transform> Waypoints; //List of Patrolpoints
@@ -48,7 +49,14 @@ public class EnemyBehavior : MonoBehaviour
     
     [Header("Health")]
     [SerializeField] private EnemyHealth enemyHealth;
+    [SerializeField] private AudioSource deathAudioSource;
+    [SerializeField] private GameObject deathEffect;
+    [SerializeField] private GameObject graphics;
     private BasicHealth _health;
+    
+    [Header("WorldSettings")]
+    [SerializeField] protected int floorLayer;
+    
     
 
     private void Awake()
@@ -56,6 +64,13 @@ public class EnemyBehavior : MonoBehaviour
         _health = GetComponent<BasicHealth>();
         _health.OnDeath += OnDeath;
         _health.OnDamage += OnDamage;
+        PlayerInstance.OnPlayerDeath += HandlePlayerDeath;
+        PlayerInstance.OnPlayerRespawn += HandlePlayerRespawn;
+        MinimapCamera.OnOnLevelChange += HandleLevelChange;
+    }
+
+    protected virtual void HandleLevelChange(int floor)
+    {
     }
 
 
@@ -64,12 +79,12 @@ public class EnemyBehavior : MonoBehaviour
         Player = PlayerInstance.Instance.transform;
         _currentState = EnemyState.Idle;
         _agent = GetComponent<NavMeshAgent>();
-        _enemyHeight = transform.position.y;
+        _enemyHeight = transform.position.y - _agent.destination.y;
         
         if(!DefaultRotation) _agent.updateRotation = false;
 
-        
-        _agent.updatePosition = false;
+
+        //_agent.updatePosition = false;
 
         StartCoroutine(FOVRoutine());
     }
@@ -95,6 +110,11 @@ public class EnemyBehavior : MonoBehaviour
     /// </summary>
     private void FieldOfViewCheck()
     {
+        if (_isPlayerDead)
+        {
+            canSeePlayer = false;
+            return;
+        }
         Collider[] rangeChecks = Physics.OverlapSphere(transform.position, CheckRadius, whatIsPlayer);
 
         if (rangeChecks.Length != 0) //we are only looking for one object, if this does not work look that only the player has the Player Layer
@@ -128,7 +148,7 @@ public class EnemyBehavior : MonoBehaviour
     /// </summary>
     private void setCurrentState()
     {
-        _playerInAttackRange = Physics.CheckSphere(transform.position, CheckRadius / 2, whatIsPlayer);
+        _playerInAttackRange = !_isPlayerDead && Physics.CheckSphere(transform.position, CheckRadius / 2, whatIsPlayer);
 
 
         if (!canSeePlayer && !_playerInAttackRange)
@@ -196,22 +216,28 @@ public class EnemyBehavior : MonoBehaviour
     {
         float distance = Vector3.Distance(transform.position, Waypoints[currentTarget].position) - _enemyHeight;
         _agent.destination = Waypoints[currentTarget].position;
+        _enemyHeight = transform.position.y - _agent.destination.y;
+        
         transform.position = Vector3.SmoothDamp(transform.position,
-                new Vector3(_agent.nextPosition.x, 0, _agent.nextPosition.z), ref velocity, 0.3f);
+        new Vector3(_agent.nextPosition.x, 0, _agent.nextPosition.z), ref velocity, 0.3f);
 
         Vector3 target = _agent.pathEndPosition;
         Vector3 directionTarget = (target - transform.position).normalized;
-        
-        Debug.Log(Vector3.Angle(transform.forward, directionTarget));
 
         if (!DefaultRotation)
         {
             
             if (!IsValueBetween(0f, 5f, Vector3.Angle(transform.forward, directionTarget)))
             {
-                _agent.isStopped = true;//Stop the Agent while Rotating
+                
+                if(Vector3.Angle(transform.forward, directionTarget) < 15f) transform.LookAt(target);
+                else
+                {
+                    _agent.isStopped = true;//Stop the Agent while Rotating
 
-                RotateToPoint(target);
+                    RotateToPoint(target);
+                }
+                
             }
             else
             {
@@ -220,11 +246,12 @@ public class EnemyBehavior : MonoBehaviour
             
         }
         
-        if (IsValueBetween(0.0f, 0.15f, distance) && !_targetReached)
+        if (IsValueBetween(0.0f, 0.5f, distance) && !_targetReached)
             {
             
             
                 _targetReached = true;
+
 
                 if (_reverse == false)
                 {
@@ -258,8 +285,9 @@ public class EnemyBehavior : MonoBehaviour
     {
         Vector3 targetDirection = target - transform.position;
                 
-        float SingleStep = _agent.angularSpeed * Time.fixedDeltaTime;
-        Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, SingleStep, 0.0f);
+        float SingleStep = _agent.angularSpeed * Time.deltaTime;
+        Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, SingleStep, 0.3f);
+        newDirection.y = 0;
         transform.rotation = Quaternion.LookRotation(newDirection); 
     }
     
@@ -304,7 +332,7 @@ public class EnemyBehavior : MonoBehaviour
         }
 
         transform.position = Vector3.SmoothDamp(transform.position,
-            new Vector3(_agent.nextPosition.x, 0, _agent.nextPosition.z), ref velocity, 0.3f);
+        new Vector3(_agent.nextPosition.x, 0, _agent.nextPosition.z), ref velocity, 0.3f);
     }
 
 
@@ -318,12 +346,39 @@ public class EnemyBehavior : MonoBehaviour
 
     protected virtual void OnDeath(BasicHealth h)
     {
-        
+        StartCoroutine(DeathCoroutine());
     }
+    
+    
+    private IEnumerator DeathCoroutine()
+    {
+        deathEffect.SetActive(true);
+        this.enabled = false;
+        graphics.SetActive(false);
+        deathAudioSource.Play();
+        yield return new WaitForSeconds(2f);
+       gameObject.SetActive(false);
+    }
+
     
     protected virtual void OnDamage(BasicHealth h)
     {
         enemyHealth.UpdateHealthBar(h.Health, h.MaxHealth);
+    }
+    
+    private void HandlePlayerRespawn()
+    {
+       SetPlayerDead(false);
+    }
+
+    private void HandlePlayerDeath()
+    {
+        SetPlayerDead(true);
+    }
+    
+    private void SetPlayerDead(bool b)
+    { 
+        _isPlayerDead = b;
     }
 
     private void OnDisable()
@@ -331,5 +386,12 @@ public class EnemyBehavior : MonoBehaviour
         _agent.enabled = false;
         _health.OnDeath -= OnDeath;
         _health.OnDamage -= OnDamage;
+    }
+
+    private void OnDestroy()
+    {
+        PlayerInstance.OnPlayerDeath -= HandlePlayerDeath;
+        PlayerInstance.OnPlayerRespawn -= HandlePlayerRespawn;
+        MinimapCamera.OnOnLevelChange -= HandleLevelChange;
     }
 }

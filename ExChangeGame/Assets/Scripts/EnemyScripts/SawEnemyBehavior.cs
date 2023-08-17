@@ -24,6 +24,11 @@ public class SawEnemyBehavior : EnemyBehavior
     {
         base.OnDeath(h);
         idleSound.Stop();
-        deathSound.Play();
+    }
+    
+    protected override void HandleLevelChange(int floor)
+    {
+        base.HandleLevelChange(floor);
+        idleSound.mute = floor != floorLayer;
     }
 }

@@ -8,6 +8,7 @@ public class SawArea : MonoBehaviour
 {
         [SerializeField] private float pushForceAway = 1f;
        [SerializeField] private float pushForceUp = 1f;
+       [SerializeField] private int Damage = 1;
        
        private AudioSource _audioSource;
        
@@ -22,9 +23,9 @@ public class SawArea : MonoBehaviour
        /// <param name="other"></param>
        private void OnTriggerEnter(Collider other)
        {
-           Debug.Log("Player Hit");
            if (!other.TryGetComponent<BasicHealth>(out var health)) return;
-           health.Damage(1);
+           Debug.Log("Saw Hit", other.gameObject);
+           health.Damage(Damage);
            _audioSource.Play();
            Debug.Log(health);
            var direction = other.transform.position - transform.position;

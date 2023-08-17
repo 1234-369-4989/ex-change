@@ -28,6 +28,7 @@ namespace ExChangeParts
                 JumpHeight = jumpHeight != 0 ? jumpHeight : null
             };
             ExchangeSystem.Instance.SetMovement(movementVariables);
+            UIControlls.Instance.setJumpActiveTrue();
             // TODO: handle fall damage
         }
 
@@ -41,6 +42,7 @@ namespace ExChangeParts
                 SprintSpeed = null,
                 JumpHeight = null
             };
+            UIControlls.Instance.setJumpActiveFalse();
             ExchangeSystem.Instance.SetMovement(movementVariables);
         }
     }

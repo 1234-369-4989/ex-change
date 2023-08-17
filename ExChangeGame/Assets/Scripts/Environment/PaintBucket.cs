@@ -6,18 +6,22 @@ using UnityEngine;
 public class PaintBucket : MonoBehaviour
 {
     [SerializeField] private Color color;
-    [SerializeField] private Renderer renderer;
+    [SerializeField] private new Renderer renderer;
     private Material _mat;
+    
+    private AudioSource _audioSource;
 
     private void Awake()
     {
         renderer = GetComponent<Renderer>();
+        _audioSource = GetComponent<AudioSource>();
     }
 
     private void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            _audioSource.Play();
             ExchangeSystem.Instance.ChangeColor(color);
         }
     }
@@ -29,6 +33,7 @@ public class PaintBucket : MonoBehaviour
             renderer = GetComponent<Renderer>();
         if (_mat == null)
         {
+            if(renderer.sharedMaterial == null) return;
             _mat = Instantiate(renderer.sharedMaterial);
             _mat.color = color;
             renderer.material = _mat;

@@ -11,8 +11,7 @@ namespace Environment
     public class Door : Activatable
     {
         private Animator _animator;
-        [Header("Audio")]
-        [SerializeField] private AudioSource openCloseAudioSource;
+        [Header("Audio")] [SerializeField] private AudioSource openCloseAudioSource;
         [SerializeField] private AudioSource accessDeniedAudioSource;
         private static readonly int Open = Animator.StringToHash("Open");
 
@@ -74,23 +73,38 @@ namespace Environment
             isActivated = value;
             SwapColors(value ? State.Standby : State.Inactive);
             _closeCollider.enabled = !value;
+            var col = GetComponent<CapsuleCollider>();
+            // check if player tag is inside of collider
+            if (col)
+            {
+                var player = PlayerInstance.Instance;
+                if (player && col.bounds.Contains(player.transform.position))
+                {
+                    _animator.SetBool(Open, true);
+                    openCloseAudioSource.Play();
+                    SwapColors(State.Active);
+                }
+            }
+
             minimapIcon.SetActive(!value);
         }
 
 
         private void OnTriggerEnter(Collider other)
         {
+            Debug.Log("Door Trigger Enter");
+            if (!other.CompareTag("Player")) return;
+            Debug.Log("Door Trigger Enter");
             if (!isActivated)
             {
                 accessDeniedAudioSource.Play();
                 return;
             }
-            if (other.CompareTag("Player"))
-            {
-                _animator.SetBool(Open, true);
-                openCloseAudioSource.Play();
-                SwapColors(State.Active);
-            }
+
+            Debug.Log("Door Trigger Enter");
+            _animator.SetBool(Open, true);
+            openCloseAudioSource.Play();
+            SwapColors(State.Active);
         }
 
         private void OnTriggerExit(Collider other)
@@ -99,6 +113,7 @@ namespace Environment
             {
                 return;
             }
+
             if (other.CompareTag("Player"))
             {
                 _animator.SetBool(Open, false);
@@ -161,7 +176,6 @@ namespace Environment
         {
             foreach (var r in swapRenderers)
             {
-                
                 var materials = r.materials;
                 for (var i = 0; i < materials.Length; i++)
                 {
