@@ -30556,6 +30556,11 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
+    - target: {fileID: 918785685405919643, guid: 90e57765ea514fe4e9ae4d5c476b7795,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 921565767384887995, guid: 90e57765ea514fe4e9ae4d5c476b7795,
         type: 3}
       propertyPath: m_StaticEditorFlags
@@ -31310,6 +31315,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 1687537779814118885, guid: 90e57765ea514fe4e9ae4d5c476b7795,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.57
       objectReference: {fileID: 0}
     - target: {fileID: 1688969324741904307, guid: 90e57765ea514fe4e9ae4d5c476b7795,
         type: 3}
@@ -34856,6 +34866,16 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
+    - target: {fileID: 5095312166196269032, guid: 90e57765ea514fe4e9ae4d5c476b7795,
+        type: 3}
+      propertyPath: dialog.onComplete.m_PersistentCalls.m_Calls.Array.data[6].m_Target
+      value: 
+      objectReference: {fileID: 1891482635}
+    - target: {fileID: 5095312166196269032, guid: 90e57765ea514fe4e9ae4d5c476b7795,
+        type: 3}
+      propertyPath: dialog.onComplete.m_PersistentCalls.m_Calls.Array.data[6].m_MethodName
+      value: Play
+      objectReference: {fileID: 0}
     - target: {fileID: 5101462637239378237, guid: 90e57765ea514fe4e9ae4d5c476b7795,
         type: 3}
       propertyPath: m_StaticEditorFlags
@@ -36632,6 +36652,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 6628620875435418225, guid: 90e57765ea514fe4e9ae4d5c476b7795,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6629679705657698781, guid: 90e57765ea514fe4e9ae4d5c476b7795,
         type: 3}
@@ -45920,6 +45945,12 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!82 &1891482635 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 8286079803514461924, guid: 90e57765ea514fe4e9ae4d5c476b7795,
+    type: 3}
+  m_PrefabInstance: {fileID: 1644690851}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &1896535907
 Mesh:
   m_ObjectHideFlags: 0

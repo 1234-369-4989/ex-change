@@ -1480,6 +1480,7 @@ MonoBehaviour:
   deathAudioSource: {fileID: 4805114582993196929}
   deathEffect: {fileID: 377327843760566572}
   graphics: {fileID: 6418538158823585762}
+  floorLayer: 0
   idleSound: {fileID: 2408256304116894401}
   deathSound: {fileID: 4805114582993196929}
 --- !u!54 &6418538158830007698
@@ -1494,7 +1495,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
