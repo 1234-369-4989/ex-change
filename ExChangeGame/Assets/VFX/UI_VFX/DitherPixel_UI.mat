@@ -20,9 +20,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: DitherPixel_VFX
-  m_Shader: {fileID: -6465566751694194690, guid: e6615721f353b8b46abdb2ecfaeae3bf,
-    type: 3}
+  m_Name: DitherPixel_UI
+  m_Shader: {fileID: 4800000, guid: 49bff104e92587c459319d3986079ea4, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
@@ -99,16 +98,17 @@ Material:
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
+    - _CilpTime: 0
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
-    - _ClipTime: 1
+    - _ClipTime: 0
     - _Cull: 2
     - _Cutoff: 0.5
     - _DelayTime: 1
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _EmissionPower: 5
+    - _EmissionPower: 0
     - _EmissionTime: 0
     - _EnvironmentReflections: 1
     - _Float: 0
@@ -116,7 +116,7 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Metallic: 0.655
-    - _NoiseScale: 20
+    - _NoiseScale: 60
     - _OcclusionStrength: 1
     - _Parallax: 0.005
     - _PixelSize: 30
@@ -132,7 +132,9 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _Albedo_Color: {r: 0.6901961, g: 0.7058824, b: 0.78431374, a: 0}
+    - _Albedo_Color: {r: 0.6509434, g: 0.6509434, b: 0.6509434, a: 1}
+    - _Albedo_Color_A: {r: 0, g: 0.8728238, b: 1, a: 1}
+    - _Albedo_Color_B: {r: 0.7075471, g: 0.7075471, b: 0.7075471, a: 1}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
