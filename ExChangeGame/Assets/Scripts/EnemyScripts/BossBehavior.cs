@@ -18,6 +18,7 @@ public class BossBehavior : MonoBehaviour
     [SerializeField] private LayerMask whatIsPlayer;
     [SerializeField] private Animator Animator;
     [SerializeField] public bool Hostile;
+    public event Action<BossBehavior> OnBossDeath;
 
     [Header("Shooting Variables")]
     [SerializeField] private float timer = 5f;
@@ -52,6 +53,9 @@ public class BossBehavior : MonoBehaviour
     private bool _isPlayerDead;
 
 
+    /// <summary>
+    /// On Awakening subscribe to events and setup health
+    /// </summary>
     private void Awake()
     {
         _health = GetComponent<BasicHealth>();
@@ -62,6 +66,10 @@ public class BossBehavior : MonoBehaviour
         MinimapCamera.OnOnLevelChange += HandleLevelChange;
     }
 
+    /// <summary>
+    /// Handle the changing of floors
+    /// </summary>
+    /// <param name="floor"></param>
     protected virtual void HandleLevelChange(int floor)
     {
         idleSound.mute = floor != floorLayer;
@@ -199,12 +207,22 @@ public class BossBehavior : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, _lookRotation, Time.deltaTime * (_agent.speed/2));
     }
 
+    
+    /// <summary>
+    /// OnDeathEvent
+    /// </summary>
+    /// <param name="h"></param>
     protected virtual void OnDeath(BasicHealth h)
     {
         StartCoroutine(DeathCoroutine());
         idleSound.Stop();
+        OnBossDeath?.Invoke(this);
     }
 
+    /// <summary>
+    /// Play this when the boss should taunt
+    /// </summary>
+    /// <returns></returns>
     public IEnumerator Taunt()
     {
         Animator.Play("Slash");
@@ -212,6 +230,10 @@ public class BossBehavior : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
     }
 
+    /// <summary>
+    /// What happens when the boss dies
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator DeathCoroutine()
     {
         deathEffect.SetActive(true);
