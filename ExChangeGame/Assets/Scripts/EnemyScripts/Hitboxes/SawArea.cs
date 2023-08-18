@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SawArea : MonoBehaviour
@@ -9,7 +10,7 @@ public class SawArea : MonoBehaviour
         [SerializeField] private float pushForceAway = 1f;
        [SerializeField] private float pushForceUp = 1f;
        [SerializeField] private int Damage = 1;
-       
+
        private AudioSource _audioSource;
        
          private void Awake()
@@ -34,4 +35,5 @@ public class SawArea : MonoBehaviour
                ForceMode.VelocityChange);
            other.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
        }
+    
 }

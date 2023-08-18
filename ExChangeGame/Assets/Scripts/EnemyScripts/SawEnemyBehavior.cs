@@ -11,12 +11,14 @@ public class SawEnemyBehavior : EnemyBehavior
 /// </summary>
     public override void Attack()
     {
-        transform.LookAt(Player);
+        RotateToPoint(Player.transform.position);
 
         if (Vector3.Distance(transform.position, Player.position) >= AttackDist)
         {
+            if (_agent.isStopped) _agent.isStopped = false;
+            Debug.Log("Attacking Player");
             _agent.destination = Player.position;
-            transform.position = Vector3.SmoothDamp(transform.position, new Vector3(_agent.nextPosition.x, 0, _agent.nextPosition.z), ref velocity, 0.3f );
+            _agent.transform.position = Vector3.SmoothDamp(transform.position, new Vector3(_agent.nextPosition.x, 0, _agent.nextPosition.z), ref velocity, 0.3f );
         }
     }
 
