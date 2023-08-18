@@ -2,6 +2,7 @@ using DefaultNamespace;
 using Movement;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 namespace ExChangeParts
 {
@@ -11,9 +12,9 @@ namespace ExChangeParts
         [Header("References")]
         private MovementRigidbody pm;
         public Transform camera;
-        public Transform gunTip;
         public LayerMask whatIsGrappable;
-        public LineRenderer lr;
+        [FormerlySerializedAs("lr")] public LineRenderer lr_Left;
+        public LineRenderer lr_Right;
         public Rigidbody rb;
         private BasicEnergy _playerEnergy;
 
@@ -39,8 +40,10 @@ namespace ExChangeParts
         
         [SerializeField] private InputActionReference grappleAction;
 
-        [Header("Energy")] [SerializeField]
+        [Header("Energy & Damage")] [SerializeField]
         private float energyCost = 25f;
+        [SerializeField] private int damage = 1;
+        
         
         [Header("Audio")]
         [SerializeField] private AudioSource startGrapple;
@@ -99,12 +102,14 @@ namespace ExChangeParts
         {
             if (grappling)
             {
-                lr.SetPosition(0,gunTip.position);
+                lr_Left.SetPosition(0,lr_Left.transform.position);
+                lr_Right.SetPosition(0,lr_Right.transform.position);
             }
         }
 
         private void StartGrapple(InputAction.CallbackContext obj)
         {
+            Debug.Log("Start Grapple");
             if(UIManager.Instance.HasActiveElements) return;
             if (grapplingTimer > 0) return;
             if (!_playerEnergy.Use(energyCost)) return;
@@ -119,29 +124,44 @@ namespace ExChangeParts
             {
                 grapplePoint = hit.point;
                 _isGrappable = true;
+                Debug.Log("Collider hit" , hit.collider);
+                MakeDamage(hit.collider);
                 Invoke(nameof(ExecuteGrapple), grappleDelayTime);
             }
             else
             {
                 grapplePoint = camera.position + camera.forward * maxGrappleDistance;
                 _isGrappable = false;
+                Debug.Log("No Collider hit");
                 Invoke(nameof(StopGrapple), grappleDelayTime);
             }
 
-            lr.enabled = true;
-            lr.SetPosition(1, grapplePoint);
+            lr_Left.enabled = true;
+            lr_Left.SetPosition(1, grapplePoint);
+            lr_Right.enabled = true;
+            lr_Right.SetPosition(1, grapplePoint);
 
+        }
+
+        private void MakeDamage(Collider raycastHit)
+        {
+            if (raycastHit.TryGetComponent(out BasicHealth health))
+            {
+                health.Damage(damage);
+            }
         }
 
         private void StopGrapple()
         {
+            Debug.Log("Stop Grapple");
             _freeze = false;
             grappling = false;
             _isGrappable = false;
             
                 grapplingTimer = grapplingCd;
 
-            lr.enabled = false;
+            lr_Left.enabled = false;
+            lr_Right.enabled = false;
         }
 
         private void JumpToPosition(Vector3 targetPosition, float trajectoryHeight)

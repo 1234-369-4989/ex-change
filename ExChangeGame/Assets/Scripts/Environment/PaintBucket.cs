@@ -8,16 +8,20 @@ public class PaintBucket : MonoBehaviour
     [SerializeField] private Color color;
     [SerializeField] private new Renderer renderer;
     private Material _mat;
+    
+    private AudioSource _audioSource;
 
     private void Awake()
     {
         renderer = GetComponent<Renderer>();
+        _audioSource = GetComponent<AudioSource>();
     }
 
     private void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            _audioSource.Play();
             ExchangeSystem.Instance.ChangeColor(color);
         }
     }

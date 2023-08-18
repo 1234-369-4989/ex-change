@@ -73,6 +73,7 @@ public class CameraController : MonoBehaviour
 
     private void OnDialogStarted(GameObject obj)
     {
+        if(!obj) return;
         DialogCamera.LookAt = obj.transform;
         DialogCamera.Priority = 100;
     }
