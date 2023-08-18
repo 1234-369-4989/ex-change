@@ -313,6 +313,7 @@ GameObject:
   - component: {fileID: 3460251872132560013}
   - component: {fileID: 3460251872132560012}
   - component: {fileID: 3460251872132560011}
+  - component: {fileID: 7483187244689452815}
   m_Layer: 10
   m_Name: EnemyCapsule
   m_TagString: Untagged
@@ -354,8 +355,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df853bca335535d47909aacb1b67c140, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Health>k__BackingField: 8
-  maxHealth: 8
+  <Health>k__BackingField: 1
+  maxHealth: 1
 --- !u!54 &3460251872132560013
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -368,7 +369,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
@@ -428,6 +429,7 @@ MonoBehaviour:
   deathEffect: {fileID: 2341346430167383660}
   graphics: {fileID: 3460251872443178419}
   timer: 1.5
+  floorLayer: 0
   bulletSpeed: 15
   offSet: {x: 0, y: 0.2, z: 0}
   EnemyBullet: {fileID: 4516485619991750221, guid: f03bc413b7ad0934f972254bee9070b7,
@@ -435,6 +437,19 @@ MonoBehaviour:
   SpawnPoint: {fileID: 3460251871750631354}
   hoverSound: {fileID: 6200977818000609622}
   shootSound: {fileID: 3072529132223508940}
+--- !u!135 &7483187244689452815
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3460251872132560009}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.4
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3460251872145402063
 GameObject:
   m_ObjectHideFlags: 0
@@ -594,7 +609,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 3460251872280650308}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.5
   m_Height: 1
   m_Direction: 1
@@ -891,7 +906,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3460251873153321975
 Transform:
   m_ObjectHideFlags: 0
@@ -1287,7 +1302,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4894429406686068238}
   m_LocalRotation: {x: -0, y: -0.3089332, z: -0, w: -0.9510837}
-  m_LocalPosition: {x: -4.925582, y: -1.6001725, z: -0.06666708}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
