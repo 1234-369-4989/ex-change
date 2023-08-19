@@ -109,7 +109,6 @@ namespace ExChangeParts
 
         private void StartGrapple(InputAction.CallbackContext obj)
         {
-            Debug.Log("Start Grapple");
             if(UIManager.Instance.HasActiveElements) return;
             if (grapplingTimer > 0) return;
             if (!_playerEnergy.Use(energyCost)) return;
@@ -153,7 +152,6 @@ namespace ExChangeParts
 
         private void StopGrapple()
         {
-            Debug.Log("Stop Grapple");
             _freeze = false;
             grappling = false;
             _isGrappable = false;

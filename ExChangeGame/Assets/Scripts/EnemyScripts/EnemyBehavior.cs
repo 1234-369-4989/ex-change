@@ -218,7 +218,7 @@ public class EnemyBehavior : MonoBehaviour
         _agent.destination = Waypoints[currentTarget].position;
         _enemyHeight = transform.position.y - _agent.destination.y;
         
-        transform.position = Vector3.SmoothDamp(transform.position,
+        _agent.transform.position = Vector3.SmoothDamp(transform.position,
         new Vector3(_agent.nextPosition.x, 0, _agent.nextPosition.z), ref velocity, 0.3f);
 
         Vector3 target = _agent.pathEndPosition;
@@ -281,7 +281,7 @@ public class EnemyBehavior : MonoBehaviour
     /// Rotate Transform until looking at Point
     /// </summary>
     /// <param name="target">target to look at</param>
-    private void RotateToPoint(Vector3 target)
+    protected void RotateToPoint(Vector3 target)
     {
         Vector3 targetDirection = target - transform.position;
                 
@@ -317,7 +317,8 @@ public class EnemyBehavior : MonoBehaviour
     /// </summary>
     private void ChasePlayer()
     {
-        transform.LookAt(Player);
+        RotateToPoint(Player.transform.position);
+        if (_agent.isStopped) _agent.isStopped = false;
 
         float distance = Vector3.Distance(transform.position, Player.position);
 
@@ -331,7 +332,7 @@ public class EnemyBehavior : MonoBehaviour
             }
         }
 
-        transform.position = Vector3.SmoothDamp(transform.position,
+        _agent.transform.position = Vector3.SmoothDamp(transform.position,
         new Vector3(_agent.nextPosition.x, 0, _agent.nextPosition.z), ref velocity, 0.3f);
     }
 
