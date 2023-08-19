@@ -12,16 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5485954d14dfb9a4c8ead8edb0ded5b1, type: 3}
   m_Name: LiftGammaGain
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   lift:
     m_OverrideState: 1
-    m_Value: {x: 0.91533893, y: 1, z: 0.97911763, w: 7.344103e-10}
+    m_Value: {x: 1, y: 0.9749396, z: 0.93882656, w: 7.344103e-10}
   gamma:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 1, z: 1, w: -0.100200415}
+    m_Value: {x: 0.99511504, y: 0.9995239, z: 1, w: -0.100200415}
   gain:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 1, z: 1, w: -0.42084172}
+    m_Value: {x: 1, y: 0.99126524, z: 0.9873912, w: -0.42084172}
 --- !u!114 &-8834105459993163893
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -37,16 +37,16 @@ MonoBehaviour:
   active: 1
   threshold:
     m_OverrideState: 1
-    m_Value: 0.4
+    m_Value: 40.79
   intensity:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 76.44
   scatter:
     m_OverrideState: 1
-    m_Value: 0.7
+    m_Value: 1
   clamp:
     m_OverrideState: 1
-    m_Value: 65472
+    m_Value: 65470.65
   tint:
     m_OverrideState: 1
     m_Value: {r: 1, g: 1, b: 1, a: 1}
@@ -55,7 +55,7 @@ MonoBehaviour:
     m_Value: 0
   skipIterations:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 0
   dirtTexture:
     m_OverrideState: 1
     m_Value: {fileID: 0}
@@ -73,7 +73,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d7fd9488000d3734a9e00ee676215985, type: 3}
-  m_Name: Level1_Volume
+  m_Name: Level2_Volume
   m_EditorClassIdentifier: 
   components:
   - {fileID: -9074340350405134413}
