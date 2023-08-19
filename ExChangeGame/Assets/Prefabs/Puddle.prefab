@@ -229,8 +229,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damagePerSecond: 1
-  pushForceAway: 5
-  pushForceUp: 5
+  pushForceAway: 2.5
+  pushForceUp: 1
 --- !u!82 &7706869114947221966
 AudioSource:
   m_ObjectHideFlags: 0
