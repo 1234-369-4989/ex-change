@@ -11891,7 +11891,7 @@ PrefabInstance:
     - target: {fileID: 3423904871863642219, guid: d2a3de1e2b47de6408c0f0f42a74630a,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.6999998
+      value: -1.7
       objectReference: {fileID: 0}
     - target: {fileID: 3423904871863642219, guid: d2a3de1e2b47de6408c0f0f42a74630a,
         type: 3}
@@ -11906,7 +11906,7 @@ PrefabInstance:
     - target: {fileID: 3423904871863642219, guid: d2a3de1e2b47de6408c0f0f42a74630a,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.13890582
+      value: 0.1389057
       objectReference: {fileID: 0}
     - target: {fileID: 3423904871863642219, guid: d2a3de1e2b47de6408c0f0f42a74630a,
         type: 3}
@@ -32862,6 +32862,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3328892275709366305, guid: 90e57765ea514fe4e9ae4d5c476b7795,
         type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3328892275709366305, guid: 90e57765ea514fe4e9ae4d5c476b7795,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
@@ -34044,6 +34049,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 4460006910150299425, guid: 90e57765ea514fe4e9ae4d5c476b7795,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4467541045598104256, guid: 90e57765ea514fe4e9ae4d5c476b7795,
         type: 3}
@@ -44530,7 +44540,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_IsGlobal: 0
   priority: 0
-  blendDistance: 1
+  blendDistance: 0
   weight: 0.58
   sharedProfile: {fileID: 11400000, guid: b0dcfae33da451c44b388873f2d16cee, type: 2}
 --- !u!4 &1813941242
