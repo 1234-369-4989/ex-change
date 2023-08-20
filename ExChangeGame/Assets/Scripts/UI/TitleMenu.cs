@@ -5,6 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class TitleMenu : MonoBehaviour
 {
+    [SerializeField]
+    private Saving.AudioSaveManager AudioMng;
+
+    private void Awake()
+    {
+        AudioMng.InitAudio();
+    }
+
     public void SceneChange(string SceneName)
     {
         SceneManager.LoadScene(SceneName); 
