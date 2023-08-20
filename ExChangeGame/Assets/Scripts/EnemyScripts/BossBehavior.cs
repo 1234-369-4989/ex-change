@@ -1,12 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
+[RequireComponent(typeof(BasicHealth))]
 public class BossBehavior : MonoBehaviour
 {
     [Header("References")]
@@ -15,7 +17,8 @@ public class BossBehavior : MonoBehaviour
     public float MeleeRange; //minimal radius away from Boss so he can shoot at player
     [SerializeField] private LayerMask whatIsPlayer;
     [SerializeField] private Animator Animator;
-    [SerializeField] private bool Hostile;
+    [SerializeField] public bool Hostile;
+    public event Action<BossBehavior> OnBossDeath;
 
     [Header("Shooting Variables")]
     [SerializeField] private float timer = 5f;
@@ -26,15 +29,51 @@ public class BossBehavior : MonoBehaviour
 
     [Header("Attacking Variables")]
     [SerializeField] private float TimeBetweenAttacks;
-    
 
+    [Header("Health")]
+    [SerializeField] private EnemyHealth enemyHealth;
+    [SerializeField] private AudioSource deathAudioSource;
+    [SerializeField] private GameObject deathEffect;
+    [SerializeField] private GameObject graphics;
+    [SerializeField] private AudioSource idleSound;
+    [SerializeField] private AudioSource deathSound;
+    [SerializeField] private AudioSource shootSound;
+    [SerializeField] private AudioSource sawSound;
+    [SerializeField] private AudioSource tauntingSound;
+    private BasicHealth _health;
+
+    [Header("WorldSettings")]
+    [SerializeField] protected int floorLayer;
     
     //private variables
     private NavMeshAgent _agent;
     private bool _inAttackRange;
     private bool _inMeleeRange;
     private bool _attacking;
+    private bool _isPlayerDead;
 
+
+    /// <summary>
+    /// On Awakening subscribe to events and setup health
+    /// </summary>
+    private void Awake()
+    {
+        _health = GetComponent<BasicHealth>();
+        _health.OnDeath += OnDeath;
+        _health.OnDamage += OnDamage;
+        PlayerInstance.OnPlayerDeath += HandlePlayerDeath;
+        PlayerInstance.OnPlayerRespawn += HandlePlayerRespawn;
+        MinimapCamera.OnOnLevelChange += HandleLevelChange;
+    }
+
+    /// <summary>
+    /// Handle the changing of floors
+    /// </summary>
+    /// <param name="floor"></param>
+    protected virtual void HandleLevelChange(int floor)
+    {
+        idleSound.mute = floor != floorLayer;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -46,13 +85,13 @@ public class BossBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(_inMeleeRange);
         if (Hostile)
         {
             if (!_attacking)
             {
-                RotateToPoint(Player.transform.position);
-                _inAttackRange = Physics.CheckSphere(transform.position, AttackRadius, whatIsPlayer);
-                _inMeleeRange = Physics.CheckSphere(transform.position, MeleeRange, whatIsPlayer);
+                _inAttackRange = !_isPlayerDead && Physics.CheckSphere(transform.position, AttackRadius, whatIsPlayer);
+                _inMeleeRange = !_isPlayerDead && Physics.CheckSphere(transform.position, MeleeRange, whatIsPlayer);
             }
         }
       
@@ -60,16 +99,21 @@ public class BossBehavior : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (_inAttackRange)
+        if (Hostile)
         {
-            if (!_inMeleeRange) _agent.destination = Player.transform.position;
-            else RandomizedAttackPattern();
+            RotateToPoint(Player.transform.position);
+            if (_inAttackRange)
+            {
+                if (!_inMeleeRange) _agent.destination = Player.transform.position;
+                else RandomizedAttackPattern();// in Melee Range
+            }
+            else// when completely out of range shoot one last time, then follow player
+            {
+                ShootAfterWaitTime();
+                _agent.destination = Player.transform.position;
+            } 
         }
-        else// when completely out of range shoot one last time, then follow player
-        {
-            ShootAfterWaitTime();
-            _agent.destination = Player.transform.position;
-        }
+       
     }
 
     /// <summary>
@@ -119,9 +163,11 @@ public class BossBehavior : MonoBehaviour
 
         _bulletTime = timer;
 
+        shootSound.Play();
         GameObject bulletObject =
             Instantiate(EnemyBullet, SpawnPoint.transform.position, transform.rotation);
         Rigidbody bulletRigidbody = bulletObject.GetComponent<Rigidbody>();
+        
         
         Vector3 direction = Player.transform.position - SpawnPoint.transform.position;
         direction.Normalize();
@@ -134,6 +180,7 @@ public class BossBehavior : MonoBehaviour
 
     private void ShootWithoutWaitTime()
     {
+        shootSound.Play();
         GameObject bulletObject =
             Instantiate(EnemyBullet, SpawnPoint.transform.position, transform.rotation);
         Rigidbody bulletRigidbody = bulletObject.GetComponent<Rigidbody>();
@@ -159,4 +206,78 @@ public class BossBehavior : MonoBehaviour
         //rotate us over time according to speed until we are in the required rotation
         transform.rotation = Quaternion.Slerp(transform.rotation, _lookRotation, Time.deltaTime * (_agent.speed/2));
     }
+
+    
+    /// <summary>
+    /// OnDeathEvent
+    /// </summary>
+    /// <param name="h"></param>
+    protected virtual void OnDeath(BasicHealth h)
+    {
+        StartCoroutine(DeathCoroutine());
+        idleSound.Stop();
+        OnBossDeath?.Invoke(this);
+    }
+
+    /// <summary>
+    /// Play this when the boss should taunt
+    /// </summary>
+    /// <returns></returns>
+    public IEnumerator Taunt()
+    {
+        Animator.Play("Slash");
+        tauntingSound.Play();
+        yield return new WaitForSeconds(1.5f);
+    }
+
+    /// <summary>
+    /// What happens when the boss dies
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator DeathCoroutine()
+    {
+        deathEffect.SetActive(true);
+        this.enabled = false;
+        graphics.SetActive(false);
+        deathAudioSource.Play();
+        yield return new WaitForSeconds(2f);
+        gameObject.SetActive(false);
+    }
+
+    protected virtual void OnDamage(BasicHealth h)
+    {
+        enemyHealth.UpdateHealthBar(h.Health, h.MaxHealth);
+    }
+
+    private void HandlePlayerRespawn()
+    {
+        SetPlayerDead(false);
+    }
+
+    private void HandlePlayerDeath()
+    {
+        SetPlayerDead(true);
+    }
+    
+    private void SetPlayerDead(bool b)
+    {
+        _isPlayerDead = b;
+        Hostile = false;
+    }
+
+    private void OnDisable()
+    {
+        _agent.enabled = false;
+        _health.OnDeath -= OnDeath;
+        _health.OnDamage -= OnDamage;
+    }
+
+    private void OnDestroy()
+    {
+        PlayerInstance.OnPlayerDeath -= HandlePlayerDeath;
+        PlayerInstance.OnPlayerRespawn -= HandlePlayerRespawn;
+        MinimapCamera.OnOnLevelChange -= HandleLevelChange;
+    }
+    
+    
 }
