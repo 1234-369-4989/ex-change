@@ -38,6 +38,7 @@ public class Respawner : MonoBehaviour
 
     private void Start()
     {
+        dissolvePixel.gameObject.SetActive(false);
         _audioSource = GetComponent<AudioSource>();
         _waitforFade = new WaitForSeconds(fadeTime);
         _waitInFade = new WaitForSeconds(inFadeTime);
@@ -57,6 +58,7 @@ public class Respawner : MonoBehaviour
         Overlay.Instance.FadeIn(fadeTime);
         yield return _waitforFade;
         player.transform.position = transform.position + spawnPoint;
+        dissolvePixel.gameObject.SetActive(true);
         yield return _waitInFade;
         Overlay.Instance.FadeOut(fadeTime);
         yield return _waitforFade;

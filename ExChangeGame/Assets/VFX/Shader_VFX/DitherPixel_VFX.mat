@@ -101,21 +101,21 @@ Material:
     - _BumpScale: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
-    - _ClipTime: 0.00027531385
+    - _ClipTime: 0
     - _Cull: 2
     - _Cutoff: 0.5
     - _DelayTime: 1
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _EmissionPower: 0.0013765693
+    - _EmissionPower: 3
     - _EmissionTime: 0
     - _EnvironmentReflections: 1
     - _Float: 0
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _Metallic: 0.655
+    - _Metallic: 0
     - _NoiseScale: 20
     - _OcclusionStrength: 1
     - _Parallax: 0.005
@@ -123,7 +123,7 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _Smoothness: 0.66
+    - _Smoothness: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _Speed: 0
@@ -132,11 +132,11 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _Albedo_Color: {r: 0.6901961, g: 0.7058824, b: 0.78431374, a: 0}
+    - _Albedo_Color: {r: 0.5176471, g: 0.9176471, b: 1, a: 1}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Emission_Color: {r: 0.2316566, g: 0.82625896, b: 1.0913599, a: 0}
+    - _Emission_Color: {r: 0.2316566, g: 0.82625896, b: 1.0913599, a: 1}
     - _Emisson_Color: {r: 1, g: 1, b: 1, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
