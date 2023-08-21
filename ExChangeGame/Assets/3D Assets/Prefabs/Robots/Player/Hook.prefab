@@ -524,7 +524,7 @@ MonoBehaviour:
   camera: {fileID: 0}
   whatIsGrappable:
     serializedVersion: 2
-    m_Bits: 66561
+    m_Bits: 72705
   lr_Left: {fileID: 2737575353630212956}
   lr_Right: {fileID: 7912060485390650489}
   rb: {fileID: 0}

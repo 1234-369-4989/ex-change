@@ -10,15 +10,18 @@ public class Respawner : MonoBehaviour
     
     [SerializeField] private bool isMainSpawnPoint;
     [SerializeField] private Vector3 spawnPoint;
-    
-    
+    [SerializeField] DissolvePixel dissolvePixel;
+
+
     [SerializeField] private float fadeTime = 1;
     [SerializeField] private float inFadeTime = 1;
-    
-    private AudioSource _audioSource;
+    [SerializeField] private float effectTime = 1;
+
+        private AudioSource _audioSource;
 
     private WaitForSeconds _waitforFade;
     private WaitForSeconds _waitInFade;
+    private WaitForSeconds _waitEffect;
     
     public static void Respawn(PlayerInstance player)
     {
@@ -38,6 +41,7 @@ public class Respawner : MonoBehaviour
         _audioSource = GetComponent<AudioSource>();
         _waitforFade = new WaitForSeconds(fadeTime);
         _waitInFade = new WaitForSeconds(inFadeTime);
+        _waitEffect = new WaitForSeconds(effectTime-1);
     }
 
     private void Spawn(PlayerInstance player)
@@ -56,9 +60,13 @@ public class Respawner : MonoBehaviour
         yield return _waitInFade;
         Overlay.Instance.FadeOut(fadeTime);
         yield return _waitforFade;
+        dissolvePixel.DissolveOut(effectTime);
+        _audioSource.Play();
+        yield return _waitEffect;
+        dissolvePixel.DissolveIn(effectTime);
+        yield return _waitEffect;
         player.PlayerMovement.CanMove = true;
         player.Respawn();
-        _audioSource.Play();
     }
 
     private void OnTriggerEnter(Collider other)

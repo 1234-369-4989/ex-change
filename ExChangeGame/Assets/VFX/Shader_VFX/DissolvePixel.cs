@@ -29,18 +29,10 @@ public sealed class DissolvePixel : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            DissolveOut();
-        }
-
-        if (Input.GetMouseButtonDown(1))
-        {
-            DissolveIn();
-        }
+      
     }
 
-    public void DissolveIn()
+    public void DissolveIn(float duration)
     {
         _seq?.Kill();
         _seq = DOTween.Sequence().SetLink(gameObject).SetEase(effectEaseIn);
@@ -49,14 +41,14 @@ public sealed class DissolvePixel : MonoBehaviour
         {
             m.SetFloat(dissolveParamName, 0);
             m.SetFloat(emissionParamName, 0);
-            _seq.Join(m.DOFloat(dissolveParam, dissolveParamName, effectDuration));
-            _seq.Join(m.DOFloat(emissionParam, emissionParamName, effectDuration));
+            _seq.Join(m.DOFloat(dissolveParam, dissolveParamName, duration));
+            _seq.Join(m.DOFloat(emissionParam, emissionParamName, duration));
         }
 
         _seq.Play();
     }
 
-    public void DissolveOut()
+    public void DissolveOut(float duration)
     {
         _seq?.Kill();
         _seq = DOTween.Sequence().SetLink(gameObject).SetEase(effectEaseOut);
@@ -65,8 +57,8 @@ public sealed class DissolvePixel : MonoBehaviour
         {
             m.SetFloat(dissolveParamName, dissolveParam);
             m.SetFloat(emissionParamName, emissionParam);
-            _seq.Join(m.DOFloat(0, dissolveParamName, effectDuration));
-            _seq.Join(m.DOFloat(0, emissionParamName, effectDuration));
+            _seq.Join(m.DOFloat(0, dissolveParamName, duration));
+            _seq.Join(m.DOFloat(0, emissionParamName, duration));
         }
 
         _seq.Play();

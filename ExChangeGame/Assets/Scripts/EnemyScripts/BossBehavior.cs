@@ -85,7 +85,7 @@ public class BossBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(_inMeleeRange);
+        // Debug.Log(_inMeleeRange);
         if (Hostile)
         {
             if (!_attacking)

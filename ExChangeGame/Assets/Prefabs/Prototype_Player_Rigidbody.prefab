@@ -850,7 +850,7 @@ MonoBehaviour:
   groundedRadius: 0.2
   groundLayers:
     serializedVersion: 2
-    m_Bits: 129
+    m_Bits: 73089
   playerCameraRoot: {fileID: 95693983900728893}
   jumpSound: {fileID: 7672397859403829273}
   landSound: {fileID: 6629408047284446803}
@@ -931,6 +931,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Health>k__BackingField: 10
   maxHealth: 10
+  deathEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &3485844511516565281
 MonoBehaviour:
   m_ObjectHideFlags: 0

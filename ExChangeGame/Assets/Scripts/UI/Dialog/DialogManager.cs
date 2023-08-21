@@ -55,7 +55,7 @@ namespace Dialog
 
         private void ButtonPressed(InputAction.CallbackContext obj)
         {
-            continueButton.onClick.Invoke();
+            if(canvasGroup.gameObject.activeSelf) continueButton.onClick.Invoke();
         }
 
         public void StartDialog(Dialog dialog, DialogSource source = null)

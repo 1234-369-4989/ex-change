@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(BasicHealth))]
-public class OnBasicHealthDestroy : MonoBehaviour
+public class ErrorObstacle : MonoBehaviour
 {
     private BasicHealth _basicHealth;
 

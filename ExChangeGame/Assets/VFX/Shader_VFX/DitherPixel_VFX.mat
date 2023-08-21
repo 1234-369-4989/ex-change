@@ -101,14 +101,14 @@ Material:
     - _BumpScale: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
-    - _ClipTime: 1
+    - _ClipTime: 0.00027531385
     - _Cull: 2
     - _Cutoff: 0.5
     - _DelayTime: 1
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _EmissionPower: 5
+    - _EmissionPower: 0.0013765693
     - _EmissionTime: 0
     - _EnvironmentReflections: 1
     - _Float: 0

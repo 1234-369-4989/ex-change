@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Serialization;
 
 public class BasicHealth : MonoBehaviour
@@ -12,6 +13,8 @@ public int MaxHealth => maxHealth;
 public event Action<BasicHealth> OnDamage;
 public event Action<BasicHealth> OnDeath;
 
+public  UnityEvent deathEvent;
+
 
 public void Damage(int amount)
 {
@@ -19,6 +22,7 @@ public void Damage(int amount)
     OnDamage?.Invoke(this);
     if ((Health) <= 0)
     {
+        deathEvent.Invoke();
         OnDeath?.Invoke(this);
     }
 }
