@@ -101,7 +101,7 @@ Material:
     - _CilpTime: 0
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
-    - _ClipTime: 1
+    - _ClipTime: 0.0016453266
     - _Cull: 2
     - _Cutoff: 0.5
     - _DelayTime: 1
